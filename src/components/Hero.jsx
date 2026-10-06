@@ -47,7 +47,7 @@ const Hero = () => {
           decoding="async"
           width="1920"
           height="1080"
-          className="absolute inset-0 h-full w-full object-cover object-center"
+          className="absolute inset-0 h-full w-full object-cover object-right md:object-center"
         />
       </picture>
 
