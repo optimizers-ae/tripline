@@ -838,7 +838,9 @@ const DashboardDemo = () => {
                       </div>
 
                       <motion.a
-                        href="tel:+639602778783"
+                        href="https://wa.me/971544442029"
+                        target="_blank"
+                        rel="noopener noreferrer"
                         whileHover={{ scale: 1.05 }}
                         whileTap={{ scale: 0.95 }}
                         className="inline-flex items-center gap-2 rounded-xl bg-white/10 px-4 py-2 text-xs font-semibold text-white hover:bg-white/20 transition-colors"

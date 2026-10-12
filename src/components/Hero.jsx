@@ -37,17 +37,17 @@ const Hero = () => {
     >
       {/* High-Performance LCP Hero Background Image */}
       <picture className="absolute inset-0 z-0 pointer-events-none overflow-hidden">
-        <source media="(max-width: 768px)" srcSet="/banner.png" type="image/webp" />
-        <source media="(min-width: 769px)" srcSet="/banner.png" type="image/webp" />
+        <source media="(max-width: 768px)" srcSet="/banner-mobile.webp" type="image/webp" />
+        <source media="(min-width: 769px)" srcSet="/banner.webp" type="image/webp" />
         <img
-          src="/banner.png"
-          alt="Tripline Businessmen Services Design Engineering & Business Consultancy"
+          src="/banner.jpg"
+          alt="Tripline Businessmen Services - UAE Business Setup & Corporate Advisory"
           fetchPriority="high"
           loading="eager"
           decoding="async"
           width="1920"
           height="1080"
-          className="absolute inset-0 h-full w-full object-cover object-right md:object-center"
+          className="absolute inset-0 h-full w-full object-cover object-center"
         />
       </picture>
 
@@ -56,15 +56,8 @@ const Hero = () => {
         className="pointer-events-none absolute inset-0 z-0 overflow-hidden"
         aria-hidden="true"
       >
-        {/* <div className="absolute -left-12 top-1/4 h-80 w-80 rounded-full bg-[#FFEBEE]/25 blur-[100px] animate-floatSlow" /> */}
-
-        {/* <div className="absolute -right-12 bottom-1/4 h-96 w-96 rounded-full bg-[#D32F2F]/35 blur-[110px] animate-floatSlowReverse" /> */}
-
         <div className="absolute left-1/3 top-12 h-64 w-64 rounded-full bg-white/15 blur-[90px] animate-pulseGlow" />
       </div>
-
-      {/* Yellowish Overlay */}
-      <div className="pointer-events-none absolute inset-0 z-0 bg-[transparent]" />
 
       {/* Dynamic Cursor Spotlight */}
       <div
@@ -75,11 +68,8 @@ const Hero = () => {
         }}
       />
 
-      {/* Cursor Glow */}
-      {/* <HeroCursorGlow heroId="hero" /> */}
-
-      {/* Dark/Warm Gradient */}
-      <div className="pointer-events-none absolute inset-0 z-[2] bg-gradient-to-b from-black/25 via-[#D32F2F]/10 to-black/45" />
+      {/* Dark/Warm Gradient for Optimal Typography Contrast */}
+      <div className="pointer-events-none absolute inset-0 z-[2] bg-gradient-to-b from-black/15 via-black/15 to-black/30" />
 
       {/* Hero Content */}
       <motion.div

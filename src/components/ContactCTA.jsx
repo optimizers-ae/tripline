@@ -103,7 +103,7 @@ const ContactCTA = () => {
               className="inline-block rounded-full p-[2px] bg-gradient-to-r from-[#D32F2F] via-[#F44336] to-[#111111] shadow-xl hover:shadow-2xl transition-all duration-300"
             >
               <a
-                href="mailto:info@tripline.com"
+                href="mailto:inquiry@tripline.ae"
                 className="inline-flex items-center gap-3 rounded-full bg-neutral-950 px-8 py-4 font-bold uppercase tracking-wider text-white text-xs sm:text-sm transition-colors duration-200 hover:bg-neutral-800"
               >
                 <span>Talk to an Advisor</span>
@@ -113,7 +113,7 @@ const ContactCTA = () => {
 
             {/* Secondary WhatsApp Button */}
             <motion.a
-              href="https://wa.me/639602778783"
+              href="https://wa.me/971544442029"
               target="_blank"
               rel="noopener noreferrer"
               whileHover={{ scale: 1.04 }}
@@ -149,28 +149,39 @@ const ContactCTA = () => {
           {/* Direct Contact Cards */}
           <motion.div
             variants={fadeUpVariants}
-            className="pt-8 flex flex-col items-center justify-center gap-4 sm:flex-row sm:gap-6"
+            className="pt-8 flex flex-wrap items-center justify-center gap-4 sm:gap-6"
           >
             <motion.a
-              href="mailto:info@tripline.com"
+              href="mailto:inquiry@tripline.ae"
               whileHover={{ y: -2 }}
               className="group flex items-center gap-2.5 text-xs sm:text-sm font-semibold text-neutral-700 transition-colors hover:text-[#D32F2F]"
             >
               <div className="flex h-8 w-8 items-center justify-center rounded-xl bg-white shadow-sm border border-neutral-200 text-[#D32F2F] group-hover:scale-110 transition-transform">
                 <Mail className="h-4 w-4" />
               </div>
-              <span>info@tripline.com</span>
+              <span>inquiry@tripline.ae</span>
             </motion.a>
 
             <motion.a
-              href="tel:+639602778783"
+              href="tel:+97165734303"
               whileHover={{ y: -2 }}
-              className="group flex items-center gap-2.5 text-xs sm:text-sm font-semibold text-neutral-700 transition-colors hover:text-[#111111]"
+              className="group flex items-center gap-2.5 text-xs sm:text-sm font-semibold text-neutral-700 transition-colors hover:text-[#D32F2F]"
             >
-              <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-white shadow-sm border border-neutral-200 text-[#111111] group-hover:scale-110 transition-transform">
+              <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-white shadow-sm border border-neutral-200 text-[#D32F2F] group-hover:scale-110 transition-transform">
                 <Phone className="h-4 w-4" />
               </div>
-              <span>+63 960 277 8783</span>
+              <span>Tel: +971 6 573 4303</span>
+            </motion.a>
+
+            <motion.a
+              href="tel:+971544442029"
+              whileHover={{ y: -2 }}
+              className="group flex items-center gap-2.5 text-xs sm:text-sm font-semibold text-neutral-700 transition-colors hover:text-[#D32F2F]"
+            >
+              <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-white shadow-sm border border-neutral-200 text-[#D32F2F] group-hover:scale-110 transition-transform">
+                <Phone className="h-4 w-4" />
+              </div>
+              <span>Mob: +971 54444 2029</span>
             </motion.a>
           </motion.div>
 
@@ -180,10 +191,14 @@ const ContactCTA = () => {
             className="pt-2 flex items-center justify-center gap-2 text-xs text-neutral-500 max-w-lg mx-auto"
           >
             <MapPin className="h-4 w-4 shrink-0 text-neutral-400" />
-            <span>
-              UAE Business Centre, Sheikh Zayed Road, Dubai, United Arab
-              Emirates
-            </span>
+            <a
+              href="https://maps.app.goo.gl/ML8N7BxxDxtjg6Nw7?g_st=ic"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="hover:text-neutral-900 transition-colors"
+            >
+              Grand Mall Office Tower - Office No. 2004, Sheikh Khalifa Bin Zayed St, Al Rashidiya 3, Ajman, UAE
+            </a>
           </motion.div>
         </motion.div>
       </div>

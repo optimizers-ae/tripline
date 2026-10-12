@@ -2,6 +2,7 @@ import { useState } from "react";
 import { motion } from "framer-motion";
 import {
   Phone,
+  Smartphone,
   Mail,
   MapPin,
   Send,
@@ -20,21 +21,27 @@ import Footer from "../components/Footer";
 const CONTACT_INFO = [
   {
     icon: Phone,
-    label: "Call Us",
-    value: "+971 50 123 4567", // ← client ka actual number yahan daalein
-    href: "tel:+971501234567",
+    label: "Telephone (Tel)",
+    value: "+971 6 573 4303",
+    href: "tel:+97165734303",
+  },
+  {
+    icon: Smartphone,
+    label: "Mobile (Mob)",
+    value: "+971 54444 2029",
+    href: "tel:+971544442029",
   },
   {
     icon: Mail,
     label: "Email Us",
-    value: "info@tripline.ae", // ← client ka actual email yahan daalein
-    href: "mailto:info@tripline.ae",
+    value: "inquiry@tripline.ae",
+    href: "mailto:inquiry@tripline.ae",
   },
   {
     icon: MapPin,
     label: "Visit Us",
-    value: "Office 2004, Office Tower, Grand Mall Rashidiya, Ajman, UAE",
-    href: "https://maps.google.com/?q=Grand+Mal+Rashidiya+Ajman+UAE",
+    value: "Grand Mall Office Tower - Office No. 2004, Sheikh Khalifa Bin Zayed St, Al Rashidiya 3, Ajman, UAE",
+    href: "https://maps.app.goo.gl/ML8N7BxxDxtjg6Nw7?g_st=ic",
   },
   {
     icon: Clock,
@@ -146,7 +153,7 @@ const ContactPage = () => {
 
                 {/* WhatsApp CTA */}
                 <a
-                  href="https://wa.me/971501234567"
+                  href="https://wa.me/971544442029"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="group flex items-center justify-between gap-3 rounded-2xl border border-[#111111]/20 bg-[#111111] p-5 text-white transition-all duration-300 hover:bg-[#000] hover:shadow-2xl"
@@ -207,7 +214,7 @@ const ContactPage = () => {
                         value={form.phone}
                         onChange={handleChange}
                         required
-                        placeholder="+971 50 123 4567"
+                        placeholder="+971 54444 2029"
                         className="w-full rounded-xl border border-neutral-200 bg-neutral-50 px-4 py-3 text-sm text-neutral-900 placeholder-neutral-400 outline-none transition-all focus:border-[#D32F2F] focus:bg-white focus:ring-2 focus:ring-[#D32F2F]/20"
                       />
                     </div>
@@ -269,35 +276,39 @@ const ContactPage = () => {
               className="mt-10 md:mt-14"
             >
               <div className="relative rounded-3xl border border-neutral-200 bg-white overflow-hidden shadow-xl">
-                <div className="grid grid-cols-1 md:grid-cols-3">
+                <div className="grid grid-cols-1 md:grid-cols-3 min-h-[480px] md:min-h-[520px]">
                   {/* Left: Address Sidebar */}
-                  <div className="p-6 md:p-8 md:col-span-1 bg-gradient-to-br from-[#D32F2F] to-[#F44336] text-white flex flex-col justify-center">
-                    <MapPin className="h-8 w-8 mb-4 opacity-90" />
-                    <h3 className="text-2xl font-extrabold mb-2">
-                      Visit Our Office
-                    </h3>
-                    <div className="space-y-2 text-sm text-white/95 leading-relaxed mb-4">
-                      <p className="font-bold">📍 Office 2004</p>
-                      <p>🏢 Office Tower</p>
-                      <p>🛒 Grand Mall Rashidiya</p>
-                      <p>🇦🇪 Ajman — United Arab Emirates</p>
+                  <div className="p-8 md:p-10 lg:p-12 md:col-span-1 bg-gradient-to-br from-[#D32F2F] to-[#F44336] text-white flex flex-col justify-between">
+                    <div>
+                      <MapPin className="h-9 w-9 mb-4 opacity-90" />
+                      <h3 className="text-2xl lg:text-3xl font-extrabold mb-3">
+                        Visit Our Office
+                      </h3>
+                      <div className="space-y-2 text-sm text-white/95 leading-relaxed">
+                        <p className="font-bold text-base">Office No. 2004</p>
+                        <p>Grand Mall Office Tower</p>
+                        <p>Sheikh Khalifa Bin Zayed St</p>
+                        <p>Al Rashidiya 3, Ajman — UAE</p>
+                      </div>
                     </div>
-                    <a
-                      href="https://maps.google.com/?q=Grand+Mal+Rashidiya+Ajman+UAE"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-wider bg-white/20 hover:bg-white/30 px-4 py-2 rounded-full w-fit transition-colors"
-                    >
-                      <span>Get Directions</span>
-                      <ArrowUpRight className="h-3.5 w-3.5" />
-                    </a>
+                    <div className="pt-6">
+                      <a
+                        href="https://maps.app.goo.gl/ML8N7BxxDxtjg6Nw7?g_st=ic"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-wider bg-white/20 hover:bg-white text-white hover:text-[#D32F2F] px-5 py-3 rounded-full w-fit transition-all duration-300 shadow-md"
+                      >
+                        <span>Get Directions</span>
+                        <ArrowUpRight className="h-3.5 w-3.5" />
+                      </a>
+                    </div>
                   </div>
 
                   {/* Right: Google Map */}
-                  <div className="md:col-span-2 h-64 md:h-auto bg-neutral-100 relative">
+                  <div className="md:col-span-2 h-[420px] sm:h-[480px] md:h-full md:min-h-[520px] bg-neutral-100 relative">
                     <iframe
-                      title="Trip Line Office — Grand Mall Rashidiya, Ajman"
-                      src="https://www.google.com/maps?q=Grand+Mal+Rashidiya+Ajman+UAE&output=embed"
+                      title="Trip Line Businessmen Services — Grand Mall Office Tower, Ajman"
+                      src="https://maps.google.com/maps?q=Trip+Line+Businessmen+Services,+Grand+Mall+Office+Tower+-+Office+No.+2004+Sheikh+Khalifa+Bin+Zayed+St+-+Al+Rashidiya+3+-+Ajman&output=embed"
                       className="absolute inset-0 w-full h-full border-0"
                       loading="lazy"
                       referrerPolicy="no-referrer-when-downgrade"

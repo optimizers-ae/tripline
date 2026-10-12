@@ -2,21 +2,20 @@ import { motion } from "framer-motion";
 import { MapPin, Phone, Mail, ArrowUpRight } from "lucide-react";
 
 const QUICK_LINKS = [
-  { label: "Home", href: "#hero", color: "#D32F2F" },
-  { label: "About Us", href: "#about", color: "#D32F2F" },
-  { label: "Services", href: "#services", color: "#D32F2F" },
-  { label: "Business Setup", href: "#stack", color: "#D32F2F" },
-  { label: "Partners", href: "#stack", color: "#D32F2F" },
-  { label: "Contact", href: "#contact", color: "#D32F2F" },
+  { label: "Home", href: "/", color: "#D32F2F" },
+  { label: "About Us", href: "/about", color: "#D32F2F" },
+  { label: "Corporate Services", href: "/services/corporate", color: "#D32F2F" },
+  { label: "Individuals Services", href: "/services/individuals", color: "#D32F2F" },
+  { label: "Contact", href: "/contact", color: "#D32F2F" },
 ];
 
 const SERVICES_LINKS = [
-  { label: "Employment Contracts", href: "#demo", color: "#527A33" },
-  { label: "Commercial Licenses", href: "#demo", color: "#C2410C" },
-  { label: "Visa & Residency", href: "#demo", color: "#2563EB" },
-  { label: "Family Visas", href: "#demo", color: "#F44336" },
-  { label: "Document Attestation", href: "#demo", color: "#DB2777" },
-  { label: "Embassy Services", href: "#demo", color: "#B45309" },
+  { label: "Employment Contracts", href: "/services/corporate" },
+  { label: "Commercial Licenses", href: "/services/corporate" },
+  { label: "Visa & Residency", href: "/services/individuals" },
+  { label: "Family Visas", href: "/services/individuals" },
+  { label: "Document Attestation", href: "/services/corporate" },
+  { label: "Embassy Services", href: "/services/individuals" },
 ];
 
 const containerVariants = {
@@ -192,15 +191,12 @@ const Footer = () => {
                       <li key={idx}>
                         <a
                           href={link.href}
-                          className="group relative inline-block text-sm text-slate-300 transition-colors duration-200 hover:text-white"
+                          className="group relative inline-flex items-center text-sm text-slate-300 transition-colors duration-200 hover:text-white"
                         >
-                          <span className="inline-block transition-transform duration-200 group-hover:translate-x-1">
+                          <span className="relative pb-0.5">
                             {link.label}
+                            <span className="absolute bottom-0 left-0 h-[2px] w-0 rounded-full bg-[#D32F2F] transition-all duration-300 ease-out group-hover:w-full" />
                           </span>
-                          <span
-                            className="absolute -bottom-0.5 left-0 h-[1.5px] w-0 transition-all duration-300 group-hover:w-full"
-                            style={{ backgroundColor: link.color }}
-                          />
                         </a>
                       </li>
                     ))}
@@ -220,15 +216,12 @@ const Footer = () => {
                       <li key={idx}>
                         <a
                           href={link.href}
-                          className="group relative inline-block text-sm text-slate-300 transition-colors duration-200 hover:text-white"
+                          className="group relative inline-flex items-center text-sm text-slate-300 transition-colors duration-200 hover:text-white"
                         >
-                          <span className="inline-block transition-transform duration-200 group-hover:translate-x-1">
+                          <span className="relative pb-0.5">
                             {link.label}
+                            <span className="absolute bottom-0 left-0 h-[2px] w-0 rounded-full bg-[#D32F2F] transition-all duration-300 ease-out group-hover:w-full" />
                           </span>
-                          <span
-                            className="absolute -bottom-0.5 left-0 h-[1.5px] w-0 transition-all duration-300 group-hover:w-full"
-                            style={{ backgroundColor: link.color }}
-                          />
                         </a>
                       </li>
                     ))}
@@ -252,36 +245,49 @@ const Footer = () => {
                   <div className="space-y-3 pt-1">
                     <div className="flex items-center justify-center md:justify-start gap-3 group">
                       <MapPin className="mt-0.5 h-4 w-4 shrink-0 text-slate-400 transition-transform duration-200 group-hover:scale-110" />
-                      <span className="text-xs leading-relaxed text-slate-300 sm:text-sm max-w-xs">
-                        UAE Business Centre, Sheikh Zayed Road, Dubai, United
-                        Arab Emirates
-                      </span>
+                      <a
+                        href="https://maps.app.goo.gl/ML8N7BxxDxtjg6Nw7?g_st=ic"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-xs leading-relaxed text-slate-300 sm:text-sm max-w-xs hover:text-white transition-colors"
+                      >
+                        Grand Mall Office Tower - Office No. 2004, Sheikh Khalifa Bin Zayed St, Al Rashidiya 3, Ajman, UAE
+                      </a>
                     </div>
 
                     <div className="flex items-center justify-center md:justify-start gap-3 group">
                       <Phone className="h-4 w-4 shrink-0 text-slate-400 transition-transform duration-200 group-hover:scale-110" />
-                      <a
-                        href="tel:+639602778783"
-                        className="text-xs text-slate-300 transition-colors hover:text-white sm:text-sm"
-                      >
-                        +63 960 277 8783
-                      </a>
+                      <div className="flex flex-col sm:flex-row sm:items-center gap-1 sm:gap-2.5 text-xs sm:text-sm">
+                        <a
+                          href="tel:+97165734303"
+                          className="text-slate-300 transition-colors hover:text-white"
+                        >
+                          <span className="text-slate-400 font-medium">Tel:</span> +971 6 573 4303
+                        </a>
+                        <span className="hidden sm:inline text-slate-500">•</span>
+                        <a
+                          href="tel:+971544442029"
+                          className="text-slate-300 transition-colors hover:text-white"
+                        >
+                          <span className="text-slate-400 font-medium">Mob:</span> +971 54444 2029
+                        </a>
+                      </div>
                     </div>
 
                     <div className="flex items-center justify-center md:justify-start gap-3 group">
                       <Mail className="h-4 w-4 shrink-0 text-slate-400 transition-transform duration-200 group-hover:scale-110" />
                       <a
-                        href="mailto:info@tripline.com"
+                        href="mailto:inquiry@tripline.ae"
                         className="text-xs text-slate-300 transition-colors hover:text-white sm:text-sm"
                       >
-                        info@tripline.com
+                        inquiry@tripline.ae
                       </a>
                     </div>
                   </div>
 
                   <div className="pt-2">
                     <motion.a
-                      href="#contact"
+                      href="/contact"
                       whileHover={{ scale: 1.05 }}
                       whileTap={{ scale: 0.95 }}
                       className="inline-flex items-center md:items-start gap-2 rounded-xl bg-[#D32F2F] px-6 py-2.5 text-xs font-bold uppercase tracking-wider text-white shadow-md transition-all duration-200 hover:bg-[#B71C1C] hover:shadow-lg cursor-pointer group"
@@ -310,19 +316,25 @@ const Footer = () => {
 
                 <div className="flex flex-wrap items-center md:items-start justify-center md:justify-start gap-4 md:justify-end">
                   <a
-                    href="#contact"
-                    className="text-xs text-slate-300 transition-colors duration-200 hover:text-white sm:text-sm"
+                    href="/contact"
+                    className="group relative text-xs text-slate-300 transition-colors duration-200 hover:text-white sm:text-sm"
                   >
-                    Privacy Policy
+                    <span className="relative pb-0.5">
+                      Privacy Policy
+                      <span className="absolute bottom-0 left-0 h-[1.5px] w-0 rounded-full bg-[#D32F2F] transition-all duration-300 ease-out group-hover:w-full" />
+                    </span>
                   </a>
                   <span className="text-slate-400" aria-hidden="true">
                     •
                   </span>
                   <a
-                    href="#contact"
-                    className="text-xs text-slate-300 transition-colors duration-200 hover:text-white sm:text-sm"
+                    href="/contact"
+                    className="group relative text-xs text-slate-300 transition-colors duration-200 hover:text-white sm:text-sm"
                   >
-                    Terms of Service
+                    <span className="relative pb-0.5">
+                      Terms of Service
+                      <span className="absolute bottom-0 left-0 h-[1.5px] w-0 rounded-full bg-[#D32F2F] transition-all duration-300 ease-out group-hover:w-full" />
+                    </span>
                   </a>
                 </div>
               </div>

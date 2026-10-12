@@ -1,3 +1,5 @@
+import { useEffect } from "react";
+import { useLocation } from "react-router-dom";
 import { motion } from "framer-motion";
 import {
   FileText,
@@ -59,7 +61,25 @@ const CORPORATE_SERVICES_MAP = [
    =========================================================== */
 const CorporateServices = () => {
   const { t, lang } = useLanguage();
+  const location = useLocation();
   const isArabic = lang === "AR";
+
+  useEffect(() => {
+    if (location.hash) {
+      const id = location.hash.replace("#", "");
+      const timer = setTimeout(() => {
+        const el = document.getElementById(id);
+        if (el) {
+          el.scrollIntoView({ behavior: "smooth", block: "center" });
+          el.classList.add("ring-4", "ring-[#D32F2F]/40", "shadow-2xl", "scale-[1.02]");
+          setTimeout(() => {
+            el.classList.remove("ring-4", "ring-[#D32F2F]/40", "shadow-2xl", "scale-[1.02]");
+          }, 2400);
+        }
+      }, 200);
+      return () => clearTimeout(timer);
+    }
+  }, [location.hash]);
 
   return (
     <div
@@ -71,7 +91,7 @@ const CorporateServices = () => {
 
       <main>
         {/* ============ HERO BANNER ============ */}
-        <section className="relative w-full pt-32 md:pt-40 pb-12 md:pb-16 bg-gradient-to-b from-neutral-50 to-white overflow-hidden">
+        {/* <section className="relative w-full pt-32 md:pt-40 pb-12 md:pb-16 bg-gradient-to-b from-neutral-50 to-white overflow-hidden">
           <div className="pointer-events-none absolute inset-0 overflow-hidden">
             <div className="absolute top-0 left-1/4 h-[500px] w-[500px] rounded-full bg-gradient-to-br from-[#D32F2F]/10 via-[#F44336]/5 to-transparent blur-[120px]" />
             <div className="absolute bottom-0 right-0 h-[400px] w-[400px] rounded-full bg-[#111111]/5 blur-[100px]" />
@@ -98,10 +118,10 @@ const CorporateServices = () => {
               </p>
             </motion.div>
           </div>
-        </section>
+        </section> */}
 
         {/* ============ MAIN CONTENT ============ */}
-        <section className="relative w-full py-14 md:py-20 bg-neutral-50 overflow-hidden">
+        <section className="relative w-full pt-32 py-14 bg-neutral-50 overflow-hidden">
           <div className="pointer-events-none absolute inset-0 overflow-hidden">
             <div className="absolute top-0 right-1/4 h-[500px] w-[500px] rounded-full bg-gradient-to-br from-[#D32F2F]/8 via-[#F44336]/5 to-transparent blur-[120px]" />
             <div className="absolute bottom-0 left-0 h-[400px] w-[400px] rounded-full bg-[#111111]/5 blur-[100px]" />
@@ -177,10 +197,11 @@ const CorporateServices = () => {
 
             {/* ---- Divider Heading ---- */}
             <motion.div
+              id="corporate-services"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6 }}
-              className="text-center mb-12"
+              className="text-center mb-12 scroll-mt-28 md:scroll-mt-36"
             >
               <h3 className="text-2xl md:text-3xl font-extrabold text-neutral-900 mb-2">
                 {t("corporateServicesHeading")}
@@ -197,11 +218,12 @@ const CorporateServices = () => {
                 return (
                   <motion.div
                     key={service.titleKey}
+                    id={service.titleKey}
                     initial={{ opacity: 0, y: 20 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
                     transition={{ duration: 0.5, delay: idx * 0.04 }}
-                    className="group relative flex items-start gap-4 rounded-2xl border border-neutral-200 bg-white p-5 transition-all duration-300 hover:border-[#D32F2F]/40 hover:shadow-xl hover:-translate-y-0.5 h-full"
+                    className="group relative flex items-start gap-4 rounded-2xl border border-neutral-200 bg-white p-5 transition-all duration-300 hover:border-[#D32F2F]/40 hover:shadow-xl hover:-translate-y-0.5 h-full scroll-mt-28 md:scroll-mt-36"
                   >
                     {/* Icon Box */}
                     <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl border border-neutral-200 bg-neutral-50 text-[#D32F2F] transition-all duration-300 group-hover:bg-[#D32F2F] group-hover:text-white group-hover:border-[#D32F2F]">

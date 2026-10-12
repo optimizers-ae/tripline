@@ -2,7 +2,26 @@ import logoImg from "../assets/logo.png";
 import { useState, useEffect, useRef } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
-import { X, ArrowRight, Phone, MapPin, Globe, ChevronDown, User, Building2 } from "lucide-react";
+import {
+  X,
+  ArrowRight,
+  Phone,
+  Mail,
+  MapPin,
+  Globe,
+  ChevronDown,
+  Building2,
+  Users,
+  FileText,
+  Landmark,
+  Briefcase,
+  UserCheck,
+  PlaneTakeoff,
+  Scale,
+  RefreshCw,
+  Globe2,
+  Award,
+} from "lucide-react";
 import { useLanguage } from "../context/LanguageContext";
 
 const Navbar = () => {
@@ -13,50 +32,142 @@ const Navbar = () => {
   const [ctaIndex, setCtaIndex] = useState(0);
   const [animState, setAnimState] = useState("");
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const [servicesOpen, setServicesOpen] = useState(false);
+  const [activeDropdown, setActiveDropdown] = useState(null); // 'corporate' | 'individuals' | null
 
-  // Close services dropdown on outside click
-  const servicesRef = useRef(null);
+  const leaveTimerRef = useRef(null);
+  const navContainerRef = useRef(null);
 
+  // Close dropdown on outside click
   useEffect(() => {
     const handleClickOutside = (e) => {
-      if (servicesRef.current && !servicesRef.current.contains(e.target)) {
-        setServicesOpen(false);
+      if (navContainerRef.current && !navContainerRef.current.contains(e.target)) {
+        setActiveDropdown(null);
       }
     };
     document.addEventListener("mousedown", handleClickOutside);
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
 
-  // Submenu items for Services dropdown
-  const SERVICES_SUBMENU = [
+  const handleDropdownEnter = (menuKey) => {
+    if (leaveTimerRef.current) clearTimeout(leaveTimerRef.current);
+    setActiveDropdown(menuKey);
+  };
+
+  const handleDropdownLeave = () => {
+    leaveTimerRef.current = setTimeout(() => {
+      setActiveDropdown(null);
+    }, 180);
+  };
+
+  // Main Corporate Services for Popup Window
+  const CORPORATE_POPUP_SERVICES = [
     {
-      icon: User,
-      label: t("servicesTitleLine1") === "Individuals" ? "Individuals" : "الأفراد",
-      desc: t("servicesDesc") || "Government, Visa & Business Services",
-      href: "/services/individuals",
+      icon: FileText,
+      title: t("navCorp1"),
+      desc: t("navCorp1Desc"),
+      href: "/services/corporate#corp1Title",
     },
     {
       icon: Building2,
-      label: t("corporateServices") || "Corporate Services",
-      desc: t("corporateDesc") || "Business & Company Services",
-      href: "/services/corporate",
+      title: t("navCorp2"),
+      desc: t("navCorp2Desc"),
+      href: "/services/corporate#corp2Title",
+    },
+    {
+      icon: Landmark,
+      title: t("navCorp3"),
+      desc: t("navCorp3Desc"),
+      href: "/services/corporate#corp3Title",
+    },
+    {
+      icon: Briefcase,
+      title: t("navCorp4"),
+      desc: t("navCorp4Desc"),
+      href: "/services/corporate#corp4Title",
+    },
+    {
+      icon: Users,
+      title: t("navCorp6"),
+      desc: t("navCorp6Desc"),
+      href: "/services/corporate#corp6Title",
+    },
+    {
+      icon: UserCheck,
+      title: t("navCorp14"),
+      desc: t("navCorp14Desc"),
+      href: "/services/corporate#corp14Title",
     },
   ];
 
-  // Build links using translations
+  // Main Individuals Services for Popup Window
+  const INDIVIDUALS_POPUP_SERVICES = [
+    {
+      icon: Users,
+      title: t("navInd1"),
+      desc: t("navInd1Desc"),
+      href: "/services/individuals#service1Title",
+    },
+    {
+      icon: Award,
+      title: t("navInd3"),
+      desc: t("navInd3Desc"),
+      href: "/services/individuals#service3Title",
+    },
+    {
+      icon: PlaneTakeoff,
+      title: t("navInd5"),
+      desc: t("navInd5Desc"),
+      href: "/services/individuals#service5Title",
+    },
+    {
+      icon: RefreshCw,
+      title: t("navInd12"),
+      desc: t("navInd12Desc"),
+      href: "/services/individuals#service12Title",
+    },
+    {
+      icon: Scale,
+      title: t("navInd14"),
+      desc: t("navInd14Desc"),
+      href: "/services/individuals#service14Title",
+    },
+    {
+      icon: Globe2,
+      title: t("navIndTour"),
+      desc: t("navIndTourDesc"),
+      href: "/services/individuals#tourist-visas",
+    },
+  ];
+
+  // Build links using translations: Home, About Us, Corporate Services, Individuals Services, Contact
   const NAV_LINKS = [
     { num: "01", name: t("home"), href: "/", desc: t("homeDesc"), isRoute: true },
     { num: "02", name: t("aboutUs"), href: "/about", desc: t("aboutDesc"), isRoute: true },
     {
       num: "03",
-      name: t("services"),
-      href: "/services",
-      desc: t("servicesDesc"),
+      key: "corporate",
+      name: t("corporateServices"),
+      href: "/services/corporate",
+      desc: t("corporateNavDesc"),
       isRoute: true,
       hasDropdown: true,
+      dropdownItems: CORPORATE_POPUP_SERVICES,
+      headerTitle: t("mainServicesCorporate"),
+      moreHref: "/services/corporate",
     },
-    { num: "04", name: t("contact"), href: "/contact", desc: t("contactDesc"), isRoute: true },
+    {
+      num: "04",
+      key: "individuals",
+      name: t("individualsServices"),
+      href: "/services/individuals",
+      desc: t("individualsNavDesc"),
+      isRoute: true,
+      hasDropdown: true,
+      dropdownItems: INDIVIDUALS_POPUP_SERVICES,
+      headerTitle: t("mainServicesIndividuals"),
+      moreHref: "/services/individuals",
+    },
+    { num: "05", name: t("contact"), href: "/contact", desc: t("contactDesc"), isRoute: true },
   ];
 
   const MOBILE_CTAS = [t("cta1"), t("cta2"), t("cta3")];
@@ -77,13 +188,12 @@ const Navbar = () => {
     }, 2600);
 
     return () => clearInterval(interval);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [MOBILE_CTAS.length]);
 
-  // Close mobile menu on route change
+  // Close menus on route change
   useEffect(() => {
     setMobileMenuOpen(false);
-    setServicesOpen(false);
+    setActiveDropdown(null);
   }, [location.pathname]);
 
   // Lock body scroll and Escape key
@@ -91,7 +201,7 @@ const Navbar = () => {
     const handleKeyDown = (e) => {
       if (e.key === "Escape") {
         setMobileMenuOpen(false);
-        setServicesOpen(false);
+        setActiveDropdown(null);
       }
     };
 
@@ -110,17 +220,35 @@ const Navbar = () => {
   const handleNavClick = (e, href) => {
     e.preventDefault();
     setMobileMenuOpen(false);
-    setServicesOpen(false);
+    setActiveDropdown(null);
 
-    if (href.startsWith("#")) {
-      if (location.pathname !== "/") {
-        navigate("/");
+    const [pathname, hash] = href.split("#");
+    const targetPath = pathname || "/";
+
+    if (location.pathname === targetPath && hash) {
+      const el = document.getElementById(hash);
+      if (el) {
+        el.scrollIntoView({ behavior: "smooth", block: "center" });
+        el.classList.add("ring-4", "ring-[#D32F2F]/40", "shadow-2xl", "scale-[1.02]");
         setTimeout(() => {
-          document.querySelector(href)?.scrollIntoView({ behavior: "smooth" });
-        }, 350);
-      } else {
-        document.querySelector(href)?.scrollIntoView({ behavior: "smooth" });
+          el.classList.remove("ring-4", "ring-[#D32F2F]/40", "shadow-2xl", "scale-[1.02]");
+        }, 2400);
       }
+      return;
+    }
+
+    if (hash) {
+      navigate(href);
+      setTimeout(() => {
+        const el = document.getElementById(hash);
+        if (el) {
+          el.scrollIntoView({ behavior: "smooth", block: "center" });
+          el.classList.add("ring-4", "ring-[#D32F2F]/40", "shadow-2xl", "scale-[1.02]");
+          setTimeout(() => {
+            el.classList.remove("ring-4", "ring-[#D32F2F]/40", "shadow-2xl", "scale-[1.02]");
+          }, 2400);
+        }
+      }, 350);
       return;
     }
 
@@ -185,7 +313,7 @@ const Navbar = () => {
           </a>
 
           <a
-            href="tel:+971501234567"
+            href="tel:+971544442029"
             className="relative z-10 grid w-10 h-10 shrink-0 place-items-center rounded-full border border-[#D32F2F]/80 bg-[#D32F2F] hover:text-[#D32F2F] hover:bg-white transition-colors shadow-[0_4px_10px_rgba(0,0,0,0.18)] text-white"
             aria-label="Call Trip Line"
           >
@@ -215,15 +343,16 @@ const Navbar = () => {
       {/* ========================================================= */}
       {/* 2. DESKTOP FLOATING PILL NAVBAR (hidden md:block)         */}
       {/* ========================================================= */}
-      <div className="hidden md:block font-comforta">
+      <div className="hidden md:block font-comforta" ref={navContainerRef}>
         <div
           style={{ animationDelay: "0.8s" }}
-          className="nav-pill-drop fixed top-[18px] left-1/2 z-50 -translate-x-1/2 w-[calc(100vw-48px)] max-w-[1100px] isolate"
+          className="nav-pill-drop fixed top-[18px] left-1/2 z-50 -translate-x-1/2 w-[calc(100vw-40px)] max-w-[1180px] isolate"
         >
           <div className="relative rounded-full border border-white/60 bg-white/20 backdrop-blur-2xl shadow-[0_14px_45px_rgba(0,0,0,0.24),inset_0_1px_1px_rgba(255,255,255,0.55),inset_0_-8px_16px_rgba(255,255,255,0.14)] p-1.5 flex items-center gap-2 overflow-visible">
             <div className="pointer-events-none absolute inset-[1px] rounded-full bg-gradient-to-b from-white/45 via-white/8 to-transparent" />
             <div className="pointer-events-none absolute -top-4 left-8 h-8 w-40 rounded-full bg-white/35 blur-md" />
 
+            {/* Logo */}
             <a
               href="/"
               onClick={(e) => handleNavClick(e, "/")}
@@ -243,106 +372,129 @@ const Navbar = () => {
             {/* Navigation Links */}
             <nav
               aria-label="Main Desktop Navigation"
-              className="relative z-10 hidden md:flex items-center flex-1 justify-center gap-5 min-w-0 nav-text-glow"
+              className="relative z-10 hidden md:flex items-center flex-1 justify-center gap-2 lg:gap-4 xl:gap-5 min-w-0 nav-text-glow"
             >
               {NAV_LINKS.map((link) => {
                 const isActive =
                   link.href === "/"
                     ? location.pathname === "/"
-                    : location.pathname.startsWith(link.href);
+                    : location.pathname === link.href || location.pathname.startsWith(link.href + "/");
 
-                /* ---------- Services link with dropdown ---------- */
+                /* ---------- Link with Hover Pop-up Window ---------- */
                 if (link.hasDropdown) {
+                  const isDropdownOpen = activeDropdown === link.key;
+
                   return (
                     <div
                       key={link.name}
-                      ref={servicesRef}
                       className="relative"
-                      onMouseEnter={() => setServicesOpen(true)}
-                      onMouseLeave={() => setServicesOpen(false)}
+                      onMouseEnter={() => handleDropdownEnter(link.key)}
+                      onMouseLeave={handleDropdownLeave}
                     >
                       <a
                         href={link.href}
                         onClick={(e) => handleNavClick(e, link.href)}
-                        className={`group relative px-2 py-2 text-sm font-semibold whitespace-nowrap transition-all duration-300 hover:-translate-y-[1px] flex items-center gap-1 ${
-                          isActive
+                        className={`group relative px-2.5 py-1.5 text-[13px] lg:text-sm font-semibold whitespace-nowrap transition-colors duration-200 flex items-center gap-1 ${
+                          isActive || isDropdownOpen
                             ? "text-[#D32F2F]"
-                            : "text-neutral-950 hover:text-neutral-900"
+                            : "text-neutral-950 hover:text-[#D32F2F]"
                         }`}
                       >
-                        <span className="relative z-10 flex items-center gap-1.5">
-                          {link.name}
+                        <span className="relative z-10 flex items-center gap-1">
+                          <span className="relative pb-1">
+                            {link.name}
+                            <span
+                              className={`absolute bottom-0 left-0 right-0 h-[2px] rounded-full bg-[#D32F2F] transition-all duration-300 ease-out origin-center ${
+                                isActive || isDropdownOpen
+                                  ? "scale-x-100 opacity-100"
+                                  : "scale-x-0 opacity-0 group-hover:scale-x-100 group-hover:opacity-100"
+                              }`}
+                            />
+                          </span>
                           <ChevronDown
                             className={`h-3.5 w-3.5 transition-transform duration-300 ${
-                              servicesOpen ? "rotate-180" : ""
+                              isDropdownOpen ? "rotate-180 text-[#D32F2F]" : ""
                             }`}
                           />
                         </span>
-                        <span className="pointer-events-none absolute inset-0 -z-10 rounded-full bg-[#EA8132]/0 blur-md transition-all duration-300 group-hover:bg-[#EA8132]/10" />
-                        <span
-                          className={`absolute bottom-1 left-1/2 h-[1.5px] -translate-x-1/2 rounded-full bg-[#EA8132] transition-all duration-300 ease-out ${
-                            isActive ? "w-[70%]" : "w-0 group-hover:w-[70%]"
-                          }`}
-                        />
                       </a>
 
-                      {/* ---------- Dropdown Submenu ---------- */}
+                      {/* ---------- Popped Window Listing Main Services ---------- */}
                       <AnimatePresence>
-                        {servicesOpen && (
+                        {isDropdownOpen && (
                           <motion.div
                             initial={{ opacity: 0, y: 10, scale: 0.96 }}
                             animate={{ opacity: 1, y: 0, scale: 1 }}
-                            exit={{ opacity: 0, y: 10, scale: 0.96 }}
+                            exit={{ opacity: 0, y: 8, scale: 0.96 }}
                             transition={{ duration: 0.2, ease: "easeOut" }}
-                            className="absolute top-full left-1/2 -translate-x-1/2 pt-3 w-[420px] z-[70]"
+                            className="absolute top-full left-1/2 -translate-x-1/2 pt-2.5 w-[380px] sm:w-[420px] z-[70]"
+                            onMouseEnter={() => {
+                              if (leaveTimerRef.current) clearTimeout(leaveTimerRef.current);
+                            }}
+                            onMouseLeave={handleDropdownLeave}
                           >
-                            <div className="relative rounded-2xl border border-white/60 bg-white/90 backdrop-blur-2xl shadow-[0_20px_60px_rgba(0,0,0,0.18),inset_0_1px_1px_rgba(255,255,255,0.65)] p-2 overflow-hidden">
-                              <div className="pointer-events-none absolute inset-[1px] rounded-2xl bg-gradient-to-b from-white/60 via-white/20 to-transparent" />
+                            <div className="relative rounded-2xl border border-white/70 bg-white/95 backdrop-blur-2xl shadow-[0_24px_60px_rgba(0,0,0,0.18),0_4px_16px_rgba(0,0,0,0.06),inset_0_1px_1px_rgba(255,255,255,0.9)] p-2.5 overflow-hidden text-neutral-900">
+                              <div className="pointer-events-none absolute inset-x-0 top-0 h-[2px] bg-gradient-to-r from-transparent via-[#D32F2F] to-transparent" />
+                              <div className="pointer-events-none absolute -top-8 left-10 h-16 w-32 rounded-full bg-[#D32F2F]/10 blur-xl" />
 
-                              {SERVICES_SUBMENU.map((sub, idx) => {
-                                const SubIcon = sub.icon;
-                                const isSubActive = location.pathname === sub.href;
-                                return (
-                                  <a
-                                    key={sub.href}
-                                    href={sub.href}
-                                    onClick={(e) => handleNavClick(e, sub.href)}
-                                    className={`group/sub relative z-10 flex items-start gap-3.5 rounded-xl p-3 transition-all duration-200 ${
-                                      isSubActive
-                                        ? "bg-[#D32F2F]/10"
-                                        : "hover:bg-neutral-100"
-                                    }`}
-                                  >
-                                    <div
-                                      className={`flex h-10 w-10 shrink-0 items-center justify-center rounded-lg transition-all duration-300 ${
-                                        isSubActive
-                                          ? "bg-gradient-to-br from-[#D32F2F] to-[#F44336] text-white shadow-md"
-                                          : "bg-neutral-100 text-[#D32F2F] group-hover/sub:bg-gradient-to-br group-hover/sub:from-[#D32F2F] group-hover/sub:to-[#F44336] group-hover/sub:text-white group-hover/sub:shadow-md"
-                                      }`}
+                              {/* Category Header */}
+                              <div className="relative z-10 px-2.5 py-1.5 mb-1 flex items-center justify-between border-b border-neutral-100 text-[11px] font-bold uppercase tracking-wider text-neutral-400">
+                                <span className="flex items-center gap-1.5 text-[#D32F2F]">
+                                  <span className="h-1.5 w-1.5 rounded-full bg-[#D32F2F] animate-pulse" />
+                                  {link.headerTitle}
+                                </span>
+                                <span className="text-[10px] text-neutral-400 font-medium">
+                                  {link.dropdownItems.length} {lang === "AR" ? "خدمات رئيسية" : "Main Services"}
+                                </span>
+                              </div>
+
+                              {/* Main Services List */}
+                              <div className="relative z-10 flex flex-col gap-1 max-h-[350px] overflow-y-auto no-scrollbar py-0.5">
+                                {link.dropdownItems.map((item) => {
+                                  const ItemIcon = item.icon;
+                                  return (
+                                    <a
+                                      key={item.href}
+                                      href={item.href}
+                                      onClick={(e) => handleNavClick(e, item.href)}
+                                      className="group/item relative flex items-center gap-3 rounded-xl p-2 transition-all duration-200 hover:bg-neutral-100/90 active:scale-[0.99]"
                                     >
-                                      <SubIcon className="h-5 w-5" />
-                                    </div>
-
-                                    <div className="min-w-0 flex-1">
-                                      <div className="flex items-center justify-between gap-2">
-                                        <span
-                                          className={`text-sm font-bold transition-colors ${
-                                            isSubActive
-                                              ? "text-[#D32F2F]"
-                                              : "text-neutral-900 group-hover/sub:text-[#D32F2F]"
-                                          }`}
-                                        >
-                                          {sub.label}
-                                        </span>
-                                        <ArrowRight className="h-3.5 w-3.5 text-neutral-400 opacity-0 -translate-x-1 group-hover/sub:opacity-100 group-hover/sub:translate-x-0 transition-all duration-300" />
+                                      <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-neutral-100 text-[#D32F2F] group-hover/item:bg-gradient-to-br group-hover/item:from-[#D32F2F] group-hover/item:to-[#F44336] group-hover/item:text-white group-hover/item:shadow-sm transition-all duration-200">
+                                        <ItemIcon className="h-4 w-4" />
                                       </div>
-                                      <p className="text-xs text-neutral-500 mt-0.5 leading-snug">
-                                        {sub.desc}
-                                      </p>
-                                    </div>
-                                  </a>
-                                );
-                              })}
+
+                                      <div className="min-w-0 flex-1">
+                                        <p className="text-[13px] font-bold text-neutral-900 group-hover/item:text-[#D32F2F] transition-colors leading-snug line-clamp-1">
+                                          {item.title}
+                                        </p>
+                                        <p className="text-[11px] text-neutral-500 line-clamp-1 mt-0.5 leading-tight">
+                                          {item.desc}
+                                        </p>
+                                      </div>
+
+                                      <div className="shrink-0 text-neutral-400 group-hover/item:text-[#D32F2F] transition-colors">
+                                        <ArrowRight className="h-3.5 w-3.5 opacity-0 -translate-x-1 group-hover/item:opacity-100 group-hover/item:translate-x-0 rtl:rotate-180 rtl:group-hover/item:-translate-x-0 transition-all duration-200" />
+                                      </div>
+                                    </a>
+                                  );
+                                })}
+                              </div>
+
+                              {/* "Click for more" Footer Link */}
+                              <div className="relative z-10 border-t border-neutral-100 mt-1.5 pt-2 px-1">
+                                <a
+                                  href={link.moreHref}
+                                  onClick={(e) => handleNavClick(e, link.moreHref)}
+                                  className="group/more flex items-center justify-between w-full px-3 py-2 rounded-xl bg-gradient-to-r from-neutral-50 to-neutral-100 hover:from-[#D32F2F]/10 hover:to-[#D32F2F]/5 border border-neutral-200/80 hover:border-[#D32F2F]/40 transition-all duration-200"
+                                >
+                                  <span className="text-xs font-extrabold text-neutral-900 group-hover/more:text-[#D32F2F] transition-colors">
+                                    {t("clickForMore")}
+                                  </span>
+                                  <span className="flex items-center gap-1 text-xs font-bold text-[#D32F2F] group-hover/more:translate-x-1 rtl:group-hover/more:-translate-x-1 transition-transform duration-200">
+                                    <ArrowRight className="h-3.5 w-3.5 rtl:rotate-180" />
+                                  </span>
+                                </a>
+                              </div>
                             </div>
                           </motion.div>
                         )}
@@ -351,25 +503,28 @@ const Navbar = () => {
                   );
                 }
 
-                /* ---------- Regular link ---------- */
+                /* ---------- Standard Nav Link ---------- */
                 return (
                   <a
                     key={link.name}
                     href={link.href}
                     onClick={(e) => handleNavClick(e, link.href)}
-                    className={`group relative px-2 py-2 text-sm font-semibold whitespace-nowrap transition-all duration-300 hover:-translate-y-[1px] ${
-                      isActive ? "text-[#D32F2F]" : "text-neutral-950 hover:text-neutral-900"
+                    className={`group relative px-2.5 py-1.5 text-[13px] lg:text-sm font-semibold whitespace-nowrap transition-colors duration-200 flex items-center ${
+                      isActive
+                        ? "text-[#D32F2F]"
+                        : "text-neutral-950 hover:text-[#D32F2F]"
                     }`}
                   >
-                    <span className="relative z-10 flex items-center gap-1.5">
+                    <span className="relative z-10 pb-1">
                       {link.name}
+                      <span
+                        className={`absolute bottom-0 left-0 right-0 h-[2px] rounded-full bg-[#D32F2F] transition-all duration-300 ease-out origin-center ${
+                          isActive
+                            ? "scale-x-100 opacity-100"
+                            : "scale-x-0 opacity-0 group-hover:scale-x-100 group-hover:opacity-100"
+                        }`}
+                      />
                     </span>
-                    <span className="pointer-events-none absolute inset-0 -z-10 rounded-full bg-[#EA8132]/0 blur-md transition-all duration-300 group-hover:bg-[#EA8132]/10" />
-                    <span
-                      className={`absolute bottom-1 left-1/2 h-[1.5px] -translate-x-1/2 rounded-full bg-[#EA8132] transition-all duration-300 ease-out ${
-                        isActive ? "w-[70%]" : "w-0 group-hover:w-[70%]"
-                      }`}
-                    />
                   </a>
                 );
               })}
@@ -388,7 +543,7 @@ const Navbar = () => {
 
             {/* Action: Call Us */}
             <a
-              href="tel:+971501234567"
+              href="tel:+97165734303"
               className="relative z-10 w-10 h-10 rounded-full border border-[#D32F2F]/80 bg-[#D32F2F] text-white hover:text-[#D32F2F] hover:bg-white flex items-center justify-center transition-colors shrink-0 shadow-[0_4px_10px_rgba(0,0,0,0.18)]"
               aria-label="Call Us"
             >
@@ -504,7 +659,7 @@ const Navbar = () => {
                     </div>
 
                     <div className="flex h-9 w-9 items-center justify-center rounded-full border border-neutral-200 bg-white/5 text-neutral-500 group-hover:border-[#D32F2F] group-hover:bg-[#D32F2F] group-hover:text-neutral-950 group-hover:rotate-[-45deg] transition-all duration-300">
-                      <ArrowRight className="h-4 w-4" />
+                      <ArrowRight className="h-4 w-4 rtl:rotate-180" />
                     </div>
                   </motion.a>
                 ))}
@@ -513,17 +668,45 @@ const Navbar = () => {
 
             <div className="relative z-10 border-t border-neutral-200 pt-4 max-w-7xl mx-auto w-full flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-neutral-500">
               <div className="flex items-center gap-2">
-                <MapPin className="h-4 w-4 text-[#D32F2F]" />
-                <span>{t("address")}</span>
+                <MapPin className="h-4 w-4 text-[#D32F2F] shrink-0" />
+                <a
+                  href="https://maps.app.goo.gl/ML8N7BxxDxtjg6Nw7?g_st=ic"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="hover:text-neutral-900 transition-colors"
+                >
+                  {t("address")}
+                </a>
               </div>
 
-              <a
-                href="tel:+971501234567"
-                className="flex items-center gap-2 font-bold text-neutral-900 hover:text-[#111111] transition-colors"
-              >
-                <Phone className="h-3.5 w-3.5 text-[#111111]" />
-                <span>+971 50 123 4567</span>
-              </a>
+              <div className="flex flex-wrap items-center justify-center sm:justify-end gap-3 sm:gap-4 font-semibold text-neutral-900">
+                <a
+                  href="tel:+97165734303"
+                  className="flex items-center gap-1.5 hover:text-[#D32F2F] transition-colors"
+                  aria-label="Call Landline +971 6 573 4303"
+                >
+                  <Phone className="h-3.5 w-3.5 text-[#D32F2F]" />
+                  <span>Tel: +971 6 573 4303</span>
+                </a>
+                <span className="hidden sm:inline text-neutral-300">•</span>
+                <a
+                  href="tel:+971544442029"
+                  className="flex items-center gap-1.5 hover:text-[#D32F2F] transition-colors"
+                  aria-label="Call Mobile +971 54444 2029"
+                >
+                  <Phone className="h-3.5 w-3.5 text-[#D32F2F]" />
+                  <span>Mob: +971 54444 2029</span>
+                </a>
+                <span className="hidden sm:inline text-neutral-300">•</span>
+                <a
+                  href="mailto:inquiry@tripline.ae"
+                  className="flex items-center gap-1.5 hover:text-[#D32F2F] transition-colors"
+                  aria-label="Email inquiry@tripline.ae"
+                >
+                  <Mail className="h-3.5 w-3.5 text-[#D32F2F]" />
+                  <span>inquiry@tripline.ae</span>
+                </a>
+              </div>
             </div>
           </motion.div>
         )}

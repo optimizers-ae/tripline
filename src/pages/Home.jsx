@@ -1,6 +1,7 @@
 import { lazy, Suspense } from 'react';
 import Navbar from '../components/Navbar';
 import Hero from '../components/Hero';
+import GovernmentEntitiesSlider from '../components/GovernmentEntitiesSlider';
 
 // Code-split below-the-fold components to reduce initial bundle size by 80%
 const About = lazy(() => import('../components/About'));
@@ -23,6 +24,9 @@ const Home = () => {
 
       {/* 2. Hero*/}
       <Hero />
+
+      {/* 2.5 Government Entities Movement Logo Slider */}
+      <GovernmentEntitiesSlider />
 
       {/* Below-the-fold components loaded on demand */}
       <Suspense fallback={<div className="min-h-[200px] bg-[#f7f7f8]" />}>

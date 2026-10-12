@@ -1,30 +1,24 @@
+import { useEffect } from "react";
+import { useLocation } from "react-router-dom";
 import { motion } from "framer-motion";
 import {
-  // Featured
   FileText,
-  Plane,
-  Hotel,
-  Map,
-  Palmtree,
-  // Individual Services Icons
-  HeartPulse,
   Users,
-  FileCheck,
-  Globe2,
-  ShieldCheck,
-  Home,
   Award,
-  Briefcase,
-  CreditCard,
   PlaneTakeoff,
+  RefreshCw,
+  Scale,
+  Home,
+  Briefcase,
+  UserPlus,
   Clock,
   XCircle,
-  UserPlus,
-  RefreshCw,
+  FileCheck,
   LogOut,
-  Scale,
-  ShieldAlert,
   Landmark,
+  ShieldAlert,
+  Globe2,
+  Map,
   GraduationCap,
   ArrowUpRight,
   Sparkles,
@@ -35,14 +29,14 @@ import Footer from "../components/Footer";
 import { useLanguage } from "../context/LanguageContext";
 
 /* ===========================================================
-   FEATURED SERVICES (Top 5) — keys refer to translations
+   FEATURED INDIVIDUALS SERVICES (Top 5)
    =========================================================== */
 const FEATURED_ICONS = [
-  { icon: FileText, emoji: "📄", titleKey: "service10Title", descKey: "service10Desc" }, // Document Clearance
-  { icon: Plane, emoji: "✈️", titleKey: "service9Title", descKey: "service9Desc" }, // Flight Tickets → use visa extension placeholder
-  { icon: Hotel, emoji: "🏨", titleKey: "service15Title", descKey: "service15Desc" }, // Hotel → Saudi multiple visa
-  { icon: Map, emoji: "🗺️", titleKey: "service5Title", descKey: "service5Desc" }, // Tourist Visas → Multi-entry 5yr
-  { icon: Palmtree, emoji: "🏝️", titleKey: "service6Title", descKey: "service6Desc" }, // Tour Packages → business explore
+  { icon: Users, titleKey: "service1Title", descKey: "service1Desc" },
+  { icon: Award, titleKey: "service3Title", descKey: "service3Desc" },
+  { icon: PlaneTakeoff, titleKey: "service5Title", descKey: "service5Desc" },
+  { icon: RefreshCw, titleKey: "service12Title", descKey: "service12Desc" },
+  { icon: Scale, titleKey: "service14Title", descKey: "service14Desc" },
 ];
 
 /* ===========================================================
@@ -63,7 +57,7 @@ const TOURIST_VISAS = [
 ];
 
 /* ===========================================================
-   INDIVIDUAL SERVICES (1–19) — icons + translation keys
+   FULL INDIVIDUAL SERVICES (1–19)
    =========================================================== */
 const INDIVIDUAL_SERVICES_MAP = [
   { icon: Users, titleKey: "service1Title", descKey: "service1Desc" },
@@ -92,8 +86,25 @@ const INDIVIDUAL_SERVICES_MAP = [
    =========================================================== */
 const ServicesPage = () => {
   const { t, lang } = useLanguage();
-
+  const location = useLocation();
   const isArabic = lang === "AR";
+
+  useEffect(() => {
+    if (location.hash) {
+      const id = location.hash.replace("#", "");
+      const timer = setTimeout(() => {
+        const el = document.getElementById(id);
+        if (el) {
+          el.scrollIntoView({ behavior: "smooth", block: "center" });
+          el.classList.add("ring-4", "ring-[#D32F2F]/40", "shadow-2xl", "scale-[1.02]");
+          setTimeout(() => {
+            el.classList.remove("ring-4", "ring-[#D32F2F]/40", "shadow-2xl", "scale-[1.02]");
+          }, 2400);
+        }
+      }, 200);
+      return () => clearTimeout(timer);
+    }
+  }, [location.hash]);
 
   return (
     <div
@@ -104,38 +115,8 @@ const ServicesPage = () => {
       <Navbar />
 
       <main>
-        {/* ============ HERO BANNER ============ */}
-        {/* <section className="relative w-full pt-32 md:pt-40 pb-10 md:pb-14 bg-gradient-to-b from-neutral-50 to-white overflow-hidden">
-          <div className="pointer-events-none absolute inset-0 overflow-hidden">
-            <div className="absolute top-0 left-1/4 h-[500px] w-[500px] rounded-full bg-gradient-to-br from-[#D32F2F]/10 via-[#F44336]/5 to-transparent blur-[120px]" />
-            <div className="absolute bottom-0 right-0 h-[400px] w-[400px] rounded-full bg-[#111111]/5 blur-[100px]" />
-          </div>
-
-          <div className="relative z-10 max-w-5xl mx-auto px-6 md:px-10 text-center">
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6 }}
-            >
-              <span className="inline-flex items-center gap-2 rounded-full border border-[#D32F2F]/30 bg-[#D32F2F]/5 px-4 py-1.5 text-xs font-bold uppercase tracking-wider text-[#D32F2F] mb-5">
-                <span className="h-1.5 w-1.5 rounded-full bg-[#D32F2F] animate-pulse" />
-                {t("servicesBadge")}
-              </span>
-              <h1 className="text-4xl md:text-6xl lg:text-7xl font-extrabold tracking-tight text-neutral-900 mb-5 leading-[1.05]">
-                {t("servicesTitleLine1")}{" "}
-                <span className="bg-gradient-to-r from-[#D32F2F] via-[#F44336] to-[#111111] bg-clip-text text-transparent">
-                  {t("servicesTitleHighlight")}
-                </span>
-              </h1>
-              <p className="max-w-3xl mx-auto text-base md:text-lg text-neutral-600 leading-relaxed">
-                {t("servicesSubtitle")}
-              </p>
-            </motion.div>
-          </div>
-        </section> */}
-
-        {/* ============ FEATURED SERVICES + MAIN SERVICES ============ */}
-        <section className="relative w-full py-12 md:py-20 bg-neutral-50 overflow-hidden">
+        {/* ============ MAIN CONTENT (Identical layout to Corporate Services) ============ */}
+        <section className="relative w-full pt-32 py-14 bg-neutral-50 overflow-hidden">
           <div className="pointer-events-none absolute inset-0 overflow-hidden">
             <div className="absolute top-0 right-1/4 h-[500px] w-[500px] rounded-full bg-gradient-to-br from-[#D32F2F]/8 via-[#F44336]/5 to-transparent blur-[120px]" />
             <div className="absolute bottom-0 left-0 h-[400px] w-[400px] rounded-full bg-[#111111]/5 blur-[100px]" />
@@ -147,7 +128,7 @@ const ServicesPage = () => {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.15 }}
-              className="text-center mb-12"
+              className="text-center mb-14"
             >
               <span className="inline-flex items-center gap-2 rounded-full border border-[#D32F2F]/30 bg-[#D32F2F]/5 px-4 py-1.5 text-xs font-bold uppercase tracking-wider text-[#D32F2F] mb-4">
                 <span className="h-1.5 w-1.5 rounded-full bg-[#D32F2F] animate-pulse" />
@@ -171,33 +152,37 @@ const ServicesPage = () => {
                 return (
                   <motion.a
                     key={idx}
-                    href="#contact"
+                    href="/contact"
                     initial={{ opacity: 0, y: 25 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.5, delay: idx * 0.08 }}
-                    className="group relative flex flex-col rounded-2xl border border-neutral-200 bg-white p-6 transition-all duration-300 hover:border-[#D32F2F]/50 hover:shadow-2xl hover:-translate-y-1.5 overflow-hidden"
+                    className="group relative flex flex-col rounded-2xl border border-neutral-200 bg-white p-6 transition-all duration-300 hover:border-[#D32F2F]/50 hover:shadow-2xl hover:-translate-y-1.5 overflow-hidden min-h-[280px]"
                   >
+                    {/* Top accent line */}
                     <span className="absolute top-0 left-6 right-6 h-[2px] bg-gradient-to-r from-transparent via-[#D32F2F] to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
 
-                    <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-gradient-to-br from-[#D32F2F] to-[#F44336] text-white shadow-lg mb-5 transition-transform duration-300 group-hover:scale-110 group-hover:rotate-3">
-                      <Icon className="h-7 w-7" />
+                    {/* Icon */}
+                    <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-gradient-to-br from-[#D32F2F] to-[#F44336] text-white shadow-lg mb-5 transition-transform duration-300 group-hover:scale-110">
+                      <Icon className="h-7 w-7" strokeWidth={1.75} />
                     </div>
 
-                    <h3 className="text-lg font-bold text-neutral-900 mb-2 flex items-center gap-2">
-                      <span aria-hidden="true">{item.emoji}</span>
+                    {/* Title */}
+                    <h3 className="text-base font-bold text-neutral-900 mb-2 leading-snug min-h-[44px] flex items-start">
                       {t(item.titleKey)}
                     </h3>
 
-                    <p className="text-sm text-neutral-600 leading-relaxed mb-5 flex-1">
+                    {/* Description */}
+                    <p className="text-sm text-neutral-600 leading-relaxed mb-5 flex-1 line-clamp-4">
                       {t(item.descKey)}
                     </p>
 
+                    {/* Learn More */}
                     <div
-                      className={`flex items-center gap-1.5 text-xs font-bold uppercase tracking-wider text-[#D32F2F] group-hover:gap-2.5 transition-all duration-300 ${
+                      className={`flex items-center gap-1.5 text-xs font-bold uppercase tracking-wider text-[#D32F2F] group-hover:gap-2.5 transition-all duration-300 mt-auto ${
                         isArabic ? "flex-row-reverse" : ""
                       }`}
                     >
-                      <span>{isArabic ? "اعرف المزيد" : "Learn More"}</span>
+                      <span>{t("learnMore")}</span>
                       <ArrowUpRight className="h-3.5 w-3.5 transition-transform duration-300 group-hover:rotate-45" />
                     </div>
                   </motion.a>
@@ -209,10 +194,11 @@ const ServicesPage = () => {
                 TOURIST VISAS — 11 Countries
                ============================================================ */}
             <motion.div
+              id="tourist-visas"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.2 }}
-              className="mb-16 md:mb-20"
+              className="mb-16 md:mb-20 scroll-mt-28 md:scroll-mt-36"
             >
               <div className="text-center mb-10">
                 <span className="inline-flex items-center gap-2 rounded-full border border-[#D32F2F]/30 bg-[#D32F2F]/5 px-4 py-1.5 text-xs font-bold uppercase tracking-wider text-[#D32F2F] mb-4">
@@ -234,7 +220,7 @@ const ServicesPage = () => {
                 {TOURIST_VISAS.map((visa, idx) => (
                   <motion.a
                     key={visa.nameEN}
-                    href="#contact"
+                    href="/contact"
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.4, delay: idx * 0.04 }}
@@ -268,7 +254,7 @@ const ServicesPage = () => {
 
               <div className="mt-10 text-center">
                 <a
-                  href="#contact"
+                  href="/contact"
                   className="inline-flex items-center gap-2 rounded-full border-2 border-[#D32F2F] bg-white px-6 py-3 text-sm font-bold text-[#D32F2F] hover:bg-[#D32F2F] hover:text-white transition-all duration-300"
                 >
                   <span>{t("applyVisaBtn")}</span>
@@ -277,44 +263,47 @@ const ServicesPage = () => {
               </div>
             </motion.div>
 
-            {/* ============================================================
-                FULL INDIVIDUALS SERVICES LIST (19 Services)
-               ============================================================ */}
+            {/* ---- Divider Heading ---- */}
             <motion.div
+              id="individuals-services"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6 }}
-              className="text-center mb-10"
+              className="text-center mb-12 scroll-mt-28 md:scroll-mt-36"
             >
               <h3 className="text-2xl md:text-3xl font-extrabold text-neutral-900 mb-2">
                 {t("individualServicesHeading")}
               </h3>
-              <p className="text-sm md:text-base text-neutral-600">
+              <p className="text-sm md:text-base text-neutral-600 max-w-2xl mx-auto">
                 {t("individualServicesSubheading")}
               </p>
             </motion.div>
 
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+            {/* ---- Full Individuals Services Grid (19) ---- */}
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
               {INDIVIDUAL_SERVICES_MAP.map((service, idx) => {
                 const Icon = service.icon;
                 return (
                   <motion.div
                     key={service.titleKey}
+                    id={service.titleKey}
                     initial={{ opacity: 0, y: 20 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
                     transition={{ duration: 0.5, delay: idx * 0.04 }}
-                    className="group relative flex items-start gap-4 rounded-2xl border border-neutral-200 bg-white p-5 transition-all duration-300 hover:border-[#111111]/30 hover:shadow-xl hover:-translate-y-0.5"
+                    className="group relative flex items-start gap-4 rounded-2xl border border-neutral-200 bg-white p-5 transition-all duration-300 hover:border-[#D32F2F]/40 hover:shadow-xl hover:-translate-y-0.5 h-full scroll-mt-28 md:scroll-mt-36"
                   >
-                    <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl border border-neutral-200 bg-neutral-50 text-[#D32F2F] transition-all duration-300 group-hover:bg-[#111111] group-hover:text-white group-hover:border-[#111111]">
-                      <Icon className="h-5 w-5" />
+                    {/* Icon Box */}
+                    <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl border border-neutral-200 bg-neutral-50 text-[#D32F2F] transition-all duration-300 group-hover:bg-[#D32F2F] group-hover:text-white group-hover:border-[#D32F2F]">
+                      <Icon className="h-5 w-5" strokeWidth={1.75} />
                     </div>
 
+                    {/* Text Content */}
                     <div className="min-w-0 flex-1">
-                      <h4 className="text-base font-bold text-neutral-900 mb-1 group-hover:text-[#D32F2F] transition-colors">
+                      <h4 className="text-[15px] font-bold text-neutral-900 mb-1.5 leading-snug group-hover:text-[#D32F2F] transition-colors">
                         {t(service.titleKey)}
                       </h4>
-                      <p className="text-sm text-neutral-600 leading-relaxed">
+                      <p className="text-[13px] text-neutral-600 leading-relaxed">
                         {t(service.descKey)}
                       </p>
                     </div>
@@ -329,10 +318,10 @@ const ServicesPage = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6 }}
-              className="mt-14 text-center"
+              className="mt-16 text-center"
             >
               <a
-                href="#contact"
+                href="/contact"
                 className="inline-flex items-center gap-3 rounded-full bg-gradient-to-r from-[#D32F2F] via-[#F44336] to-[#111111] px-8 py-4 text-sm font-extrabold uppercase tracking-wider text-white shadow-xl hover:brightness-110 active:scale-[0.98] transition-all"
               >
                 <span>{t("ctaConsultation")}</span>
