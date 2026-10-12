@@ -188,7 +188,7 @@ const CorporateServices = () => {
                       }`}
                     >
                       <span>{t("learnMore")}</span>
-                      <ArrowUpRight className="h-3.5 w-3.5 transition-transform duration-300 group-hover:rotate-45" />
+                      <ArrowUpRight className="h-3.5 w-3.5 rtl:rotate-[-90deg] transition-transform duration-300 group-hover:rotate-45" />
                     </div>
                   </motion.a>
                 );
@@ -257,7 +257,7 @@ const CorporateServices = () => {
                 className="inline-flex items-center gap-3 rounded-full bg-gradient-to-r from-[#D32F2F] via-[#F44336] to-[#111111] px-8 py-4 text-sm font-extrabold uppercase tracking-wider text-white shadow-xl hover:brightness-110 active:scale-[0.98] transition-all"
               >
                 <span>{t("ctaConsultation")}</span>
-                <ArrowUpRight className="h-5 w-5" />
+                <ArrowUpRight className="h-5 w-5 rtl:rotate-[-90deg]" />
               </a>
             </motion.div>
           </div>

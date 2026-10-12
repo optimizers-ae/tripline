@@ -13,45 +13,44 @@ import {
 
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
-
-/* -----------------------------------------------------------
-   Contact Info Cards — Client's ACTUAL details (from Instagram)
-   Office 2004, Office Tower, Grand Mall Rashidiya, Ajman, UAE
------------------------------------------------------------ */
-const CONTACT_INFO = [
-  {
-    icon: Phone,
-    label: "Telephone (Tel)",
-    value: "+971 6 573 4303",
-    href: "tel:+97165734303",
-  },
-  {
-    icon: Smartphone,
-    label: "Mobile (Mob)",
-    value: "+971 54444 2029",
-    href: "tel:+971544442029",
-  },
-  {
-    icon: Mail,
-    label: "Email Us",
-    value: "inquiry@tripline.ae",
-    href: "mailto:inquiry@tripline.ae",
-  },
-  {
-    icon: MapPin,
-    label: "Visit Us",
-    value: "Grand Mall Office Tower - Office No. 2004, Sheikh Khalifa Bin Zayed St, Al Rashidiya 3, Ajman, UAE",
-    href: "https://maps.app.goo.gl/ML8N7BxxDxtjg6Nw7?g_st=ic",
-  },
-  {
-    icon: Clock,
-    label: "Working Hours",
-    value: "Sat – Thu, 9AM – 7PM",
-    href: "#",
-  },
-];
+import { useLanguage } from "../context/LanguageContext";
 
 const ContactPage = () => {
+  const { t } = useLanguage();
+
+  const CONTACT_INFO = [
+    {
+      icon: Phone,
+      label: t("contactLabelTel"),
+      value: "+971 6 573 4303",
+      href: "tel:+97165734303",
+    },
+    {
+      icon: Smartphone,
+      label: t("contactLabelMob"),
+      value: "+971 54444 2029",
+      href: "tel:+971544442029",
+    },
+    {
+      icon: Mail,
+      label: t("contactLabelEmail"),
+      value: "inquiry@tripline.ae",
+      href: "mailto:inquiry@tripline.ae",
+    },
+    {
+      icon: MapPin,
+      label: t("contactLabelVisit"),
+      value: "Grand Mall Office Tower - Office No. 2004, Sheikh Khalifa Bin Zayed St, Al Rashidiya 3, Ajman, UAE",
+      href: "https://maps.app.goo.gl/ML8N7BxxDxtjg6Nw7?g_st=ic",
+    },
+    {
+      icon: Clock,
+      label: t("contactLabelHours"),
+      value: t("contactHoursValue"),
+      href: "#",
+    },
+  ];
+
   const [form, setForm] = useState({
     name: "",
     email: "",
@@ -65,7 +64,6 @@ const ContactPage = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // TODO: hook up to your backend / email service
     setSubmitted(true);
     setTimeout(() => setSubmitted(false), 4000);
   };
@@ -91,17 +89,16 @@ const ContactPage = () => {
             >
               <span className="inline-flex items-center gap-2 rounded-full border border-[#D32F2F]/30 bg-[#D32F2F]/5 px-4 py-1.5 text-xs font-bold uppercase tracking-wider text-[#D32F2F] mb-5">
                 <span className="h-1.5 w-1.5 rounded-full bg-[#D32F2F] animate-pulse" />
-                Contact & Consultation
+                {t("contactPageBadge")}
               </span>
               <h1 className="text-4xl md:text-6xl lg:text-7xl font-extrabold tracking-tight text-neutral-900 mb-5 leading-[1.05]">
-                Let's Talk About{" "}
+                {t("contactPageHeadingPre")}{" "}
                 <span className="bg-gradient-to-r from-[#D32F2F] via-[#F44336] to-[#111111] bg-clip-text text-transparent">
-                  Your Needs
+                  {t("contactPageHeadingHighlight")}
                 </span>
               </h1>
               <p className="max-w-3xl mx-auto text-base md:text-lg text-neutral-600 leading-relaxed">
-                Speak to a senior advisor today and get expert guidance on
-                visas, business setup, or any UAE government service.
+                {t("contactPageDesc")}
               </p>
             </motion.div>
           </div>
@@ -160,10 +157,10 @@ const ContactPage = () => {
                 >
                   <div className="flex items-center gap-3">
                     <MessageSquare className="h-5 w-5" />
-                    <span className="font-bold">Chat on WhatsApp</span>
+                    <span className="font-bold">{t("contactChatWhatsApp")}</span>
                   </div>
-                  <span className="text-xs font-semibold uppercase tracking-wider opacity-80 group-hover:opacity-100">
-                    Instant Reply →
+                  <span className="text-xs font-semibold uppercase tracking-wider opacity-80 group-hover:opacity-100 rtl:rotate-180 inline-block">
+                    {t("contactInstantReply")}
                   </span>
                 </a>
               </motion.div>
@@ -183,16 +180,16 @@ const ContactPage = () => {
                   <div className="absolute top-0 left-8 right-8 h-1 bg-gradient-to-r from-transparent via-[#D32F2F] to-transparent" />
 
                   <h3 className="text-2xl font-extrabold text-neutral-900 mb-2">
-                    Send Us a Message
+                    {t("contactFormTitle")}
                   </h3>
                   <p className="text-sm text-neutral-600 mb-6">
-                    Fill out the form and we'll get back to you within 24 hours.
+                    {t("contactFormDesc")}
                   </p>
 
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-4">
                     <div>
                       <label className="block text-xs font-bold uppercase tracking-wider text-neutral-700 mb-2">
-                        Full Name
+                        {t("contactFormFullName")}
                       </label>
                       <input
                         type="text"
@@ -200,13 +197,13 @@ const ContactPage = () => {
                         value={form.name}
                         onChange={handleChange}
                         required
-                        placeholder="Your name"
+                        placeholder={t("contactFormFullNamePh")}
                         className="w-full rounded-xl border border-neutral-200 bg-neutral-50 px-4 py-3 text-sm text-neutral-900 placeholder-neutral-400 outline-none transition-all focus:border-[#D32F2F] focus:bg-white focus:ring-2 focus:ring-[#D32F2F]/20"
                       />
                     </div>
                     <div>
                       <label className="block text-xs font-bold uppercase tracking-wider text-neutral-700 mb-2">
-                        Phone
+                        {t("contactFormPhone")}
                       </label>
                       <input
                         type="tel"
@@ -214,7 +211,7 @@ const ContactPage = () => {
                         value={form.phone}
                         onChange={handleChange}
                         required
-                        placeholder="+971 54444 2029"
+                        placeholder={t("contactFormPhonePh")}
                         className="w-full rounded-xl border border-neutral-200 bg-neutral-50 px-4 py-3 text-sm text-neutral-900 placeholder-neutral-400 outline-none transition-all focus:border-[#D32F2F] focus:bg-white focus:ring-2 focus:ring-[#D32F2F]/20"
                       />
                     </div>
@@ -222,7 +219,7 @@ const ContactPage = () => {
 
                   <div className="mb-4">
                     <label className="block text-xs font-bold uppercase tracking-wider text-neutral-700 mb-2">
-                      Email
+                      {t("contactFormEmail")}
                     </label>
                     <input
                       type="email"
@@ -230,14 +227,14 @@ const ContactPage = () => {
                       value={form.email}
                       onChange={handleChange}
                       required
-                      placeholder="you@example.com"
+                      placeholder={t("contactFormEmailPh")}
                       className="w-full rounded-xl border border-neutral-200 bg-neutral-50 px-4 py-3 text-sm text-neutral-900 placeholder-neutral-400 outline-none transition-all focus:border-[#D32F2F] focus:bg-white focus:ring-2 focus:ring-[#D32F2F]/20"
                     />
                   </div>
 
                   <div className="mb-6">
                     <label className="block text-xs font-bold uppercase tracking-wider text-neutral-700 mb-2">
-                      Message
+                      {t("contactFormMessage")}
                     </label>
                     <textarea
                       name="message"
@@ -245,7 +242,7 @@ const ContactPage = () => {
                       onChange={handleChange}
                       required
                       rows={5}
-                      placeholder="Tell us what service you need..."
+                      placeholder={t("contactFormMessagePh")}
                       className="w-full rounded-xl border border-neutral-200 bg-neutral-50 px-4 py-3 text-sm text-neutral-900 placeholder-neutral-400 outline-none transition-all focus:border-[#D32F2F] focus:bg-white focus:ring-2 focus:ring-[#D32F2F]/20 resize-none"
                     />
                   </div>
@@ -255,11 +252,11 @@ const ContactPage = () => {
                     className="group flex w-full items-center justify-center gap-3 rounded-xl bg-gradient-to-r from-[#D32F2F] via-[#F44336] to-[#111111] px-6 py-4 text-sm font-extrabold uppercase tracking-wider text-white shadow-xl hover:brightness-110 active:scale-[0.99] transition-all"
                   >
                     {submitted ? (
-                      <span>✓ Message Sent!</span>
+                      <span>{t("contactFormBtnSent")}</span>
                     ) : (
                       <>
-                        <span>Send Message</span>
-                        <Send className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
+                        <span>{t("contactFormBtnSend")}</span>
+                        <Send className="h-4 w-4 rtl:rotate-180 transition-transform group-hover:translate-x-0.5 rtl:group-hover:-translate-x-0.5" />
                       </>
                     )}
                   </button>
@@ -282,13 +279,13 @@ const ContactPage = () => {
                     <div>
                       <MapPin className="h-9 w-9 mb-4 opacity-90" />
                       <h3 className="text-2xl lg:text-3xl font-extrabold mb-3">
-                        Visit Our Office
+                        {t("contactVisitOfficeTitle")}
                       </h3>
                       <div className="space-y-2 text-sm text-white/95 leading-relaxed">
-                        <p className="font-bold text-base">Office No. 2004</p>
-                        <p>Grand Mall Office Tower</p>
-                        <p>Sheikh Khalifa Bin Zayed St</p>
-                        <p>Al Rashidiya 3, Ajman — UAE</p>
+                        <p className="font-bold text-base">{t("contactOfficeRoom")}</p>
+                        <p>{t("contactOfficeTower")}</p>
+                        <p>{t("contactOfficeStreet")}</p>
+                        <p>{t("contactOfficeArea")}</p>
                       </div>
                     </div>
                     <div className="pt-6">
@@ -298,8 +295,8 @@ const ContactPage = () => {
                         rel="noopener noreferrer"
                         className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-wider bg-white/20 hover:bg-white text-white hover:text-[#D32F2F] px-5 py-3 rounded-full w-fit transition-all duration-300 shadow-md"
                       >
-                        <span>Get Directions</span>
-                        <ArrowUpRight className="h-3.5 w-3.5" />
+                        <span>{t("contactGetDirections")}</span>
+                        <ArrowUpRight className="h-3.5 w-3.5 rtl:rotate-[-90deg]" />
                       </a>
                     </div>
                   </div>

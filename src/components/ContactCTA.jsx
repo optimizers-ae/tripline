@@ -8,6 +8,7 @@ import {
   ShieldCheck,
   Sparkles,
 } from "lucide-react";
+import { useLanguage } from "../context/LanguageContext";
 
 const containerVariants = {
   hidden: { opacity: 0 },
@@ -33,6 +34,8 @@ const fadeUpVariants = {
 };
 
 const ContactCTA = () => {
+  const { t, isArabic } = useLanguage();
+
   return (
     <section
       id="contact"
@@ -66,18 +69,18 @@ const ContactCTA = () => {
                 <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-[#D32F2F] opacity-75" />
                 <span className="relative inline-flex h-2 w-2 rounded-full bg-[#D32F2F]" />
               </span>
-              <span>Tripline Senior Advisory Desk</span>
+              <span>{t("contactCtaDeskBadge")}</span>
             </span>
           </motion.div>
 
           {/* Main Heading */}
           <motion.h2
             variants={fadeUpVariants}
-            className="text-3xl font-extrabold tracking-tight text-neutral-950 sm:text-4xl md:text-5xl lg:text-6xl leading-18"
+            className="text-3xl font-extrabold tracking-tight text-neutral-950 sm:text-4xl md:text-5xl lg:text-6xl leading-tight"
           >
-            Ready to secure your{" "}
+            {t("contactCtaHeadingPre")}
             <span className="bg-gradient-to-r from-[#D32F2F] via-[#F44336] to-[#111111] bg-clip-text text-transparent">
-              UAE success?
+              {t("contactCtaHeadingHighlight")}
             </span>
           </motion.h2>
 
@@ -86,9 +89,7 @@ const ContactCTA = () => {
             variants={fadeUpVariants}
             className="mx-auto max-w-xl text-base leading-relaxed text-neutral-600 md:text-lg"
           >
-            Let’s talk about your business setup or property financing. No
-            pressure, just a clear, professional conversation about what’s
-            possible.
+            {t("contactCtaSubtitle")}
           </motion.p>
 
           {/* Primary & Secondary CTA Buttons */}
@@ -106,8 +107,8 @@ const ContactCTA = () => {
                 href="mailto:inquiry@tripline.ae"
                 className="inline-flex items-center gap-3 rounded-full bg-neutral-950 px-8 py-4 font-bold uppercase tracking-wider text-white text-xs sm:text-sm transition-colors duration-200 hover:bg-neutral-800"
               >
-                <span>Talk to an Advisor</span>
-                <ArrowRight className="h-4 w-4 text-[#D32F2F]" />
+                <span>{t("contactCtaBtnAdvisor")}</span>
+                <ArrowRight className="h-4 w-4 text-[#D32F2F] rtl:rotate-180" />
               </a>
             </motion.div>
 
@@ -121,7 +122,7 @@ const ContactCTA = () => {
               className="inline-flex items-center gap-2.5 rounded-full border border-neutral-300 bg-white/90 px-7 py-4 text-xs sm:text-sm font-bold text-neutral-800 shadow-md backdrop-blur-sm transition-all hover:bg-white hover:border-[#111111] hover:text-[#00A389]"
             >
               <MessageSquare className="h-4 w-4 text-[#25D366]" />
-              <span>WhatsApp Us</span>
+              <span>{t("contactCtaBtnWhatsApp")}</span>
             </motion.a>
           </motion.div>
 
@@ -132,17 +133,17 @@ const ContactCTA = () => {
           >
             <span className="flex items-center gap-1.5">
               <span className="h-1.5 w-1.5 rounded-full bg-[#111111]" />
-              Direct Senior Access
+              {t("contactCtaTrust1")}
             </span>
             <span className="hidden sm:inline text-neutral-300">•</span>
             <span className="flex items-center gap-1.5">
               <span className="h-1.5 w-1.5 rounded-full bg-[#F44336]" />
-              48-Hour Bank Pre-Approval
+              {t("contactCtaTrust2")}
             </span>
             <span className="hidden sm:inline text-neutral-300">•</span>
             <span className="flex items-center gap-1.5">
               <span className="h-1.5 w-1.5 rounded-full bg-[#D32F2F]" />
-              Zero Hidden Scopes
+              {t("contactCtaTrust3")}
             </span>
           </motion.div>
 
@@ -159,7 +160,7 @@ const ContactCTA = () => {
               <div className="flex h-8 w-8 items-center justify-center rounded-xl bg-white shadow-sm border border-neutral-200 text-[#D32F2F] group-hover:scale-110 transition-transform">
                 <Mail className="h-4 w-4" />
               </div>
-              <span>inquiry@tripline.ae</span>
+              <span dir="ltr">inquiry@tripline.ae</span>
             </motion.a>
 
             <motion.a
@@ -170,7 +171,7 @@ const ContactCTA = () => {
               <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-white shadow-sm border border-neutral-200 text-[#D32F2F] group-hover:scale-110 transition-transform">
                 <Phone className="h-4 w-4" />
               </div>
-              <span>Tel: +971 6 573 4303</span>
+              <span dir="ltr">Tel: +971 6 573 4303</span>
             </motion.a>
 
             <motion.a
@@ -181,7 +182,7 @@ const ContactCTA = () => {
               <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-white shadow-sm border border-neutral-200 text-[#D32F2F] group-hover:scale-110 transition-transform">
                 <Phone className="h-4 w-4" />
               </div>
-              <span>Mob: +971 54444 2029</span>
+              <span dir="ltr">Mob: +971 54444 2029</span>
             </motion.a>
           </motion.div>
 
@@ -197,7 +198,7 @@ const ContactCTA = () => {
               rel="noopener noreferrer"
               className="hover:text-neutral-900 transition-colors"
             >
-              Grand Mall Office Tower - Office No. 2004, Sheikh Khalifa Bin Zayed St, Al Rashidiya 3, Ajman, UAE
+              {t("address")}
             </a>
           </motion.div>
         </motion.div>

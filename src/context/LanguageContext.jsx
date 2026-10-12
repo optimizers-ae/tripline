@@ -244,6 +244,212 @@ export const translations = {
     corp15Title: "Document Collection, Submission & Renewal Reminders",
     corp15Desc:
       "Collection and submission of documents, plus timely renewal reminders for your business.",
+
+    /* ---------------- HERO SECTION (HOME) ---------------- */
+    heroBadge: "Authorized UAE Businessmen & Government Services",
+    heroTitlePre: "Complete Business Setup & ",
+    heroTitleHighlight: "Government Solutions.",
+    heroDesc:
+      "From trade license applications and company formation to residency visas and corporate PRO services across the UAE.",
+    heroBtnExplore: "Corporate Services",
+    heroBtnIndividuals: "Individuals Services",
+    heroBtnContact: "Contact Advisors",
+
+    /* ---------------- ABOUT SECTION (HOME) ---------------- */
+    homeAboutBadge: "About Us & Our Expertise",
+    homeAboutTitlePre: "Comprehensive Solutions & Empowered by ",
+    homeAboutTitleHighlight: "Government Services.",
+    homeAboutDesc:
+      "Tripline Businessmen Services provides an all-inclusive suite of governmental, corporate, and visa solutions. We bridge the gap between premium service delivery and administrative excellence.",
+    homeVisualVisa: "Visas & Residency",
+    homeVisualCorporate: "Corporate Licensing",
+    homeVisualGov: "Government Relations",
+    homeSvc1Tag: "LABOR & IMMIGRATION",
+    homeSvc1Title: "Employment Contracts",
+    homeSvc1Desc:
+      "Issuance & cancellation of employment contracts tailored to UAE labor laws.",
+    homeSvc2Tag: "LABOR & IMMIGRATION",
+    homeSvc2Title: "Labor Cards",
+    homeSvc2Desc:
+      "Renewal & modification of labor cards ensuring full compliance with MOHRE.",
+    homeSvc3Tag: "CORPORATE SERVICES",
+    homeSvc3Title: "Commercial Licenses",
+    homeSvc3Desc:
+      "Issuance & renewal of commercial licenses for mainland and free zones.",
+    homeSvc4Tag: "VISA & RESIDENCY",
+    homeSvc4Title: "Medical & Emirates ID",
+    homeSvc4Desc:
+      "Assistance with medical fitness tests & Emirates ID services for new and renewing residents.",
+    homeSvc5Tag: "VISA & RESIDENCY",
+    homeSvc5Title: "Entry Visas",
+    homeSvc5Desc:
+      "Issuance & cancellation of entry visas for business, visit, and tourism.",
+    homeSvc6Tag: "VISA & RESIDENCY",
+    homeSvc6Title: "Family & Partner Visas",
+    homeSvc6Desc:
+      "Family & investor partner visa services for seamless relocation and sponsorship.",
+    homeSvc7Tag: "LEGAL SERVICES",
+    homeSvc7Title: "Document Attestation",
+    homeSvc7Desc:
+      "Attestation of official documents & contracts from relevant ministries and embassies.",
+    homeSvc8Tag: "GOVERNMENT RELATIONS",
+    homeSvc8Title: "Embassy Services",
+    homeSvc8Desc:
+      "Embassy & consulate liaison services including Sudanese and other nationalities.",
+    homeSvc9Tag: "GOVERNMENT RELATIONS",
+    homeSvc9Title: "Fines & Exemption",
+    homeSvc9Desc:
+      "Fine reduction, waiver requests & status corrections for businesses and individuals.",
+
+    /* ---------------- STATS & TESTIMONIAL ---------------- */
+    statQuote:
+      "Their guidance made the entire business setup process clear, fast, and stress-free. From consultation to execution, every step was handled professionally.”",
+    statBadge: "Client Testimonial",
+    stat1Label: "businesses successfully supported ",
+    stat1Highlight: "across the UAE",
+    stat2Label: "years of combined business ",
+    stat2Highlight: "consultancy experience",
+    stat3Label: "client satisfaction across ",
+    stat3Highlight: "completed cases",
+
+    /* ---------------- ACCENT BANNER ---------------- */
+    accentBadge: "ENGINEERED FOR BUSINESS SUCCESS",
+    accentLine1: "EVERY BUSINESS",
+    accentLine2: "DESERVES THE",
+    accentLine3: "RIGHT GUIDANCE",
+    accentLine4: "TO GROW.",
+
+    /* ---------------- WHY CHOOSE US ---------------- */
+    whyBadge: "The Consultancy Difference",
+    whyHeadingPre: "Why Businesses ",
+    whyHeadingHighlight: "Choose Us.",
+    whySubtitle:
+      "We don't just provide services. We understand your goals, create the right strategy, and guide you through every step of building a successful business in the UAE.",
+    whyCard1Title: "Expert Company Formation",
+    whyCard1Strategy: "Strategy First",
+    whyCard1Desc:
+      "From Mainland DED licensing to Free Zone and Offshore setups, we tailor the legal structure and jurisdiction to match your business goals, minimizing costs and maximizing growth potential.",
+    whyCard1Tag1: "Mainland & Freezone Setup",
+    whyCard1Tag2: "Offshore Company Formation",
+    whyCard2Title: "Strategic Mortgage Consultancy",
+    whyCard2Desc:
+      "Secure the best financing options for your residential or commercial properties in Dubai. Our experts negotiate on your behalf to get the most favorable rates.",
+    whyCard2Tag: "Residential & Commercial Focus",
+    whyCard3Title: "Transparent Pricing & Processes",
+    whyCard3Desc:
+      "We believe in complete honesty. You get upfront pricing, realistic timelines for approvals, and a clear breakdown of fees without any hidden retainers.",
+    whyCard3Tag: "100% Guaranteed Fee Clarity",
+    whyCard4Title: "End-to-End PRO & Golden Visa Services",
+    whyCard4Badge: "Lifetime Advisory",
+    whyCard4Desc:
+      "Our support doesn't end with a trade license. We handle your employee visas, UAE Golden Visa applications, corporate tax registration, and ongoing government liaison services.",
+    whyCard4Tag1: "Golden Visa Processing",
+    whyCard4Tag2: "Corporate Tax & VAT",
+    whyCard4Tag3: "PRO & Document Attestation",
+
+    /* ---------------- CONTACT CTA ---------------- */
+    contactCtaDeskBadge: "Tripline Senior Advisory Desk",
+    contactCtaHeadingPre: "Ready to secure your ",
+    contactCtaHeadingHighlight: "UAE success?",
+    contactCtaSubtitle:
+      "Let’s talk about your business setup or property financing. No pressure, just a clear, professional conversation about what’s possible.",
+    contactCtaBtnAdvisor: "Talk to an Advisor",
+    contactCtaBtnWhatsApp: "WhatsApp Us",
+    contactCtaTrust1: "Direct Senior Access",
+    contactCtaTrust2: "48-Hour Bank Pre-Approval",
+    contactCtaTrust3: "Zero Hidden Scopes",
+
+    /* ---------------- FOOTER ---------------- */
+    footerDesc:
+      "Helping entrepreneurs and businesses establish, manage, and grow in the UAE with trusted consultancy and complete business solutions.",
+    footerSupportStatus: "Business Support Available",
+    footerQuickLinks: "Quick Links",
+    footerServices: "Services",
+    footerContactUs: "Contact Us",
+    footerConsultancyTag: "UAE Business Consultancy",
+    footerBookConsultation: "Book Consultation",
+    footerCopyright: "© 2026 Tripline Businessmen Services. All rights reserved.",
+    footerPrivacy: "Privacy Policy",
+    footerTerms: "Terms of Service",
+    footerTelLabel: "Tel:",
+    footerMobLabel: "Mob:",
+
+    /* ---------------- ABOUT PAGE ---------------- */
+    aboutPageBadge: "About Trip Line",
+    aboutPageHeadingPre: "Your Trusted Partner in ",
+    aboutPageHeadingHighlight: "UAE Services",
+    aboutPageDesc:
+      "At Trip Line Businessmen Services, we are committed to providing fast and reliable solutions for all residency and business-related services. Our goal is to simplify all government transactions and visa services.",
+    aboutPageP1Bold: "seamless and hassle-free experience",
+    aboutPageP1Pre: "To give our clients a ",
+    aboutPageP1Post:
+      ", our team works with high expertise and professionalism to ensure your transactions are completed accurately and quickly.",
+    aboutPageP2Pre: "Because ",
+    aboutPageP2Highlight: "your comfort is our priority",
+    aboutPageP2Post: ".",
+    aboutTagUaeLicensed: "UAE Licensed",
+    aboutTagTrustedAdvisors: "Trusted Advisors",
+    aboutStatHappyClients: "Happy Clients",
+    aboutStatFastProcessing: "Fast Processing",
+    aboutStatSuccessRate: "Success Rate",
+    aboutStatExperience: "Years Experience",
+    aboutFeat1Title: "Customized Service",
+    aboutFeat1Desc: "Tailored solutions for your specific residency & business needs.",
+    aboutFeat2Title: "Professional Team",
+    aboutFeat2Desc: "Expert advisors with deep knowledge of UAE regulations.",
+    aboutFeat3Title: "Fast Execution",
+    aboutFeat3Desc: "Quick turnaround on all government transactions.",
+    aboutFeat4Title: "Reliability",
+    aboutFeat4Desc: "Trusted by hundreds of satisfied clients across the UAE.",
+
+    /* ---------------- CONTACT PAGE ---------------- */
+    contactPageBadge: "Contact & Consultation",
+    contactPageHeadingPre: "Let's Talk About ",
+    contactPageHeadingHighlight: "Your Needs",
+    contactPageDesc:
+      "Speak to a senior advisor today and get expert guidance on visas, business setup, or any UAE government service.",
+    contactLabelTel: "Telephone (Tel)",
+    contactLabelMob: "Mobile (Mob)",
+    contactLabelEmail: "Email Us",
+    contactLabelVisit: "Visit Us",
+    contactLabelHours: "Working Hours",
+    contactHoursValue: "Sat – Thu, 9AM – 7PM",
+    contactChatWhatsApp: "Chat on WhatsApp",
+    contactInstantReply: "Instant Reply →",
+    contactFormTitle: "Send Us a Message",
+    contactFormDesc: "Fill out the form and we'll get back to you within 24 hours.",
+    contactFormFullName: "Full Name",
+    contactFormFullNamePh: "Your name",
+    contactFormPhone: "Phone",
+    contactFormPhonePh: "+971 54444 2029",
+    contactFormEmail: "Email",
+    contactFormEmailPh: "you@example.com",
+    contactFormMessage: "Message",
+    contactFormMessagePh: "Tell us what service you need...",
+    contactFormBtnSend: "Send Message",
+    contactFormBtnSent: "✓ Message Sent!",
+    contactVisitOfficeTitle: "Visit Our Office",
+    contactOfficeRoom: "Office No. 2004",
+    contactOfficeTower: "Grand Mall Office Tower",
+    contactOfficeStreet: "Sheikh Khalifa Bin Zayed St",
+    contactOfficeArea: "Al Rashidiya 3, Ajman — UAE",
+    contactGetDirections: "Get Directions",
+
+    /* ---------------- ROUTER / 404 ---------------- */
+    notFoundHeading: "404",
+    notFoundDesc: "Page not found",
+    backToHome: "Back to Home",
+
+    /* ---------------- TECH STACK / PARTNERS ---------------- */
+    trustedPartnersBadge: "TRUSTED PARTNERS",
+    trustedPartnersTitlePre: "Building Success Through ",
+    trustedPartnersTitleHighlight: "Trusted Partnerships.",
+    trustedPartnersSubtitle:
+      "We collaborate with reliable institutions and government authorities to deliver complete business solutions for entrepreneurs and companies in the UAE.",
+    tabAllPartners: "All Partners",
+    tabFreezones: "Free Zones",
+    tabMainland: "Mainland Authorities",
+    tabGovt: "Government Centers",
   },
 
   AR: {
@@ -486,6 +692,212 @@ export const translations = {
     corp15Title: "استلام المستندات وتقديمها والتذكير بمواعيد التجديد",
     corp15Desc:
       "استلام وتقديم المستندات، بالإضافة إلى تذكيرات التجديد في الوقت المناسب لأعمالك.",
+
+    /* ---------------- HERO SECTION (HOME) ---------------- */
+    heroBadge: "خدمات رجال الأعمال وتخليص المعاملات الحكومية المعتمدة",
+    heroTitlePre: "تأسيس متكامل للشركات و",
+    heroTitleHighlight: "حلول حكومية شاملة.",
+    heroDesc:
+      "من تأسيس الشركات وإصدار الرخص التجارية إلى تأشيرات الإقامة وخدمات المندوب وتخليص المعاملات في كافة إمارات الدولة.",
+    heroBtnExplore: "خدمات الشركات",
+    heroBtnIndividuals: "خدمات الأفراد",
+    heroBtnContact: "تواصل مع المستشارين",
+
+    /* ---------------- ABOUT SECTION (HOME) ---------------- */
+    homeAboutBadge: "من نحن وخبراتنا",
+    homeAboutTitlePre: "حلول شاملة ومتكاملة مدعومة بـ ",
+    homeAboutTitleHighlight: "الخدمات الحكومية.",
+    homeAboutDesc:
+      "تقدم ترايب لاين لخدمات رجال الأعمال باقة متكاملة من الحلول الحكومية والمؤسسية وخدمات التأشيرات. نجمع بين أعلى معايير تقديم الخدمة والتميز الإداري.",
+    homeVisualVisa: "التأشيرات والإقامة",
+    homeVisualCorporate: "التراخيص التجارية",
+    homeVisualGov: "العلاقات الحكومية",
+    homeSvc1Tag: "العمل والإقامة",
+    homeSvc1Title: "عقود العمل",
+    homeSvc1Desc:
+      "إصدار وإلغاء عقود العمل وفقاً لقوانين وأنظمة العمل بدولة الإمارات.",
+    homeSvc2Tag: "العمل والإقامة",
+    homeSvc2Title: "بطاقات العمل",
+    homeSvc2Desc:
+      "تجديد وتعديل بطاقات العمل مع ضمان الامتثال الكامل لوزارة الموارد البشرية.",
+    homeSvc3Tag: "خدمات الشركات",
+    homeSvc3Title: "الرخص التجارية",
+    homeSvc3Desc:
+      "إصدار وتجديد الرخص التجارية في البر الرئيسي والمناطق الحرة.",
+    homeSvc4Tag: "التأشيرات والإقامة",
+    homeSvc4Title: "الفحص الطبي والهوية الإماراتية",
+    homeSvc4Desc:
+      "حجز مواعيد الفحص الطبي وطباعة الهوية الإماراتية للمقيمين الجدد والتجديد.",
+    homeSvc5Tag: "التأشيرات والإقامة",
+    homeSvc5Title: "تأشيرات الدخول",
+    homeSvc5Desc:
+      "إصدار وإلغاء تأشيرات الدخول لرجال الأعمال والزيارة والسياحة.",
+    homeSvc6Tag: "التأشيرات والإقامة",
+    homeSvc6Title: "إقامات الأسرة والشركاء",
+    homeSvc6Desc:
+      "خدمات إقامة العائلة والشركاء والمستثمرين لإجراءات استقرار سلسة.",
+    homeSvc7Tag: "الخدمات القانونية",
+    homeSvc7Title: "تصديق المستندات",
+    homeSvc7Desc:
+      "تصديق وتوثيق العقود والوثائق الرسمية لدى الوزارات والسفارات المعتمدة.",
+    homeSvc8Tag: "العلاقات الحكومية",
+    homeSvc8Title: "خدمات السفارات",
+    homeSvc8Desc:
+      "تخليص ومتابعة معاملات السفارات والقنصليات بما فيها السودانية وغيرها.",
+    homeSvc9Tag: "العلاقات الحكومية",
+    homeSvc9Title: "تخفيض الغرامات والتأمين",
+    homeSvc9Desc:
+      "تخفيض وإعفاء الغرامات وتعديل الأوضاع للأفراد والمنشآت.",
+
+    /* ---------------- STATS & TESTIMONIAL ---------------- */
+    statQuote:
+      "إرشاداتهم جعلت إجراءات تأسيس الأعمال بأكملها واضحة وسريعة وبلا أي عناء. من الاستشارة وحتى التنفيذ النهائي، تم التعامل مع كل خطوة باحترافية تامة.”",
+    statBadge: "آراء عملائنا",
+    stat1Label: "شركة ورخصة تم دعمها بنجاح ",
+    stat1Highlight: "في كافة أنحاء الإمارات",
+    stat2Label: "سنوات من الخبرة المشتركة ",
+    stat2Highlight: "في الاستشارات وتخليص المعاملات",
+    stat3Label: "نسبة رضا العملاء عبر ",
+    stat3Highlight: "كافة المعاملات المنجزة",
+
+    /* ---------------- ACCENT BANNER ---------------- */
+    accentBadge: "حلول مصممة لنجاح الأعمال",
+    accentLine1: "كل مشروع ناجح",
+    accentLine2: "يستحق التوجيه",
+    accentLine3: "والدعم الموثوق",
+    accentLine4: "لينمو ويزدهر.",
+
+    /* ---------------- WHY CHOOSE US ---------------- */
+    whyBadge: "سر تميزنا الاستشاري",
+    whyHeadingPre: "لماذا يختارنا ",
+    whyHeadingHighlight: "أصحاب الأعمال والشركات.",
+    whySubtitle:
+      "نحن لا نكتفي بإنهاء الإجراءات؛ بل نفهم أهدافكم، ونضع الاستراتيجية الأنسب، ونرشدكم في كل خطوة لبناء مشروع ناجح في دولة الإمارات.",
+    whyCard1Title: "تأسيس خبير للشركات",
+    whyCard1Strategy: "الاستراتيجية أولاً",
+    whyCard1Desc:
+      "من رخص الدوائر الاقتصادية في البر الرئيسي إلى المناطق الحرة والشركات الخارجية، نختار الهيكل القانوني الأمثل لتحقيق أهدافك وخفض التكاليف وتسريع النمو.",
+    whyCard1Tag1: "تأسيس بالبر الرئيسي والمناطق الحرة",
+    whyCard1Tag2: "تأسيس الشركات الخارجية (أوفشور)",
+    whyCard2Title: "استشارات الرهن والحلول المصرفية",
+    whyCard2Desc:
+      "تأمين أفضل خيارات التمويل لعقاراتك السكنية والتجارية في دبي. يفاوض خبراؤنا بالنيابة عنك للحصول على أفضل الشروط والفوائد.",
+    whyCard2Tag: "تركيز على العقارات السكنية والتجارية",
+    whyCard3Title: "شفافية مطلقة في الأسعار والخطوات",
+    whyCard3Desc:
+      "نؤمن بالصدق والوضوح التام. ستحصل على أسعار واضحة مسبقاً، ومواعيد إنجاز واقعية للموافقات، وتفصيل دقيق للرسوم دون أي تكاليف مستترة.",
+    whyCard3Tag: "وضوح مضمون 100% في الرسوم",
+    whyCard4Title: "خدمات شاملة للمندوب والإقامة الذهبية",
+    whyCard4Badge: "استشارات مدى الحياة",
+    whyCard4Desc:
+      "لا ينتهي دعمنا بصدور الرخصة؛ بل نتولى تأشيرات موظفيك، وطلبات الإقامة الذهبية، والامتثال لوزارة الموارد البشرية، والضريبة، ومتابعة المعاملات الحكومية المستمرة.",
+    whyCard4Tag1: "معاملات الإقامة الذهبية",
+    whyCard4Tag2: "ضريبة الشركات والقيمة المضافة",
+    whyCard4Tag3: "خدمات المندوب وتصديق المستندات",
+
+    /* ---------------- CONTACT CTA ---------------- */
+    contactCtaDeskBadge: "مكتب كبار المستشارين - ترايب لاين",
+    contactCtaHeadingPre: "هل أنت جاهز لتحقيق ",
+    contactCtaHeadingHighlight: "نجاحك في الإمارات؟",
+    contactCtaSubtitle:
+      "تواصل معنا لمناقشة تأسيس شركتك أو تمويل عقارك أو معاملاتك. محادثة مهنية واضحة ومباشرة حول أفضل الحلول المتاحة.",
+    contactCtaBtnAdvisor: "تحدث مع مستشار",
+    contactCtaBtnWhatsApp: "تواصل عبر واتساب",
+    contactCtaTrust1: "تواصل مباشر مع كبار المستشارين",
+    contactCtaTrust2: "موافقة بنكية مسبقة خلال 48 ساعة",
+    contactCtaTrust3: "بدون أي رسوم أو شروط خفية",
+
+    /* ---------------- FOOTER ---------------- */
+    footerDesc:
+      "نساعد رواد الأعمال والشركات على تأسيس وإدارة وتنمية أعمالهم في دولة الإمارات من خلال استشارات موثوقة وحلول متكاملة.",
+    footerSupportStatus: "فريق الدعم والاستشارات متاح",
+    footerQuickLinks: "روابط سريعة",
+    footerServices: "الخدمات",
+    footerContactUs: "اتصل بنا",
+    footerConsultancyTag: "استشارات أعمال وترخيص بالدولة",
+    footerBookConsultation: "احجز استشارة مجانية",
+    footerCopyright: "© 2026 ترايب لاين لخدمات رجال الأعمال. جميع الحقوق محفوظة.",
+    footerPrivacy: "سياسة الخصوصية",
+    footerTerms: "شروط الخدمة",
+    footerTelLabel: "هاتف:",
+    footerMobLabel: "متحرك:",
+
+    /* ---------------- ABOUT PAGE ---------------- */
+    aboutPageBadge: "عن ترايب لاين",
+    aboutPageHeadingPre: "شريكك الموثوق في ",
+    aboutPageHeadingHighlight: "خدمات الإمارات",
+    aboutPageDesc:
+      "في ترايب لاين لخدمات رجال الأعمال، نلتزم بتقديم حلول سريعة وموثوقة لكافة خدمات الإقامة وتأسيس الأعمال. هدفنا هو تبسيط جميع المعاملات الحكومية وتأشيرات الدخول.",
+    aboutPageP1Bold: "تجربة سلسة ومريحة خالية من المتاعب",
+    aboutPageP1Pre: "لمنح عملائنا ",
+    aboutPageP1Post:
+      "، يعمل فريقنا بخبرة واحترافية عالية لضمان إنجاز معاملاتكم بدقة وسرعة فائقة.",
+    aboutPageP2Pre: "لأن ",
+    aboutPageP2Highlight: "راحتكم هي أولويتنا القصوى",
+    aboutPageP2Post: ".",
+    aboutTagUaeLicensed: "مرخص في الإمارات",
+    aboutTagTrustedAdvisors: "مستشارون معتمدون",
+    aboutStatHappyClients: "عميل راضٍ",
+    aboutStatFastProcessing: "إنجاز سريع",
+    aboutStatSuccessRate: "نسبة النجاح",
+    aboutStatExperience: "سنوات خبرة",
+    aboutFeat1Title: "خدمة مخصصة",
+    aboutFeat1Desc: "حلول مصممة خصيصاً لتناسب احتياجات إقامتك وأعمالك.",
+    aboutFeat2Title: "فريق احترافي",
+    aboutFeat2Desc: "مستشارون خبراء على دراية واسعة بكافة القوانين واللوائح الإماراتية.",
+    aboutFeat3Title: "إنجاز فوري",
+    aboutFeat3Desc: "سرعة قياسية في متابعة وإنهاء المعاملات الحكومية.",
+    aboutFeat4Title: "موثوقية وأمان",
+    aboutFeat4Desc: "شريك موثوق لمئات العملاء والشركات في دولة الإمارات.",
+
+    /* ---------------- CONTACT PAGE ---------------- */
+    contactPageBadge: "التواصل والاستشارات",
+    contactPageHeadingPre: "تحدث معنا حول ",
+    contactPageHeadingHighlight: "متطلباتك وأعمالك",
+    contactPageDesc:
+      "تحدث مع أحد كبار المستشارين اليوم واحصل على إرشادات خبيرة حول التأشيرات أو تأسيس الشركات أو أي خدمة حكومية.",
+    contactLabelTel: "الهاتف الثابت",
+    contactLabelMob: "الهاتف المتحرك",
+    contactLabelEmail: "البريد الإلكتروني",
+    contactLabelVisit: "موقعنا",
+    contactLabelHours: "ساعات العمل",
+    contactHoursValue: "السبت – الخميس: 9 صباحاً – 7 مساءً",
+    contactChatWhatsApp: "محادثة عبر واتساب",
+    contactInstantReply: "رد فوري ←",
+    contactFormTitle: "أرسل لنا رسالة",
+    contactFormDesc: "املأ النموذج وسنقوم بالرد والتواصل معك خلال 24 ساعة.",
+    contactFormFullName: "الاسم بالكامل",
+    contactFormFullNamePh: "أدخل اسمك الكريم",
+    contactFormPhone: "رقم الهاتف",
+    contactFormPhonePh: "2029 54444 971+",
+    contactFormEmail: "البريد الإلكتروني",
+    contactFormEmailPh: "you@example.com",
+    contactFormMessage: "الرسالة أو تفاصيل الخدمة",
+    contactFormMessagePh: "أخبرنا بالخدمة أو المعاملة التي تحتاجها...",
+    contactFormBtnSend: "إرسال الرسالة",
+    contactFormBtnSent: "✓ تم إرسال الرسالة بنجاح!",
+    contactVisitOfficeTitle: "تفضل بزيارة مكتبنا",
+    contactOfficeRoom: "مكتب رقم 2004",
+    contactOfficeTower: "برج مكاتب جراند مول",
+    contactOfficeStreet: "شارع الشيخ خليفة بن زايد",
+    contactOfficeArea: "الراشدية 3، عجمان — الإمارات",
+    contactGetDirections: "الحصول على الاتجاهات",
+
+    /* ---------------- ROUTER / 404 ---------------- */
+    notFoundHeading: "404",
+    notFoundDesc: "الصفحة غير موجودة",
+    backToHome: "العودة إلى الرئيسية",
+
+    /* ---------------- TECH STACK / PARTNERS ---------------- */
+    trustedPartnersBadge: "شركاؤنا المعتمدون",
+    trustedPartnersTitlePre: "نبني النجاح من خلال ",
+    trustedPartnersTitleHighlight: "شراكات موثوقة.",
+    trustedPartnersSubtitle:
+      "نتعاون مع أرقى المؤسسات والجهات الحكومية لتقديم حلول أعمال ومعاملات متكاملة للمستثمرين والشركات في دولة الإمارات.",
+    tabAllPartners: "جميع الشركاء",
+    tabFreezones: "المناطق الحرة",
+    tabMainland: "الدوائر الاقتصادية المحلية",
+    tabGovt: "المراكز الحكومية",
   },
 };
 
@@ -502,10 +914,19 @@ export const LanguageProvider = ({ children }) => {
 
   const toggleLang = () => setLang((prev) => (prev === "EN" ? "AR" : "EN"));
 
-  const t = (key) => translations[lang][key] || key;
+  const t = (key) => translations[lang]?.[key] || translations["EN"]?.[key] || key;
 
   return (
-    <LanguageContext.Provider value={{ lang, toggleLang, t }}>
+    <LanguageContext.Provider
+      value={{
+        lang,
+        setLang,
+        toggleLang,
+        t,
+        isArabic: lang === "AR",
+        isRTL: lang === "AR",
+      }}
+    >
       {children}
     </LanguageContext.Provider>
   );

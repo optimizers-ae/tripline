@@ -1,27 +1,7 @@
 import { useState, useEffect, useRef } from 'react';
 import { Quote } from 'lucide-react';
 import { motion, useInView } from 'framer-motion';
-
-const STATS = [
-  {
-    target: 500,
-    suffix: '+',
-    label: 'businesses successfully supported ',
-    highlight: 'across the UAE',
-  },
-  {
-    target: 10,
-    suffix: '+',
-    label: 'years of combined business ',
-    highlight: 'consultancy experience',
-  },
-  {
-    target: 98,
-    suffix: '%',
-    label: 'client satisfaction across ',
-    highlight: 'completed cases',
-  },
-];
+import { useLanguage } from '../context/LanguageContext';
 
 // Testimonial container stagger
 const quoteContainerVariants = {
@@ -79,7 +59,7 @@ const statCardVariants = {
   },
 };
 
-const StatCard = ({ stat, isVisible }) => {
+const StatCard = ({ stat, isVisible, isArabic }) => {
   const [count, setCount] = useState(0);
 
   useEffect(() => {
@@ -106,7 +86,9 @@ const StatCard = ({ stat, isVisible }) => {
   return (
     <motion.div
       variants={statCardVariants}
-      className="group/stat relative rounded-2xl border border-neutral-200/80 bg-white p-6 sm:p-8 md:p-10 md:pb-12 text-left shadow-sm transition-all duration-300 hover:-translate-y-1 hover:border-[#D32F2F]/50 hover:shadow-xl overflow-hidden "
+      className={`group/stat relative rounded-2xl border border-neutral-200/80 bg-white p-6 sm:p-8 md:p-10 md:pb-12 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:border-[#D32F2F]/50 hover:shadow-xl overflow-hidden ${
+        isArabic ? 'text-right' : 'text-left'
+      }`}
     >
       {/* Subtle top indicator with brand gradient */}
       <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-[#D32F2F] via-[#F44336] to-[#111111] opacity-0 transition-opacity duration-300 group-hover/stat:opacity-100" />
@@ -115,7 +97,7 @@ const StatCard = ({ stat, isVisible }) => {
       <div className="pointer-events-none absolute -top-12 -right-12 h-32 w-32 rounded-full bg-gradient-to-br from-[#D32F2F]/10 via-[#F44336]/5 to-transparent blur-2xl opacity-0 transition-opacity duration-300 group-hover/stat:opacity-100" />
 
       <div className="relative z-10 flex items-center gap-5 sm:block">
-        <span className="shrink-0 font-display text-4xl font-extrabold text-neutral-900 sm:text-4xl md:text-5xl transition-all duration-300 group-hover/stat:text-transparent group-hover/stat:bg-gradient-to-r group-hover/stat:from-[#D32F2F] group-hover/stat:via-[#F44336] group-hover/stat:to-[#111111] group-hover/stat:bg-clip-text">
+        <span className="shrink-0 font-display text-4xl font-extrabold text-neutral-900 sm:text-4xl md:text-5xl transition-all duration-300 group-hover/stat:text-transparent group-hover/stat:bg-gradient-to-r group-hover/stat:from-[#D32F2F] group-hover/stat:via-[#F44336] group-hover/stat:to-[#111111] group-hover/stat:bg-clip-text" dir="ltr">
           <span className="tabular-nums">{count}</span>
           <span>{stat.suffix}</span>
         </span>
@@ -130,8 +112,30 @@ const StatCard = ({ stat, isVisible }) => {
 };
 
 const StatsCounter = () => {
+  const { t, isArabic } = useLanguage();
   const sectionRef = useRef(null);
   const isInView = useInView(sectionRef, { once: true, amount: 0.2 });
+
+  const stats = [
+    {
+      target: 500,
+      suffix: '+',
+      label: t('stat1Label'),
+      highlight: t('stat1Highlight'),
+    },
+    {
+      target: 10,
+      suffix: '+',
+      label: t('stat2Label'),
+      highlight: t('stat2Highlight'),
+    },
+    {
+      target: 98,
+      suffix: '%',
+      label: t('stat3Label'),
+      highlight: t('stat3Highlight'),
+    },
+  ];
 
   return (
     <section
@@ -157,7 +161,7 @@ const StatsCounter = () => {
             variants={fadeUpVariants}
             className="text-xl font-medium leading-[1.35] tracking-tight text-neutral-900 md:text-3xl lg:text-4xl"
           >
-            Their guidance made the entire business setup process clear, fast, and stress-free. From consultation to execution, every step was handled professionally.”
+            {t('statQuote')}
           </motion.p>
 
           <motion.div
@@ -166,7 +170,7 @@ const StatsCounter = () => {
           >
             <span className="h-px w-12 bg-neutral-300" />
             <span className="text-xs font-semibold uppercase tracking-[0.25em] text-neutral-500 font-mono">
-              Client Testimonial
+              {t('statBadge')}
             </span>
             <span className="h-px w-12 bg-neutral-300" />
           </motion.div>
@@ -179,8 +183,8 @@ const StatsCounter = () => {
           animate={isInView ? 'visible' : 'hidden'}
           className="grid grid-cols-1 gap-6 sm:grid-cols-3"
         >
-          {STATS.map((stat, index) => (
-            <StatCard key={index} stat={stat} isVisible={isInView} />
+          {stats.map((stat, index) => (
+            <StatCard key={index} stat={stat} isVisible={isInView} isArabic={isArabic} />
           ))}
         </motion.div>
       </div>

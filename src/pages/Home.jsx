@@ -47,14 +47,7 @@ const Home = () => {
         >
           <AccentBanner
             image="/accent-section-1-v2.webp"
-            alt="Loro Labs Handed Off"
-            lines={[
-              'EVERY BUSINESS',
-              'DESERVES THE',
-              'RIGHT GUIDANCE',
-              'TO GROW.',
-            ]}
-            badge="ENGINEERED FOR BUSINESS SUCCESS"
+            alt="Tripline Business Guidance"
             position="bottom-right"
           />
         </MagneticCursor>

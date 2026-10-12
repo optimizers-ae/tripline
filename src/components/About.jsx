@@ -10,70 +10,89 @@ import {
   Landmark,
   Stamp
 } from 'lucide-react';
+import { useLanguage } from '../context/LanguageContext';
 
 const SERVICES = [
   {
-    id: '01', number: '01 / 09',
-    title: 'Employment Contracts',
-    tag: 'LABOR & IMMIGRATION',
-    description: 'Issuance & Cancellation of Employment Contracts tailored to UAE labor laws.',
-    icon: Briefcase, accent: '#D32F2F',
+    id: '01',
+    number: '01 / 09',
+    titleKey: 'homeSvc1Title',
+    tagKey: 'homeSvc1Tag',
+    descKey: 'homeSvc1Desc',
+    icon: Briefcase,
+    accent: '#D32F2F',
   },
   {
-    id: '02', number: '02 / 09',
-    title: 'Labor Cards',
-    tag: 'LABOR & IMMIGRATION',
-    description: 'Renewal & Modification of Labor Cards ensuring full compliance.',
-    icon: CreditCard, accent: '#D32F2F',
+    id: '02',
+    number: '02 / 09',
+    titleKey: 'homeSvc2Title',
+    tagKey: 'homeSvc2Tag',
+    descKey: 'homeSvc2Desc',
+    icon: CreditCard,
+    accent: '#D32F2F',
   },
   {
-    id: '03', number: '03 / 09',
-    title: 'Commercial Licenses',
-    tag: 'CORPORATE SERVICES',
-    description: 'Issuance & Renewal of Commercial Licenses for mainland and free zones.',
-    icon: Globe, accent: '#F44336',
+    id: '03',
+    number: '03 / 09',
+    titleKey: 'homeSvc3Title',
+    tagKey: 'homeSvc3Tag',
+    descKey: 'homeSvc3Desc',
+    icon: Globe,
+    accent: '#F44336',
   },
   {
-    id: '04', number: '04 / 09',
-    title: 'Medical & Emirates ID',
-    tag: 'VISA & RESIDENCY',
-    description: 'Assistance with Medical Tests & Emirates ID Services for new residents.',
-    icon: ShieldCheck, accent: '#111111',
+    id: '04',
+    number: '04 / 09',
+    titleKey: 'homeSvc4Title',
+    tagKey: 'homeSvc4Tag',
+    descKey: 'homeSvc4Desc',
+    icon: ShieldCheck,
+    accent: '#111111',
   },
   {
-    id: '05', number: '05 / 09',
-    title: 'Entry Visas',
-    tag: 'VISA & RESIDENCY',
-    description: 'Issuance & Cancellation of Entry Visas for business and tourism.',
-    icon: FileKey, accent: '#D32F2F',
+    id: '05',
+    number: '05 / 09',
+    titleKey: 'homeSvc5Title',
+    tagKey: 'homeSvc5Tag',
+    descKey: 'homeSvc5Desc',
+    icon: FileKey,
+    accent: '#D32F2F',
   },
   {
-    id: '06', number: '06 / 09',
-    title: 'Family & Partner Visas',
-    tag: 'VISA & RESIDENCY',
-    description: 'Family & Partner Visa Services for seamless relocation and sponsorship.',
-    icon: Users, accent: '#F44336',
+    id: '06',
+    number: '06 / 09',
+    titleKey: 'homeSvc6Title',
+    tagKey: 'homeSvc6Tag',
+    descKey: 'homeSvc6Desc',
+    icon: Users,
+    accent: '#F44336',
   },
   {
-    id: '07', number: '07 / 09',
-    title: 'Document Attestation',
-    tag: 'LEGAL SERVICES',
-    description: 'Attestation of Documents & Contracts from relevant ministries and embassies.',
-    icon: FileSignature, accent: '#111111',
+    id: '07',
+    number: '07 / 09',
+    titleKey: 'homeSvc7Title',
+    tagKey: 'homeSvc7Tag',
+    descKey: 'homeSvc7Desc',
+    icon: FileSignature,
+    accent: '#111111',
   },
   {
-    id: '08', number: '08 / 09',
-    title: 'Embassy Services',
-    tag: 'GOVERNMENT RELATIONS',
-    description: 'Embassy & Consulate Services including Sudanese and other nationalities.',
-    icon: Landmark, accent: '#D32F2F',
+    id: '08',
+    number: '08 / 09',
+    titleKey: 'homeSvc8Title',
+    tagKey: 'homeSvc8Tag',
+    descKey: 'homeSvc8Desc',
+    icon: Landmark,
+    accent: '#D32F2F',
   },
   {
-    id: '09', number: '09 / 09',
-    title: 'Fines & Insurance',
-    tag: 'GOVERNMENT RELATIONS',
-    description: 'Fine Reduction & Insurance Updates for businesses and individuals.',
-    icon: Stamp, accent: '#F44336',
+    id: '09',
+    number: '09 / 09',
+    titleKey: 'homeSvc9Title',
+    tagKey: 'homeSvc9Tag',
+    descKey: 'homeSvc9Desc',
+    icon: Stamp,
+    accent: '#F44336',
   },
 ];
 
@@ -91,6 +110,8 @@ const fadeUpVariants = {
 };
 
 export default function About() {
+  const { t, isArabic } = useLanguage();
+
   return (
     <section id="about" className="relative overflow-hidden bg-[#f7f7f8] py-24 md:py-32 font-comforta">
       <div className="mx-auto max-w-7xl px-6">
@@ -107,16 +128,16 @@ export default function About() {
               <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-[#D32F2F] opacity-75" />
               <span className="relative inline-flex h-2 w-2 rounded-full bg-[#D32F2F]" />
             </span>
-            About Us &amp; Our Expertise
+            {t('homeAboutBadge')}
           </motion.span>
           <motion.h2 variants={fadeUpVariants} className="mt-5 text-4xl md:text-5xl font-bold tracking-tight text-neutral-900">
-            Comprehensive Solutions &amp; Empowered by{' '}
+            {t('homeAboutTitlePre')}
             <span className="bg-gradient-to-r from-[#D32F2F] via-[#F44336] to-[#111111] bg-clip-text text-transparent">
-              Government Services.
+              {t('homeAboutTitleHighlight')}
             </span>
           </motion.h2>
-          <motion.p variants={fadeUpVariants} className="mt-4 text-base text-neutral-600">
-            Tripline Businessmen Services provides an all-inclusive suite of governmental, corporate, and visa solutions. We bridge the gap between premium service delivery and administrative excellence.
+          <motion.p variants={fadeUpVariants} className="mt-4 text-base text-neutral-600 leading-relaxed">
+            {t('homeAboutDesc')}
           </motion.p>
         </motion.div>
 
@@ -129,14 +150,16 @@ export default function About() {
           className="grid md:grid-cols-3 gap-6 mb-16"
         >
           {[
-            { img: '/service_visa.jpg', title: 'Visas & Immigration' },
-            { img: '/service_contract.jpg', title: 'Corporate Licensing' },
-            { img: '/service_government.jpg', title: 'Government Relations' }
+            { img: '/service_visa.jpg', titleKey: 'homeVisualVisa' },
+            { img: '/service_contract.jpg', titleKey: 'homeVisualCorporate' },
+            { img: '/service_government.jpg', titleKey: 'homeVisualGov' }
           ].map((item, i) => (
              <motion.div key={i} variants={fadeUpVariants} className="group relative overflow-hidden rounded-3xl h-64 md:h-80 shadow-lg">
-                <img src={item.img} alt={item.title} className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
+                <img src={item.img} alt={t(item.titleKey)} className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
-                <h3 className="absolute bottom-6 left-6 text-xl font-bold text-white">{item.title}</h3>
+                <h3 className={`absolute bottom-6 text-xl font-bold text-white ${isArabic ? 'right-6 text-right' : 'left-6 text-left'}`}>
+                  {t(item.titleKey)}
+                </h3>
              </motion.div>
           ))}
         </motion.div>
@@ -156,13 +179,13 @@ export default function About() {
                     <Icon className="h-6 w-6" />
                   </div>
                   <h4 className="text-sm font-bold uppercase tracking-wider text-neutral-400 mb-2">
-                    {service.tag}
+                    {t(service.tagKey)}
                   </h4>
                   <h3 className="text-xl font-bold text-neutral-900 leading-snug mb-3">
-                    {service.title}
+                    {t(service.titleKey)}
                   </h3>
                   <p className="text-sm text-neutral-600 leading-relaxed">
-                    {service.description}
+                    {t(service.descKey)}
                   </p>
                 </div>
               </motion.div>

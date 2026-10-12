@@ -183,7 +183,7 @@ const ServicesPage = () => {
                       }`}
                     >
                       <span>{t("learnMore")}</span>
-                      <ArrowUpRight className="h-3.5 w-3.5 transition-transform duration-300 group-hover:rotate-45" />
+                      <ArrowUpRight className="h-3.5 w-3.5 rtl:rotate-[-90deg] transition-transform duration-300 group-hover:rotate-45" />
                     </div>
                   </motion.a>
                 );
@@ -247,7 +247,7 @@ const ServicesPage = () => {
                       </p>
                     </div>
 
-                    <ArrowUpRight className="h-4 w-4 text-[#D32F2F] opacity-0 group-hover:opacity-100 transition-all duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+                    <ArrowUpRight className="h-4 w-4 text-[#D32F2F] opacity-0 group-hover:opacity-100 transition-all duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 rtl:rotate-[-90deg]" />
                   </motion.a>
                 ))}
               </div>
@@ -258,7 +258,7 @@ const ServicesPage = () => {
                   className="inline-flex items-center gap-2 rounded-full border-2 border-[#D32F2F] bg-white px-6 py-3 text-sm font-bold text-[#D32F2F] hover:bg-[#D32F2F] hover:text-white transition-all duration-300"
                 >
                   <span>{t("applyVisaBtn")}</span>
-                  <ArrowUpRight className="h-4 w-4" />
+                  <ArrowUpRight className="h-4 w-4 rtl:rotate-[-90deg]" />
                 </a>
               </div>
             </motion.div>
@@ -325,7 +325,7 @@ const ServicesPage = () => {
                 className="inline-flex items-center gap-3 rounded-full bg-gradient-to-r from-[#D32F2F] via-[#F44336] to-[#111111] px-8 py-4 text-sm font-extrabold uppercase tracking-wider text-white shadow-xl hover:brightness-110 active:scale-[0.98] transition-all"
               >
                 <span>{t("ctaConsultation")}</span>
-                <ArrowUpRight className="h-5 w-5" />
+                <ArrowUpRight className="h-5 w-5 rtl:rotate-[-90deg]" />
               </a>
             </motion.div>
           </div>

@@ -1,22 +1,8 @@
 import { motion } from "framer-motion";
 import { MapPin, Phone, Mail, ArrowUpRight } from "lucide-react";
-
-const QUICK_LINKS = [
-  { label: "Home", href: "/", color: "#D32F2F" },
-  { label: "About Us", href: "/about", color: "#D32F2F" },
-  { label: "Corporate Services", href: "/services/corporate", color: "#D32F2F" },
-  { label: "Individuals Services", href: "/services/individuals", color: "#D32F2F" },
-  { label: "Contact", href: "/contact", color: "#D32F2F" },
-];
-
-const SERVICES_LINKS = [
-  { label: "Employment Contracts", href: "/services/corporate" },
-  { label: "Commercial Licenses", href: "/services/corporate" },
-  { label: "Visa & Residency", href: "/services/individuals" },
-  { label: "Family Visas", href: "/services/individuals" },
-  { label: "Document Attestation", href: "/services/corporate" },
-  { label: "Embassy Services", href: "/services/individuals" },
-];
+import { useLanguage } from "../context/LanguageContext";
+import logoImg from "../assets/logo.png";
+import arabicLogoWhite from "../assets/arabic_logo_white.png";
 
 const containerVariants = {
   hidden: { opacity: 0 },
@@ -42,6 +28,25 @@ const fadeUpVariants = {
 };
 
 const Footer = () => {
+  const { t, isArabic } = useLanguage();
+
+  const quickLinks = [
+    { label: t("home"), href: "/", color: "#D32F2F" },
+    { label: t("aboutUs"), href: "/about", color: "#D32F2F" },
+    { label: t("corporateServices"), href: "/services/corporate", color: "#D32F2F" },
+    { label: t("individualsServices"), href: "/services/individuals", color: "#D32F2F" },
+    { label: t("contact"), href: "/contact", color: "#D32F2F" },
+  ];
+
+  const servicesLinks = [
+    { label: t("homeSvc1Title"), href: "/services/corporate" },
+    { label: t("homeSvc3Title"), href: "/services/corporate" },
+    { label: t("homeVisualVisa"), href: "/services/individuals" },
+    { label: t("homeSvc6Title"), href: "/services/individuals" },
+    { label: t("homeSvc7Title"), href: "/services/corporate" },
+    { label: t("homeSvc8Title"), href: "/services/individuals" },
+  ];
+
   return (
     <footer className="bg-neutral-900 p-3 sm:p-4 text-slate-300 font-comforta">
       <div className="mx-auto flex justify-center md:justify-start">
@@ -63,21 +68,26 @@ const Footer = () => {
                 {/* Brand & Mission Column */}
                 <motion.div
                   variants={fadeUpVariants}
-                  className="space-y-4 lg:col-span-4 flex flex-col items-center md:items-start text-center md:text-left"
+                  className="space-y-4 lg:col-span-4 flex flex-col items-center md:items-start text-center md:text-left rtl:md:text-right rtl:md:items-start"
                 >
                   <a
                     href="#hero"
-                    className="inline-flex items-center md:items-start gap-2 group"
+                    className="inline-flex flex-col items-center md:items-start gap-3 group"
                   >
+                    <img
+                      src={isArabic ? arabicLogoWhite : logoImg}
+                      alt="Trip Line"
+                      className={`h-8 sm:h-9 w-auto max-w-[170px] object-contain transition-transform duration-300 group-hover:scale-105 ${
+                        !isArabic ? "brightness-0 invert" : ""
+                      }`}
+                    />
                     <span className="text-xl font-bold tracking-tight text-white transition-transform duration-300 group-hover:scale-105">
-                      Tripline Businessmen Services
+                      {isArabic ? "تريب لاين لخدمات رجال الأعمال" : "Tripline Businessmen Services"}
                     </span>
                   </a>
 
                   <p className="max-w-sm text-sm leading-relaxed text-slate-300">
-                    Helping entrepreneurs and businesses establish, manage, and
-                    grow in the UAE with trusted consultancy and complete
-                    business solutions.
+                    {t("footerDesc")}
                   </p>
 
                   {/* Live Status Pill */}
@@ -87,7 +97,7 @@ const Footer = () => {
                       <span className="relative block h-2 w-2 rounded-full bg-emerald-400" />
                     </span>
                     <span className="font-mono text-[11px] font-semibold text-emerald-400 uppercase tracking-wider">
-                      Business Support Available
+                      {t("footerSupportStatus")}
                     </span>
                   </div>
 
@@ -181,13 +191,13 @@ const Footer = () => {
                 {/* Quick Links Column */}
                 <motion.div
                   variants={fadeUpVariants}
-                  className="space-y-4 lg:col-span-2 flex flex-col items-center md:items-start text-center md:text-left"
+                  className="space-y-4 lg:col-span-2 flex flex-col items-center md:items-start text-center md:text-left rtl:md:text-right rtl:md:items-start"
                 >
                   <h3 className="text-xs font-bold uppercase tracking-widest text-white">
-                    Quick Links
+                    {t("footerQuickLinks")}
                   </h3>
                   <ul className="space-y-2.5">
-                    {QUICK_LINKS.map((link, idx) => (
+                    {quickLinks.map((link, idx) => (
                       <li key={idx}>
                         <a
                           href={link.href}
@@ -206,13 +216,13 @@ const Footer = () => {
                 {/* Services Column */}
                 <motion.div
                   variants={fadeUpVariants}
-                  className="hidden md:flex flex-col items-start space-y-4 lg:col-span-2"
+                  className="hidden md:flex flex-col items-start space-y-4 lg:col-span-2 rtl:items-start"
                 >
                   <h3 className="text-xs font-bold uppercase tracking-widest text-white">
-                    Services
+                    {t("footerServices")}
                   </h3>
                   <ul className="space-y-2.5">
-                    {SERVICES_LINKS.map((link, idx) => (
+                    {servicesLinks.map((link, idx) => (
                       <li key={idx}>
                         <a
                           href={link.href}
@@ -231,14 +241,14 @@ const Footer = () => {
                 {/* Studio & Contact Column */}
                 <motion.div
                   variants={fadeUpVariants}
-                  className="space-y-4 lg:col-span-4 flex flex-col items-center md:items-start text-center md:text-left"
+                  className="space-y-4 lg:col-span-4 flex flex-col items-center md:items-start text-center md:text-left rtl:md:text-right rtl:md:items-start"
                 >
                   <div>
                     <h3 className="text-xs font-bold uppercase tracking-widest text-white">
-                      Contact us
+                      {t("footerContactUs")}
                     </h3>
                     <p className="mt-1 font-mono text-[10px] font-semibold uppercase tracking-[2px] text-slate-400">
-                      UAE Business Consultancy
+                      {t("footerConsultancyTag")}
                     </p>
                   </div>
 
@@ -251,7 +261,7 @@ const Footer = () => {
                         rel="noopener noreferrer"
                         className="text-xs leading-relaxed text-slate-300 sm:text-sm max-w-xs hover:text-white transition-colors"
                       >
-                        Grand Mall Office Tower - Office No. 2004, Sheikh Khalifa Bin Zayed St, Al Rashidiya 3, Ajman, UAE
+                        {t("address")}
                       </a>
                     </div>
 
@@ -262,14 +272,14 @@ const Footer = () => {
                           href="tel:+97165734303"
                           className="text-slate-300 transition-colors hover:text-white"
                         >
-                          <span className="text-slate-400 font-medium">Tel:</span> +971 6 573 4303
+                          <span className="text-slate-400 font-medium">{t("footerTelLabel")}</span> +971 6 573 4303
                         </a>
                         <span className="hidden sm:inline text-slate-500">•</span>
                         <a
                           href="tel:+971544442029"
                           className="text-slate-300 transition-colors hover:text-white"
                         >
-                          <span className="text-slate-400 font-medium">Mob:</span> +971 54444 2029
+                          <span className="text-slate-400 font-medium">{t("footerMobLabel")}</span> +971 54444 2029
                         </a>
                       </div>
                     </div>
@@ -279,6 +289,7 @@ const Footer = () => {
                       <a
                         href="mailto:inquiry@tripline.ae"
                         className="text-xs text-slate-300 transition-colors hover:text-white sm:text-sm"
+                        dir="ltr"
                       >
                         inquiry@tripline.ae
                       </a>
@@ -292,8 +303,8 @@ const Footer = () => {
                       whileTap={{ scale: 0.95 }}
                       className="inline-flex items-center md:items-start gap-2 rounded-xl bg-[#D32F2F] px-6 py-2.5 text-xs font-bold uppercase tracking-wider text-white shadow-md transition-all duration-200 hover:bg-[#B71C1C] hover:shadow-lg cursor-pointer group"
                     >
-                      <span>Book Consultation</span>
-                      <ArrowUpRight className="h-4 w-4 transition-transform duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+                      <span>{t("footerBookConsultation")}</span>
+                      <ArrowUpRight className="h-4 w-4 transition-transform duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 rtl:rotate-90" />
                     </motion.a>
                   </div>
                 </motion.div>
@@ -306,13 +317,9 @@ const Footer = () => {
               className="px-6 sm:px-10 lg:px-14 py-6 sm:py-8"
             >
               <div className="flex flex-col items-center md:items-start justify-between gap-4 md:flex-row">
-                <p className="text-center md:text-left text-xs text-slate-300 md:text-left sm:text-sm">
-                  © 2026 Tripline Businessmen Services. All rights reserved.
+                <p className="text-center md:text-left text-xs text-slate-300 sm:text-sm">
+                  {t("footerCopyright")}
                 </p>
-
-                {/* <p className="text-center md:text-left text-xs md:text-sm text-slate-300/90 italic">
-                  “We build with empathy, creativity, and purpose.”
-                </p> */}
 
                 <div className="flex flex-wrap items-center md:items-start justify-center md:justify-start gap-4 md:justify-end">
                   <a
@@ -320,7 +327,7 @@ const Footer = () => {
                     className="group relative text-xs text-slate-300 transition-colors duration-200 hover:text-white sm:text-sm"
                   >
                     <span className="relative pb-0.5">
-                      Privacy Policy
+                      {t("footerPrivacy")}
                       <span className="absolute bottom-0 left-0 h-[1.5px] w-0 rounded-full bg-[#D32F2F] transition-all duration-300 ease-out group-hover:w-full" />
                     </span>
                   </a>
@@ -332,7 +339,7 @@ const Footer = () => {
                     className="group relative text-xs text-slate-300 transition-colors duration-200 hover:text-white sm:text-sm"
                   >
                     <span className="relative pb-0.5">
-                      Terms of Service
+                      {t("footerTerms")}
                       <span className="absolute bottom-0 left-0 h-[1.5px] w-0 rounded-full bg-[#D32F2F] transition-all duration-300 ease-out group-hover:w-full" />
                     </span>
                   </a>

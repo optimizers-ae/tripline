@@ -1,4 +1,5 @@
 import logoImg from "../assets/logo.png";
+import arabicLogoDark from "../assets/arabic_logo_dark.png";
 import { useState, useEffect, useRef } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
@@ -276,7 +277,7 @@ const Navbar = () => {
             aria-label="Trip Line home"
           >
             <img
-              src={logoImg}
+              src={lang === "AR" ? arabicLogoDark : logoImg}
               alt="Trip Line"
               className="h-7 w-auto max-w-[80px] object-contain transition-transform duration-300 group-hover:scale-105"
               onError={(e) => (e.currentTarget.style.display = "none")}
@@ -291,7 +292,7 @@ const Navbar = () => {
             aria-label="Toggle language"
           >
             <Globe className="w-3 h-3" />
-            {lang}
+            {lang === "EN" ? "العربية" : "English"}
           </button>
 
           <a
@@ -360,7 +361,7 @@ const Navbar = () => {
               aria-label="Trip Line home"
             >
               <img
-                src={logoImg}
+                src={lang === "AR" ? arabicLogoDark : logoImg}
                 alt="Trip Line logo"
                 width="80"
                 height="32"
@@ -538,7 +539,7 @@ const Navbar = () => {
               aria-label="Toggle language"
             >
               <Globe className="w-3.5 h-3.5" />
-              {lang}
+              {lang === "EN" ? "العربية" : "English"}
             </button>
 
             {/* Action: Call Us */}
@@ -609,25 +610,37 @@ const Navbar = () => {
                   className="flex h-11 px-3 items-center justify-center rounded-2xl bg-white border border-neutral-200 backdrop-blur-md transition-all hover:bg-neutral-100 hover:scale-105"
                 >
                   <img
-                    src={logoImg}
+                    src={lang === "AR" ? arabicLogoDark : logoImg}
                     alt="Trip Line"
                     className="h-7 w-auto object-contain"
                     onError={(e) => (e.currentTarget.style.display = "none")}
                   />
                 </a>
                 <span className="text-neutral-900 font-bold">
-                  Trip Line Businessmen Services
+                  {lang === "AR" ? "تريب لاين لخدمات رجال الأعمال" : "Trip Line Businessmen Services"}
                 </span>
               </div>
 
-              <button
-                type="button"
-                onClick={() => setMobileMenuOpen(false)}
-                className="group flex h-11 w-11 items-center justify-center rounded-full border border-neutral-200 bg-neutral-100 text-neutral-900 backdrop-blur-md transition-all duration-300 hover:bg-white hover:text-neutral-950 hover:rotate-90 hover:scale-105"
-                aria-label={t("closeMenu")}
-              >
-                <X className="h-5 w-5 transition-transform" />
-              </button>
+              <div className="flex items-center gap-2">
+                <button
+                  type="button"
+                  onClick={toggleLang}
+                  className="flex h-10 px-3 items-center justify-center gap-1.5 rounded-full border border-neutral-200 bg-neutral-100 text-neutral-900 text-xs font-bold hover:bg-white transition-colors"
+                  aria-label="Toggle language"
+                >
+                  <Globe className="w-3.5 h-3.5" />
+                  {lang === "EN" ? "العربية" : "English"}
+                </button>
+
+                <button
+                  type="button"
+                  onClick={() => setMobileMenuOpen(false)}
+                  className="group flex h-10 w-10 sm:h-11 sm:w-11 items-center justify-center rounded-full border border-neutral-200 bg-neutral-100 text-neutral-900 backdrop-blur-md transition-all duration-300 hover:bg-white hover:text-neutral-950 hover:rotate-90 hover:scale-105"
+                  aria-label={t("closeMenu")}
+                >
+                  <X className="h-5 w-5 transition-transform" />
+                </button>
+              </div>
             </div>
 
             <div className="relative z-10 my-auto py-8 max-w-7xl mx-auto w-full grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
@@ -640,7 +653,7 @@ const Navbar = () => {
                     initial={{ opacity: 0, x: -20 }}
                     animate={{ opacity: 1, x: 0 }}
                     transition={{ delay: 0.05 * idx, duration: 0.3 }}
-                    className="group relative flex items-center justify-between p-3.5 sm:p-4 rounded-2xl border border-transparent transition-all duration-300 hover:border-neutral-200 hover:bg-white/[0.06] hover:translate-x-2"
+                    className="group relative flex items-center justify-between p-3.5 sm:p-4 rounded-2xl border border-transparent transition-all duration-300 hover:border-neutral-200 hover:bg-white/[0.06] hover:translate-x-2 rtl:hover:-translate-x-2"
                   >
                     <div className="flex items-center gap-4 sm:gap-6">
                       <span className="font-mono text-xs sm:text-sm font-semibold text-[#D32F2F] opacity-80 group-hover:opacity-100 group-hover:scale-110 transition-transform">

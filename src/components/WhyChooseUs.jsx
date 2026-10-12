@@ -12,6 +12,7 @@ import {
   Clock,
 } from 'lucide-react';
 import { MagneticCursor } from './MouseTrackingEffect';
+import { useLanguage } from '../context/LanguageContext';
 
 const containerVariants = {
   hidden: { opacity: 0 },
@@ -50,6 +51,8 @@ const cardVariants = {
 };
 
 const WhyChooseUs = () => {
+  const { t, isArabic } = useLanguage();
+
   return (
     <section
       id="why"
@@ -77,7 +80,7 @@ const WhyChooseUs = () => {
                 <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-[#D32F2F] opacity-75" />
                 <span className="relative inline-flex h-2 w-2 rounded-full bg-[#D32F2F]" />
               </span>
-              <span>The Consultancy Difference</span>
+              <span>{t('whyBadge')}</span>
             </span>
           </motion.div>
 
@@ -85,9 +88,9 @@ const WhyChooseUs = () => {
             variants={fadeUpVariants}
             className="mt-5 text-3xl font-bold tracking-tight text-neutral-950 sm:text-4xl md:text-5xl"
           >
-            Why Businesses{' '}
+            {t('whyHeadingPre')}
             <span className="bg-gradient-to-r from-[#D32F2F] via-[#F44336] to-[#111111] bg-clip-text text-transparent">
-              Choose Us.
+              {t('whyHeadingHighlight')}
             </span>
           </motion.h2>
 
@@ -95,8 +98,7 @@ const WhyChooseUs = () => {
             variants={fadeUpVariants}
             className="mx-auto mt-4 max-w-2xl text-base leading-relaxed text-neutral-600 md:text-lg"
           >
-            We don't just provide services. We understand your goals, create the right strategy,
-            and guide you through every step of building a successful business in the UAE.
+            {t('whySubtitle')}
           </motion.p>
         </motion.div>
 
@@ -128,28 +130,28 @@ const WhyChooseUs = () => {
                       <Zap className="h-5 w-5" />
                     </div>
                     <h3 className="text-lg md:text-xl font-bold text-white transition-colors duration-300 group-hover/card:text-[#D32F2F]">
-                      Expert Company Formation
+                      {t('whyCard1Title')}
                     </h3>
                   </div>
 
                   <span className="hidden sm:inline-flex items-center gap-1 rounded-full border border-white/10 bg-white/5 px-2.5 py-1 text-[10px] font-mono uppercase tracking-widest text-neutral-400">
-                    Strategy First
+                    {t('whyCard1Strategy')}
                   </span>
                 </div>
 
                 <p className="text-sm leading-relaxed text-neutral-300/80">
-                  From Mainland DED licensing to Free Zone and Offshore setups, we tailor the legal structure and jurisdiction to match your business goals, minimizing costs and maximizing growth potential.
+                  {t('whyCard1Desc')}
                 </p>
 
                 {/* Feature Tags List */}
                 <div className="mt-4 flex flex-wrap gap-2">
                   <span className="inline-flex items-center gap-1.5 rounded-full border border-white/10 bg-white/5 px-3 py-1 text-xs font-semibold text-neutral-200">
                     <CheckCircle2 className="h-3.5 w-3.5 text-[#111111]" />
-                    Mainland & Freezone Setup
+                    {t('whyCard1Tag1')}
                   </span>
                   <span className="inline-flex items-center gap-1.5 rounded-full border border-white/10 bg-white/5 px-3 py-1 text-xs font-semibold text-neutral-200">
                     <CheckCircle2 className="h-3.5 w-3.5 text-[#111111]" />
-                    Offshore Company Formation
+                    {t('whyCard1Tag2')}
                   </span>
                 </div>
               </div>
@@ -164,7 +166,7 @@ const WhyChooseUs = () => {
                 <div className="relative h-full w-full min-h-[15rem] overflow-hidden bg-neutral-950">
                   <img
                     src="/FASTER-poster.webp"
-                    alt="Understand Business Process Strategy"
+                    alt={t('whyCard1Title')}
                     loading="lazy"
                     decoding="async"
                     width="600"
@@ -181,7 +183,7 @@ const WhyChooseUs = () => {
             </div>
           </motion.div>
 
-          {/* Card 2: One Team. Complete Support. (Spans 2 cols, row 1) */}
+          {/* Card 2: Strategic Mortgage Consultancy (Spans 2 cols, row 1) */}
           <motion.div
             variants={cardVariants}
             whileHover={{ y: -6, transition: { duration: 0.3 } }}
@@ -200,7 +202,7 @@ const WhyChooseUs = () => {
                 <div className="relative h-full w-full min-h-[11rem] overflow-hidden bg-neutral-950">
                   <img
                     src="/SCALE-poster.webp"
-                    alt="One Dedicated Team Support"
+                    alt={t('whyCard2Title')}
                     loading="lazy"
                     decoding="async"
                     width="400"
@@ -217,22 +219,22 @@ const WhyChooseUs = () => {
                     <TrendingUp className="h-4 w-4" />
                   </div>
                   <h3 className="text-base font-bold text-white transition-colors duration-300 group-hover/card:text-[#F44336]">
-                    Strategic Mortgage Consultancy
+                    {t('whyCard2Title')}
                   </h3>
                 </div>
                 <p className="text-xs leading-relaxed text-neutral-300/80">
-                  Secure the best financing options for your residential or commercial properties in Dubai. Our experts negotiate on your behalf to get the most favorable rates.
+                  {t('whyCard2Desc')}
                 </p>
 
                 <div className="mt-3 flex items-center gap-2 text-[11px] font-semibold text-[#F44336]">
                   <Sparkles className="h-3.5 w-3.5" />
-                  <span>Residential & Commercial Focus</span>
+                  <span>{t('whyCard2Tag')}</span>
                 </div>
               </div>
             </div>
           </motion.div>
 
-          {/* Card 3: Transparent Advice. No Hidden Steps. (Spans 2 cols, row 2) */}
+          {/* Card 3: Transparent Pricing & Processes (Spans 2 cols, row 2) */}
           <motion.div
             variants={cardVariants}
             whileHover={{ y: -6, transition: { duration: 0.3 } }}
@@ -251,7 +253,7 @@ const WhyChooseUs = () => {
                 <div className="relative h-full w-full min-h-[11rem] overflow-hidden bg-neutral-950">
                   <img
                     src="/poster.webp"
-                    alt="Transparent Honest Advice"
+                    alt={t('whyCard3Title')}
                     loading="lazy"
                     decoding="async"
                     width="400"
@@ -268,16 +270,16 @@ const WhyChooseUs = () => {
                     <Shield className="h-4 w-4" />
                   </div>
                   <h3 className="text-base font-bold text-white transition-colors duration-300 group-hover/card:text-[#2563EB]">
-                    Transparent Pricing & Processes
+                    {t('whyCard3Title')}
                   </h3>
                 </div>
                 <p className="text-xs leading-relaxed text-neutral-300/80">
-                  We believe in complete honesty. You get upfront pricing, realistic timelines for approvals, and a clear breakdown of fees without any hidden retainers.
+                  {t('whyCard3Desc')}
                 </p>
 
                 <div className="mt-3 flex items-center gap-2 text-[11px] font-semibold text-[#60A5FA]">
                   <Award className="h-3.5 w-3.5" />
-                  <span>100% Guaranteed Fee Clarity</span>
+                  <span>{t('whyCard3Tag')}</span>
                 </div>
               </div>
             </div>
@@ -302,7 +304,7 @@ const WhyChooseUs = () => {
                 <div className="relative h-full w-full min-h-[13rem] overflow-hidden bg-neutral-950">
                   <img
                     src="/SEARCH-poster.webp"
-                    alt="Support That Continues Beyond Setup"
+                    alt={t('whyCard4Title')}
                     loading="lazy"
                     decoding="async"
                     width="400"
@@ -320,35 +322,35 @@ const WhyChooseUs = () => {
                       <Search className="h-5 w-5" />
                     </div>
                     <h3 className="text-lg md:text-xl font-bold text-white transition-colors duration-300 group-hover/card:text-[#111111]">
-                      End-to-End PRO & Golden Visa Services
+                      {t('whyCard4Title')}
                     </h3>
                   </div>
 
                   <span className="hidden sm:inline-flex items-center gap-1.5 rounded-full border border-[#111111]/30 bg-[#111111]/10 px-3 py-1 text-xs font-semibold text-[#111111]">
                     <Clock className="h-3.5 w-3.5" />
-                    Lifetime Advisory
+                    {t('whyCard4Badge')}
                   </span>
                 </div>
 
                 <p className="text-sm leading-relaxed text-neutral-300/80">
-                  Our support doesn't end with a trade license. We handle your employee visas, UAE Golden Visa applications, corporate tax registration, and ongoing government liaison services.
+                  {t('whyCard4Desc')}
                 </p>
 
                 {/* Additional Value Highlights */}
                 <div className="mt-4 flex flex-wrap items-center gap-3 text-xs font-semibold text-neutral-300">
                   <span className="flex items-center gap-1.5">
                     <span className="h-1.5 w-1.5 rounded-full bg-[#111111]" />
-                    Golden Visa Processing
+                    {t('whyCard4Tag1')}
                   </span>
                   <span className="text-neutral-600">•</span>
                   <span className="flex items-center gap-1.5">
                     <span className="h-1.5 w-1.5 rounded-full bg-[#F44336]" />
-                    Corporate Tax &amp; VAT
+                    {t('whyCard4Tag2')}
                   </span>
                   <span className="text-neutral-600">•</span>
                   <span className="flex items-center gap-1.5">
                     <span className="h-1.5 w-1.5 rounded-full bg-[#D32F2F]" />
-                    PRO &amp; Document Attestation
+                    {t('whyCard4Tag3')}
                   </span>
                 </div>
               </div>

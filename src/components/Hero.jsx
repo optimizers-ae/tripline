@@ -1,12 +1,15 @@
-import { motion } from 'framer-motion'
-import HeroCursorGlow from '../components/HeroCursorGlow'
+import { motion } from 'framer-motion';
+import { useLanguage } from '../context/LanguageContext';
+import HeroCursorGlow from '../components/HeroCursorGlow';
 
 const Hero = () => {
+  const { t, isArabic } = useLanguage();
+
   const scrollToNext = () => {
     document.getElementById('section-2')?.scrollIntoView({
       behavior: 'smooth',
-    })
-  }
+    });
+  };
 
   // Parent animation controls the stagger between children
   const containerVariants = {
@@ -16,7 +19,7 @@ const Hero = () => {
         staggerChildren: 0.08,
       },
     },
-  }
+  };
 
   // Fade-up animation for each item (starts visible so LCP is instant)
   const fadeUpVariants = {
@@ -28,12 +31,12 @@ const Hero = () => {
       opacity: 1,
       y: 0,
     },
-  }
+  };
 
   return (
     <section
       id="hero"
-      className="group/hero relative flex min-h-screen items-center justify-center overflow-hidden p-6 text-center bg-neutral-950 transition-all"
+      className="group/hero relative flex min-h-screen items-center justify-center overflow-hidden p-6 text-center bg-neutral-950 transition-all font-comforta"
     >
       {/* High-Performance LCP Hero Background Image */}
       <picture className="absolute inset-0 z-0 pointer-events-none overflow-hidden">
@@ -92,7 +95,7 @@ const Hero = () => {
             <span className="relative inline-flex h-2 w-2 rounded-full bg-red-500" />
           </span>
 
-          <span>Tripline Businessmen Services Navigation</span>
+          <span>{t('heroBadge')}</span>
         </motion.div>
 
         {/* Heading */}
@@ -100,19 +103,18 @@ const Hero = () => {
           variants={fadeUpVariants}
           className="text-4xl font-black tracking-tight text-white drop-shadow-[0_2px_20px_rgba(0,0,0,0.3)] transition-all duration-300 sm:text-6xl"
         >
-          Design engineering for{' '}
-          {/* <span className="bg-gradient-to-r from-[#D32F2F] via-[#F44336] to-[#111111] bg-clip-text text-transparent"> */}
-            ambitious brands.
-          {/* </span> */}
+          {t('heroTitlePre')}
+          <span className="bg-gradient-to-r from-[#D32F2F] via-[#F44336] to-white bg-clip-text text-transparent">
+            {t('heroTitleHighlight')}
+          </span>
         </motion.h1>
 
         {/* Description */}
         <motion.p
           variants={fadeUpVariants}
-          className="mx-auto max-w-2xl text-base font-normal text-white/95 drop-shadow-md sm:text-lg "
+          className="mx-auto max-w-2xl text-base font-normal text-white/95 drop-shadow-md sm:text-lg"
         >
-          Ultra-premium floating pill navbar with glassmorphism, mobile
-          rotating CTAs, and quick action controls.
+          {t('heroDesc')}
         </motion.p>
 
         {/* CTA Buttons */}
@@ -121,16 +123,16 @@ const Hero = () => {
           className="relative z-20 flex flex-wrap items-center justify-center gap-4 pt-4"
         >
           <motion.a
-            href="/portfolio"
+            href="/services/corporate"
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
             className="group/btn relative inline-flex cursor-pointer items-center gap-2 overflow-hidden rounded-full bg-white px-7 py-3 text-sm font-bold text-neutral-900 shadow-[0_10px_30px_rgba(0,0,0,0.25)] transition-all duration-300 hover:bg-neutral-50 hover:shadow-[0_12px_35px_rgba(0,0,0,0.35)]"
           >
             <span className="relative z-10 font-comforta">
-              Explore Showcase
+              {t('heroBtnExplore')}
             </span>
 
-            <span className="relative z-10 text-base transition-transform duration-300 group-hover/btn:translate-x-1">
+            <span className="relative z-10 text-base transition-transform duration-300 group-hover/btn:translate-x-1 rtl:rotate-180">
               →
             </span>
 
@@ -144,7 +146,7 @@ const Hero = () => {
             className="group/btn2 relative inline-flex cursor-pointer items-center gap-2 rounded-full border border-white/50 bg-black/25 px-7 py-3 text-sm font-semibold text-white shadow-[0_10px_30px_rgba(0,0,0,0.2)] backdrop-blur-xl transition-all duration-300 hover:border-white hover:bg-white hover:text-neutral-950 hover:shadow-[0_12px_35px_rgba(255,255,255,0.25)]"
           >
             <span className="relative z-10">
-              Get in Touch
+              {t('heroBtnContact')}
             </span>
           </motion.a>
         </motion.div>
