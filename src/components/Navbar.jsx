@@ -1,5 +1,5 @@
 import logoImg from "../assets/logo.png";
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, useMemo } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import {
@@ -54,123 +54,133 @@ const Navbar = () => {
   };
 
   const handleDropdownLeave = () => {
+    if (leaveTimerRef.current) clearTimeout(leaveTimerRef.current);
     leaveTimerRef.current = setTimeout(() => {
       setActiveDropdown(null);
-    }, 160);
+    }, 120);
   };
 
   // Main Corporate Services for Popup Window
-  const CORPORATE_POPUP_SERVICES = [
-    {
-      icon: FileText,
-      title: t("navCorp1"),
-      desc: t("navCorp1Desc"),
-      href: "/services/corporate#corp1Title",
-    },
-    {
-      icon: Building2,
-      title: t("navCorp2"),
-      desc: t("navCorp2Desc"),
-      href: "/services/corporate#corp2Title",
-    },
-    {
-      icon: Landmark,
-      title: t("navCorp3"),
-      desc: t("navCorp3Desc"),
-      href: "/services/corporate#corp3Title",
-    },
-    {
-      icon: Briefcase,
-      title: t("navCorp4"),
-      desc: t("navCorp4Desc"),
-      href: "/services/corporate#corp4Title",
-    },
-    {
-      icon: Users,
-      title: t("navCorp6"),
-      desc: t("navCorp6Desc"),
-      href: "/services/corporate#corp6Title",
-    },
-    {
-      icon: UserCheck,
-      title: t("navCorp14"),
-      desc: t("navCorp14Desc"),
-      href: "/services/corporate#corp14Title",
-    },
-  ];
+  const CORPORATE_POPUP_SERVICES = useMemo(
+    () => [
+      {
+        icon: FileText,
+        title: t("navCorp1"),
+        desc: t("navCorp1Desc"),
+        href: "/services/corporate#corp1Title",
+      },
+      {
+        icon: Building2,
+        title: t("navCorp2"),
+        desc: t("navCorp2Desc"),
+        href: "/services/corporate#corp2Title",
+      },
+      {
+        icon: Landmark,
+        title: t("navCorp3"),
+        desc: t("navCorp3Desc"),
+        href: "/services/corporate#corp3Title",
+      },
+      {
+        icon: Briefcase,
+        title: t("navCorp4"),
+        desc: t("navCorp4Desc"),
+        href: "/services/corporate#corp4Title",
+      },
+      {
+        icon: Users,
+        title: t("navCorp6"),
+        desc: t("navCorp6Desc"),
+        href: "/services/corporate#corp6Title",
+      },
+      {
+        icon: UserCheck,
+        title: t("navCorp14"),
+        desc: t("navCorp14Desc"),
+        href: "/services/corporate#corp14Title",
+      },
+    ],
+    [t]
+  );
 
   // Main Individuals Services for Popup Window
-  const INDIVIDUALS_POPUP_SERVICES = [
-    {
-      icon: Users,
-      title: t("navInd1"),
-      desc: t("navInd1Desc"),
-      href: "/services/individuals#service1Title",
-    },
-    {
-      icon: Award,
-      title: t("navInd3"),
-      desc: t("navInd3Desc"),
-      href: "/services/individuals#service3Title",
-    },
-    {
-      icon: PlaneTakeoff,
-      title: t("navInd5"),
-      desc: t("navInd5Desc"),
-      href: "/services/individuals#service5Title",
-    },
-    {
-      icon: RefreshCw,
-      title: t("navInd12"),
-      desc: t("navInd12Desc"),
-      href: "/services/individuals#service12Title",
-    },
-    {
-      icon: Scale,
-      title: t("navInd14"),
-      desc: t("navInd14Desc"),
-      href: "/services/individuals#service14Title",
-    },
-    {
-      icon: Globe2,
-      title: t("navIndTour"),
-      desc: t("navIndTourDesc"),
-      href: "/services/individuals#tourist-visas",
-    },
-  ];
+  const INDIVIDUALS_POPUP_SERVICES = useMemo(
+    () => [
+      {
+        icon: Users,
+        title: t("navInd1"),
+        desc: t("navInd1Desc"),
+        href: "/services/individuals#service1Title",
+      },
+      {
+        icon: Award,
+        title: t("navInd3"),
+        desc: t("navInd3Desc"),
+        href: "/services/individuals#service3Title",
+      },
+      {
+        icon: PlaneTakeoff,
+        title: t("navInd5"),
+        desc: t("navInd5Desc"),
+        href: "/services/individuals#service5Title",
+      },
+      {
+        icon: RefreshCw,
+        title: t("navInd12"),
+        desc: t("navInd12Desc"),
+        href: "/services/individuals#service12Title",
+      },
+      {
+        icon: Scale,
+        title: t("navInd14"),
+        desc: t("navInd14Desc"),
+        href: "/services/individuals#service14Title",
+      },
+      {
+        icon: Globe2,
+        title: t("navIndTour"),
+        desc: t("navIndTourDesc"),
+        href: "/services/individuals#tourist-visas",
+      },
+    ],
+    [t]
+  );
 
   // Build links using translations: Home, About Us, Corporate Services, Individuals Services, Contact
-  const NAV_LINKS = [
-    { num: "01", name: t("home"), href: "/", desc: t("homeDesc"), isRoute: true },
-    { num: "02", name: t("aboutUs"), href: "/about", desc: t("aboutDesc"), isRoute: true },
-    {
-      num: "03",
-      key: "corporate",
-      name: t("corporateServices"),
-      href: "/services/corporate",
-      desc: t("corporateNavDesc"),
-      isRoute: true,
-      hasDropdown: true,
-      dropdownItems: CORPORATE_POPUP_SERVICES,
-      headerTitle: t("mainServicesCorporate"),
-      moreHref: "/services/corporate",
-    },
-    {
-      num: "04",
-      key: "individuals",
-      name: t("individualsServices"),
-      href: "/services/individuals",
-      desc: t("individualsNavDesc"),
-      isRoute: true,
-      hasDropdown: true,
-      dropdownItems: INDIVIDUALS_POPUP_SERVICES,
-      headerTitle: t("mainServicesIndividuals"),
-      moreHref: "/services/individuals",
-    },
-    { num: "05", name: t("contact"), href: "/contact", desc: t("contactDesc"), isRoute: true },
-  ];
+  const NAV_LINKS = useMemo(
+    () => [
+      { num: "01", name: t("home"), href: "/", desc: t("homeDesc"), isRoute: true },
+      { num: "02", name: t("aboutUs"), href: "/about", desc: t("aboutDesc"), isRoute: true },
+      {
+        num: "03",
+        key: "corporate",
+        name: t("corporateServices"),
+        href: "/services/corporate",
+        desc: t("corporateNavDesc"),
+        isRoute: true,
+        hasDropdown: true,
+        dropdownItems: CORPORATE_POPUP_SERVICES,
+        headerTitle: t("mainServicesCorporate"),
+        moreHref: "/services/corporate",
+      },
+      {
+        num: "04",
+        key: "individuals",
+        name: t("individualsServices"),
+        href: "/services/individuals",
+        desc: t("individualsNavDesc"),
+        isRoute: true,
+        hasDropdown: true,
+        dropdownItems: INDIVIDUALS_POPUP_SERVICES,
+        headerTitle: t("mainServicesIndividuals"),
+        moreHref: "/services/individuals",
+      },
+      { num: "05", name: t("contact"), href: "/contact", desc: t("contactDesc"), isRoute: true },
+    ],
+    [t, CORPORATE_POPUP_SERVICES, INDIVIDUALS_POPUP_SERVICES]
+  );
 
-  const MOBILE_CTAS = [t("cta1"), t("cta2"), t("cta3")];
+  const MOBILE_CTAS = useMemo(() => [t("cta1"), t("cta2"), t("cta3")], [t]);
 
   // Rotating mobile CTA text ticker
   useEffect(() => {
@@ -372,7 +382,7 @@ const Navbar = () => {
             {/* Navigation Links */}
             <nav
               aria-label="Main Desktop Navigation"
-              className="relative z-10 hidden md:flex items-center flex-1 justify-center gap-2 lg:gap-4 xl:gap-5 min-w-0 nav-text-glow"
+              className="relative z-10 hidden md:flex items-center flex-1 justify-center gap-2 lg:gap-4 xl:gap-5 min-w-0"
             >
               {NAV_LINKS.map((link) => {
                 const isActive =
@@ -412,7 +422,7 @@ const Navbar = () => {
                             />
                           </span>
                           <ChevronDown
-                            className={`h-3.5 w-3.5 transition-transform duration-150 ${
+                            className={`h-3.5 w-3.5 transition-transform duration-150 ease-out ${
                               isDropdownOpen ? "rotate-180 text-[#D32F2F]" : ""
                             }`}
                           />
@@ -420,85 +430,81 @@ const Navbar = () => {
                       </a>
 
                       {/* ---------- Popped Window Listing Main Services ---------- */}
-                      <AnimatePresence>
-                        {isDropdownOpen && (
-                          <motion.div
-                            initial={{ opacity: 0, y: 8 }}
-                            animate={{ opacity: 1, y: 0 }}
-                            exit={{ opacity: 0, y: 4, transition: { duration: 0.1 } }}
-                            transition={{ duration: 0.16, ease: [0.16, 1, 0.3, 1] }}
-                            style={{ willChange: "transform, opacity" }}
-                            className="absolute top-full left-1/2 -translate-x-1/2 pt-2.5 w-[380px] sm:w-[420px] z-[70] before:absolute before:-top-3 before:inset-x-0 before:h-4 before:content-['']"
-                            onMouseEnter={() => {
-                              if (leaveTimerRef.current) clearTimeout(leaveTimerRef.current);
-                            }}
-                            onMouseLeave={handleDropdownLeave}
-                          >
-                            <div className="relative rounded-2xl border border-neutral-200/90 bg-white shadow-[0_20px_50px_rgba(0,0,0,0.14)] p-2.5 overflow-hidden text-neutral-900">
-                              <div className="pointer-events-none absolute inset-x-0 top-0 h-[2px] bg-gradient-to-r from-transparent via-[#D32F2F] to-transparent" />
+                      <div
+                        className={`absolute top-full left-1/2 -translate-x-1/2 pt-2.5 w-[380px] sm:w-[420px] z-[70] before:absolute before:-top-3 before:inset-x-0 before:h-4 before:content-[''] transition-[opacity,transform,visibility] duration-150 ease-out transform-gpu ${
+                          isDropdownOpen
+                            ? "opacity-100 translate-y-0 pointer-events-auto visible"
+                            : "opacity-0 translate-y-1.5 pointer-events-none invisible"
+                        }`}
+                        style={{ willChange: "transform, opacity" }}
+                        onMouseEnter={() => {
+                          if (leaveTimerRef.current) clearTimeout(leaveTimerRef.current);
+                        }}
+                        onMouseLeave={handleDropdownLeave}
+                      >
+                        <div className="relative rounded-2xl border border-neutral-200/90 bg-white shadow-[0_16px_40px_rgba(0,0,0,0.12)] p-2.5 overflow-hidden text-neutral-900">
+                          <div className="pointer-events-none absolute inset-x-0 top-0 h-[2px] bg-gradient-to-r from-transparent via-[#D32F2F] to-transparent" />
 
-                              {/* Category Header */}
-                              <div className="relative z-10 px-2.5 py-1.5 mb-1 flex items-center justify-between border-b border-neutral-100 text-[11px] font-bold uppercase tracking-wider text-neutral-400">
-                                <span className="flex items-center gap-1.5 text-[#D32F2F]">
-                                  <span className="h-1.5 w-1.5 rounded-full bg-[#D32F2F]" />
-                                  {link.headerTitle}
-                                </span>
-                                <span className="text-[10px] text-neutral-400 font-medium">
-                                  {link.dropdownItems.length} {lang === "AR" ? "خدمات رئيسية" : "Main Services"}
-                                </span>
-                              </div>
+                          {/* Category Header */}
+                          <div className="relative z-10 px-2.5 py-1.5 mb-1 flex items-center justify-between border-b border-neutral-100 text-[11px] font-bold uppercase tracking-wider text-neutral-400">
+                            <span className="flex items-center gap-1.5 text-[#D32F2F]">
+                              <span className="h-1.5 w-1.5 rounded-full bg-[#D32F2F]" />
+                              {link.headerTitle}
+                            </span>
+                            <span className="text-[10px] text-neutral-400 font-medium">
+                              {link.dropdownItems.length} {lang === "AR" ? "خدمات رئيسية" : "Main Services"}
+                            </span>
+                          </div>
 
-                              {/* Main Services List */}
-                              <div className="relative z-10 flex flex-col gap-1 py-0.5">
-                                {link.dropdownItems.map((item) => {
-                                  const ItemIcon = item.icon;
-                                  return (
-                                    <a
-                                      key={item.href}
-                                      href={item.href}
-                                      onClick={(e) => handleNavClick(e, item.href)}
-                                      className="group/item relative flex items-center gap-3 rounded-xl p-2 transition-all duration-150 ease-out hover:bg-neutral-100/90"
-                                    >
-                                      <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-neutral-100 text-[#D32F2F] group-hover/item:bg-[#D32F2F] group-hover/item:text-white transition-all duration-150 ease-out">
-                                        <ItemIcon className="h-4 w-4" />
-                                      </div>
-
-                                      <div className="min-w-0 flex-1">
-                                        <p className="text-[13px] font-bold text-neutral-900 group-hover/item:text-[#D32F2F] transition-colors duration-150 leading-snug line-clamp-1">
-                                          {item.title}
-                                        </p>
-                                        <p className="text-[11px] text-neutral-500 line-clamp-1 mt-0.5 leading-tight">
-                                          {item.desc}
-                                        </p>
-                                      </div>
-
-                                      <div className="shrink-0 text-neutral-400 group-hover/item:text-[#D32F2F] transition-colors duration-150">
-                                        <ArrowRight className="h-3.5 w-3.5 opacity-0 -translate-x-1.5 group-hover/item:opacity-100 group-hover/item:translate-x-0 rtl:rotate-180 rtl:group-hover/item:-translate-x-0 transition-all duration-150 ease-out" />
-                                      </div>
-                                    </a>
-                                  );
-                                })}
-                              </div>
-
-                              {/* "Click for more" Footer Link */}
-                              <div className="relative z-10 border-t border-neutral-100 mt-1.5 pt-2 px-1">
+                          {/* Main Services List */}
+                          <div className="relative z-10 flex flex-col gap-1 py-0.5">
+                            {link.dropdownItems.map((item) => {
+                              const ItemIcon = item.icon;
+                              return (
                                 <a
-                                  href={link.moreHref}
-                                  onClick={(e) => handleNavClick(e, link.moreHref)}
-                                  className="group/more flex items-center justify-between w-full px-3 py-2 rounded-xl bg-gradient-to-r from-neutral-50 to-neutral-100 hover:from-[#D32F2F]/10 hover:to-[#D32F2F]/5 border border-neutral-200/80 hover:border-[#D32F2F]/40 transition-colors duration-150"
+                                  key={item.href}
+                                  href={item.href}
+                                  onClick={(e) => handleNavClick(e, item.href)}
+                                  className="group/item relative flex items-center gap-3 rounded-xl p-2 transition-colors duration-150 ease-out hover:bg-neutral-100/90"
                                 >
-                                  <span className="text-xs font-extrabold text-neutral-900 group-hover/more:text-[#D32F2F] transition-colors duration-150">
-                                    {t("clickForMore")}
-                                  </span>
-                                  <span className="flex items-center gap-1 text-xs font-bold text-[#D32F2F] group-hover/more:translate-x-1 rtl:group-hover/more:-translate-x-1 transition-transform duration-150">
-                                    <ArrowRight className="h-3.5 w-3.5 rtl:rotate-180" />
-                                  </span>
+                                  <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-neutral-100 text-[#D32F2F] group-hover/item:bg-[#D32F2F] group-hover/item:text-white transition-colors duration-150 ease-out">
+                                    <ItemIcon className="h-4 w-4" />
+                                  </div>
+
+                                  <div className="min-w-0 flex-1">
+                                    <p className="text-[13px] font-bold text-neutral-900 group-hover/item:text-[#D32F2F] transition-colors duration-150 leading-snug line-clamp-1">
+                                      {item.title}
+                                    </p>
+                                    <p className="text-[11px] text-neutral-500 line-clamp-1 mt-0.5 leading-tight">
+                                      {item.desc}
+                                    </p>
+                                  </div>
+
+                                  <div className="shrink-0 text-neutral-400 group-hover/item:text-[#D32F2F] transition-colors duration-150">
+                                    <ArrowRight className="h-3.5 w-3.5 opacity-0 -translate-x-1.5 group-hover/item:opacity-100 group-hover/item:translate-x-0 rtl:rotate-180 rtl:group-hover/item:-translate-x-0 transition-[opacity,transform] duration-150 ease-out" />
+                                  </div>
                                 </a>
-                              </div>
-                            </div>
-                          </motion.div>
-                        )}
-                      </AnimatePresence>
+                              );
+                            })}
+                          </div>
+
+                          {/* "Click for more" Footer Link */}
+                          <div className="relative z-10 border-t border-neutral-100 mt-1.5 pt-2 px-1">
+                            <a
+                              href={link.moreHref}
+                              onClick={(e) => handleNavClick(e, link.moreHref)}
+                              className="group/more flex items-center justify-between w-full px-3 py-2 rounded-xl bg-gradient-to-r from-neutral-50 to-neutral-100 hover:from-[#D32F2F]/10 hover:to-[#D32F2F]/5 border border-neutral-200/80 hover:border-[#D32F2F]/40 transition-colors duration-150"
+                            >
+                              <span className="text-xs font-extrabold text-neutral-900 group-hover/more:text-[#D32F2F] transition-colors duration-150">
+                                {t("clickForMore")}
+                              </span>
+                              <span className="flex items-center gap-1 text-xs font-bold text-[#D32F2F] group-hover/more:translate-x-1 rtl:group-hover/more:-translate-x-1 transition-transform duration-150">
+                                <ArrowRight className="h-3.5 w-3.5 rtl:rotate-180" />
+                              </span>
+                            </a>
+                          </div>
+                        </div>
+                      </div>
                     </div>
                   );
                 }
