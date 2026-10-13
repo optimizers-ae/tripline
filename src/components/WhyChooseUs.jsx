@@ -10,6 +10,7 @@ import {
   Award,
   Layers,
   Clock,
+  Landmark,
 } from 'lucide-react';
 import { MagneticCursor } from './MouseTrackingEffect';
 import { useLanguage } from '../context/LanguageContext';
@@ -183,7 +184,7 @@ const WhyChooseUs = () => {
             </div>
           </motion.div>
 
-          {/* Card 2: Strategic Mortgage Consultancy (Spans 2 cols, row 1) */}
+          {/* Card 2: Authorized Government Liaison (Spans 2 cols, row 1) */}
           <motion.div
             variants={cardVariants}
             whileHover={{ y: -6, transition: { duration: 0.3 } }}
@@ -215,8 +216,8 @@ const WhyChooseUs = () => {
 
               <div className="flex flex-1 flex-col justify-center p-6 sm:p-7">
                 <div className="mb-2 flex items-center gap-2.5">
-                  <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-[#F44336]/15 text-[#F44336] border border-[#F44336]/30 transition-transform duration-300 group-hover/card:scale-110">
-                    <TrendingUp className="h-4 w-4" />
+                  <div className="flex h-10 w-12 items-center justify-center rounded-lg bg-[#F44336]/15 text-[#F44336] border border-[#F44336]/30 transition-transform duration-300 group-hover/card:scale-110">
+                    <Landmark className="h-4 w-4" />
                   </div>
                   <h3 className="text-base font-bold text-white transition-colors duration-300 group-hover/card:text-[#F44336]">
                     {t('whyCard2Title')}
@@ -265,8 +266,8 @@ const WhyChooseUs = () => {
               </MagneticCursor>
 
               <div className="flex flex-1 flex-col justify-center p-6 sm:p-7">
-                <div className="mb-2 flex items-center gap-2.5">
-                  <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-[#2563EB]/15 text-[#2563EB] border border-[#2563EB]/30 transition-transform duration-300 group-hover/card:scale-110">
+                <div className="mb-2 flex items-center gap-3">
+                  <div className="flex h-10 w-14 items-center justify-center rounded-lg bg-[#2563EB]/15 text-[#2563EB] border border-[#2563EB]/30 transition-transform duration-300 group-hover/card:scale-110">
                     <Shield className="h-4 w-4" />
                   </div>
                   <h3 className="text-base font-bold text-white transition-colors duration-300 group-hover/card:text-[#2563EB]">
@@ -318,10 +319,10 @@ const WhyChooseUs = () => {
               <div className="flex-1 p-6 md:p-8">
                 <div className="mb-3 flex items-center justify-between">
                   <div className="flex items-center gap-3">
-                    <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-[#111111]/15 text-[#111111] border border-[#111111]/30 transition-transform duration-300 group-hover/card:scale-110">
+                    <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-[#2563EB]/15 text-[#2563EB] border border-[#2563EB]/30 transition-transform duration-300 group-hover/card:scale-110">
                       <Search className="h-5 w-5" />
                     </div>
-                    <h3 className="text-lg md:text-xl font-bold text-white transition-colors duration-300 group-hover/card:text-[#111111]">
+                    <h3 className="text-lg md:text-xl font-bold text-white transition-colors duration-300 group-hover/card:text-[#357de2]">
                       {t('whyCard4Title')}
                     </h3>
                   </div>

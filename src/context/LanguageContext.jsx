@@ -56,8 +56,8 @@ export const translations = {
 
     /* ---------------- MOBILE CTAs ---------------- */
     cta1: "Talk to an Advisor",
-    cta2: "48-Hour Bank Pre-Approval",
-    cta3: "UAE Company Setup & Mortgages",
+    cta2: "Fast Government Clearances",
+    cta3: "UAE Company Setup & Visas",
 
     /* ---------------- MENU DRAWER ---------------- */
     closeMenu: "Close Menu",
@@ -331,10 +331,10 @@ export const translations = {
       "From Mainland DED licensing to Free Zone and Offshore setups, we tailor the legal structure and jurisdiction to match your business goals, minimizing costs and maximizing growth potential.",
     whyCard1Tag1: "Mainland & Freezone Setup",
     whyCard1Tag2: "Offshore Company Formation",
-    whyCard2Title: "Strategic Mortgage Consultancy",
+    whyCard2Title: "Authorized Government Liaison",
     whyCard2Desc:
-      "Secure the best financing options for your residential or commercial properties in Dubai. Our experts negotiate on your behalf to get the most favorable rates.",
-    whyCard2Tag: "Residential & Commercial Focus",
+      "Direct coordination with federal ministries, economic departments (DED), GDRFA, and MOHRE. We bypass bureaucratic delays to secure fast approvals and official clearances for your business.",
+    whyCard2Tag: "Direct Federal & Local Liaison",
     whyCard3Title: "Transparent Pricing & Processes",
     whyCard3Desc:
       "We believe in complete honesty. You get upfront pricing, realistic timelines for approvals, and a clear breakdown of fees without any hidden retainers.",
@@ -352,11 +352,11 @@ export const translations = {
     contactCtaHeadingPre: "Ready to secure your ",
     contactCtaHeadingHighlight: "UAE success?",
     contactCtaSubtitle:
-      "Let’s talk about your business setup or property financing. No pressure, just a clear, professional conversation about what’s possible.",
+      "Let’s talk about your business setup, visa processing, or government transactions. No pressure, just a clear, professional conversation about what’s possible.",
     contactCtaBtnAdvisor: "Talk to an Advisor",
     contactCtaBtnWhatsApp: "WhatsApp Us",
     contactCtaTrust1: "Direct Senior Access",
-    contactCtaTrust2: "48-Hour Bank Pre-Approval",
+    contactCtaTrust2: "Fast-Track Government Clearances",
     contactCtaTrust3: "Zero Hidden Scopes",
 
     /* ---------------- FOOTER ---------------- */
@@ -505,8 +505,8 @@ export const translations = {
 
     /* ---------------- MOBILE CTAs ---------------- */
     cta1: "تحدث مع مستشار",
-    cta2: "موافقة بنكية خلال 48 ساعة",
-    cta3: "تأسيس شركة في الإمارات والرهن العقاري",
+    cta2: "تخليص حكومي سريع ومباشر",
+    cta3: "تأسيس الشركات والتأشيرات",
 
     /* ---------------- MENU DRAWER ---------------- */
     closeMenu: "إغلاق القائمة",
@@ -779,10 +779,10 @@ export const translations = {
       "من رخص الدوائر الاقتصادية في البر الرئيسي إلى المناطق الحرة والشركات الخارجية، نختار الهيكل القانوني الأمثل لتحقيق أهدافك وخفض التكاليف وتسريع النمو.",
     whyCard1Tag1: "تأسيس بالبر الرئيسي والمناطق الحرة",
     whyCard1Tag2: "تأسيس الشركات الخارجية (أوفشور)",
-    whyCard2Title: "استشارات الرهن والحلول المصرفية",
+    whyCard2Title: "تنسيق واعتمادات حكومية مباشرة",
     whyCard2Desc:
-      "تأمين أفضل خيارات التمويل لعقاراتك السكنية والتجارية في دبي. يفاوض خبراؤنا بالنيابة عنك للحصول على أفضل الشروط والفوائد.",
-    whyCard2Tag: "تركيز على العقارات السكنية والتجارية",
+      "تنسيق مباشر مع الوزارات الاتحادية والدوائر الاقتصادية وهيئات الإقامة (GDRFA) ووزارة الموارد البشرية (MOHRE). نتجاوز العقبات الروتينية لضمان إنجاز معاملاتك الرسمية بأقصى سرعة.",
+    whyCard2Tag: "ربط حكومي مباشر وتخليص فوري",
     whyCard3Title: "شفافية مطلقة في الأسعار والخطوات",
     whyCard3Desc:
       "نؤمن بالصدق والوضوح التام. ستحصل على أسعار واضحة مسبقاً، ومواعيد إنجاز واقعية للموافقات، وتفصيل دقيق للرسوم دون أي تكاليف مستترة.",
@@ -800,11 +800,11 @@ export const translations = {
     contactCtaHeadingPre: "هل أنت جاهز لتحقيق ",
     contactCtaHeadingHighlight: "نجاحك في الإمارات؟",
     contactCtaSubtitle:
-      "تواصل معنا لمناقشة تأسيس شركتك أو تمويل عقارك أو معاملاتك. محادثة مهنية واضحة ومباشرة حول أفضل الحلول المتاحة.",
+      "تواصل معنا لمناقشة تأسيس شركتك أو إصدار التأشيرات أو تخليص المعاملات الحكومية. محادثة مهنية واضحة ومباشرة حول أفضل الحلول المتاحة.",
     contactCtaBtnAdvisor: "تحدث مع مستشار",
     contactCtaBtnWhatsApp: "تواصل عبر واتساب",
     contactCtaTrust1: "تواصل مباشر مع كبار المستشارين",
-    contactCtaTrust2: "موافقة بنكية مسبقة خلال 48 ساعة",
+    contactCtaTrust2: "تخليص حكومي سريع وموثوق",
     contactCtaTrust3: "بدون أي رسوم أو شروط خفية",
 
     /* ---------------- FOOTER ---------------- */
