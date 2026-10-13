@@ -9,8 +9,7 @@ const quoteContainerVariants = {
   visible: {
     opacity: 1,
     transition: {
-      staggerChildren: 0.14,
-      delayChildren: 0.1,
+      staggerChildren: 0.04,
     },
   },
 };
@@ -19,14 +18,14 @@ const quoteContainerVariants = {
 const fadeUpVariants = {
   hidden: {
     opacity: 0,
-    y: 35,
+    y: 14,
   },
   visible: {
     opacity: 1,
     y: 0,
     transition: {
-      duration: 0.8,
-      ease: [0.22, 1, 0.36, 1],
+      duration: 0.35,
+      ease: [0.16, 1, 0.3, 1],
     },
   },
 };
@@ -37,8 +36,7 @@ const statsGridVariants = {
   visible: {
     opacity: 1,
     transition: {
-      staggerChildren: 0.15,
-      delayChildren: 0.25,
+      staggerChildren: 0.04,
     },
   },
 };
@@ -47,14 +45,14 @@ const statsGridVariants = {
 const statCardVariants = {
   hidden: {
     opacity: 0,
-    y: 35,
+    y: 14,
   },
   visible: {
     opacity: 1,
     y: 0,
     transition: {
-      duration: 0.8,
-      ease: [0.22, 1, 0.36, 1],
+      duration: 0.35,
+      ease: [0.16, 1, 0.3, 1],
     },
   },
 };
@@ -114,7 +112,7 @@ const StatCard = ({ stat, isVisible, isArabic }) => {
 const StatsCounter = () => {
   const { t, isArabic } = useLanguage();
   const sectionRef = useRef(null);
-  const isInView = useInView(sectionRef, { once: true, amount: 0.2 });
+  const isInView = useInView(sectionRef, { once: true, amount: 0.05 });
 
   const stats = [
     {

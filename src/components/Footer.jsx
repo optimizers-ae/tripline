@@ -9,20 +9,19 @@ const containerVariants = {
   visible: {
     opacity: 1,
     transition: {
-      staggerChildren: 0.1,
-      delayChildren: 0.1,
+      staggerChildren: 0.04,
     },
   },
 };
 
 const fadeUpVariants = {
-  hidden: { opacity: 0, y: 20 },
+  hidden: { opacity: 0, y: 12 },
   visible: {
     opacity: 1,
     y: 0,
     transition: {
-      duration: 0.65,
-      ease: [0.22, 1, 0.36, 1],
+      duration: 0.32,
+      ease: [0.16, 1, 0.3, 1],
     },
   },
 };
@@ -54,7 +53,7 @@ const Footer = () => {
           variants={containerVariants}
           initial="hidden"
           whileInView="visible"
-          viewport={{ once: true, amount: 0.15 }}
+          viewport={{ once: true, amount: 0.05 }}
           className="relative w-full max-w-[1800px] overflow-hidden rounded-3xl border border-white/10 shadow-[0_8px_30px_rgba(0,0,0,0.5),inset_0_1px_0_rgba(255,255,255,0.1)]"
           style={{
             background:

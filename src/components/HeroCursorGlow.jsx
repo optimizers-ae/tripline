@@ -1,27 +1,13 @@
 import { useEffect, useRef } from 'react'
 
-const TRAIL_COUNT = 9
+const TRAIL_COUNT = 4
 
-// Rich, high-saturation optical glow nodes for an intense, vibrant light wake
+// Optimized optical glow nodes for buttery smooth 60/120fps motion
 const TRAIL_CONFIG = [
-  // Head: Primary golden spotlight & bloom
-  { size: 480, opacity: 0.9, blur: 55, bg: 'radial-gradient(circle, rgba(255,240,160,0.9) 0%, rgba(255,190,50,0.65) 35%, rgba(216,140,30,0.35) 55%, transparent 75%)' },
-  // Node 1: Intense trailing core
-  { size: 400, opacity: 0.85, blur: 48, bg: 'radial-gradient(circle, rgba(255,225,120,0.85) 0%, rgba(255,175,40,0.6) 35%, rgba(216,130,25,0.3) 55%, transparent 75%)' },
-  // Node 2: Rich warm amber
-  { size: 340, opacity: 0.8, blur: 42, bg: 'radial-gradient(circle, rgba(255,210,100,0.8) 0%, rgba(250,160,35,0.55) 35%, rgba(216,120,20,0.25) 55%, transparent 75%)' },
-  // Node 3: Golden wake
-  { size: 290, opacity: 0.72, blur: 36, bg: 'radial-gradient(circle, rgba(255,195,85,0.75) 0%, rgba(245,145,30,0.5) 35%, rgba(210,110,15,0.2) 55%, transparent 75%)' },
-  // Node 4: Saturated amber tail
-  { size: 240, opacity: 0.65, blur: 30, bg: 'radial-gradient(circle, rgba(250,180,70,0.7) 0%, rgba(240,130,25,0.45) 35%, rgba(200,100,15,0.18) 55%, transparent 75%)' },
-  // Node 5: Warm amber wake
-  { size: 190, opacity: 0.55, blur: 24, bg: 'radial-gradient(circle, rgba(245,165,60,0.6) 0%, rgba(230,115,20,0.35) 35%, rgba(190,90,10,0.12) 55%, transparent 75%)' },
-  // Node 6: Deep golden tail
-  { size: 150, opacity: 0.45, blur: 20, bg: 'radial-gradient(circle, rgba(240,150,50,0.5) 0%, rgba(220,100,15,0.3) 35%, transparent 70%)' },
-  // Node 7: Fading amber tip
-  { size: 110, opacity: 0.35, blur: 16, bg: 'radial-gradient(circle, rgba(235,135,40,0.4) 0%, rgba(210,90,10,0.2) 35%, transparent 70%)' },
-  // Node 8: Soft tail end
-  { size: 80, opacity: 0.22, blur: 12, bg: 'radial-gradient(circle, rgba(230,120,30,0.3) 0%, transparent 70%)' },
+  { size: 340, opacity: 0.8, blur: 24, bg: 'radial-gradient(circle, rgba(255,240,160,0.85) 0%, rgba(255,190,50,0.55) 35%, rgba(216,140,30,0.25) 55%, transparent 75%)' },
+  { size: 260, opacity: 0.7, blur: 20, bg: 'radial-gradient(circle, rgba(255,225,120,0.75) 0%, rgba(255,175,40,0.5) 35%, rgba(216,130,25,0.2) 55%, transparent 75%)' },
+  { size: 190, opacity: 0.55, blur: 16, bg: 'radial-gradient(circle, rgba(250,180,70,0.6) 0%, rgba(240,130,25,0.35) 35%, transparent 70%)' },
+  { size: 120, opacity: 0.35, blur: 12, bg: 'radial-gradient(circle, rgba(240,150,50,0.4) 0%, transparent 70%)' },
 ]
 
 const HeroCursorGlow = ({ heroId = 'hero' }) => {
@@ -52,6 +38,7 @@ const HeroCursorGlow = ({ heroId = 'hero' }) => {
     let isInside = false
     let isIntersecting = true
     let animationFrame = null
+    let ticking = false
 
     const handleMouseEnter = () => {
       isInside = true
@@ -62,20 +49,29 @@ const HeroCursorGlow = ({ heroId = 'hero' }) => {
     }
 
     const handleMouseMove = (e) => {
+      // If hovering near the floating navbar, dim glow to keep navbar hovers silky smooth
+      if (e.clientY < 80) {
+        targetOpacity = 0
+        return
+      }
+
       const rect = hero.getBoundingClientRect()
       targetX = e.clientX - rect.left
       targetY = e.clientY - rect.top
 
-      // 3D tilt calculations
-      const percentX = (targetX / rect.width - 0.5) * 2
-      const percentY = (targetY / rect.height - 0.5) * 2
+      if (!ticking) {
+        requestAnimationFrame(() => {
+          const percentX = (targetX / rect.width - 0.5) * 2
+          const percentY = (targetY / rect.height - 0.5) * 2
 
-      hero.style.setProperty('--mouse-x', `${targetX}px`)
-      hero.style.setProperty('--mouse-y', `${targetY}px`)
-      hero.style.setProperty('--tilt-x', `${-percentY * 6}deg`)
-      hero.style.setProperty('--tilt-y', `${percentX * 6}deg`)
-      hero.style.setProperty('--sheen-x', `${(targetX / rect.width) * 100}%`)
-      hero.style.setProperty('--sheen-y', `${(targetY / rect.height) * 100}%`)
+          hero.style.setProperty('--mouse-x', `${targetX}px`)
+          hero.style.setProperty('--mouse-y', `${targetY}px`)
+          hero.style.setProperty('--tilt-x', `${-percentY * 4}deg`)
+          hero.style.setProperty('--tilt-y', `${percentX * 4}deg`)
+          ticking = false
+        })
+        ticking = true
+      }
 
       if (!isInside) {
         isInside = true
@@ -83,6 +79,8 @@ const HeroCursorGlow = ({ heroId = 'hero' }) => {
         if (isIntersecting && !animationFrame) {
           animationFrame = requestAnimationFrame(animate)
         }
+      } else {
+        targetOpacity = 1
       }
     }
 

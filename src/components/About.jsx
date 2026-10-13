@@ -100,13 +100,13 @@ const containerVariants = {
   hidden: { opacity: 0 },
   visible: {
     opacity: 1,
-    transition: { staggerChildren: 0.1, delayChildren: 0.1 }
+    transition: { staggerChildren: 0.04 }
   }
 };
 
 const fadeUpVariants = {
-  hidden: { opacity: 0, y: 20 },
-  visible: { opacity: 1, y: 0, transition: { duration: 0.6 } }
+  hidden: { opacity: 0, y: 14 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.32, ease: [0.16, 1, 0.3, 1] } }
 };
 
 export default function About() {
@@ -120,7 +120,7 @@ export default function About() {
           variants={containerVariants}
           initial="hidden"
           whileInView="visible"
-          viewport={{ once: true, amount: 0.2 }}
+          viewport={{ once: true, amount: 0.05 }}
           className="mb-16 text-center max-w-3xl mx-auto"
         >
           <motion.span variants={fadeUpVariants} className="inline-flex items-center gap-2 rounded-full border border-neutral-300 bg-white/80 px-4 py-1.5 text-xs font-semibold uppercase tracking-[2px] text-neutral-600 shadow-sm">
@@ -146,7 +146,7 @@ export default function About() {
           variants={containerVariants}
           initial="hidden"
           whileInView="visible"
-          viewport={{ once: true, amount: 0.1 }}
+          viewport={{ once: true, amount: 0.05 }}
           className="grid md:grid-cols-3 gap-6 mb-16"
         >
           {[
@@ -155,7 +155,7 @@ export default function About() {
             { img: '/service_government.jpg', titleKey: 'homeVisualGov' }
           ].map((item, i) => (
              <motion.div key={i} variants={fadeUpVariants} className="group relative overflow-hidden rounded-3xl h-64 md:h-80 shadow-lg">
-                <img src={item.img} alt={t(item.titleKey)} className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
+                <img src={item.img} alt={t(item.titleKey)} className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
                 <h3 className={`absolute bottom-6 text-xl font-bold text-white ${isArabic ? 'right-6 text-right' : 'left-6 text-left'}`}>
                   {t(item.titleKey)}
@@ -165,7 +165,7 @@ export default function About() {
         </motion.div>
 
         {/* List of 9 Services */}
-        <motion.div variants={containerVariants} initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.1 }} className="flex md:grid md:grid-cols-3 overflow-x-auto md:overflow-visible snap-x md:snap-none snap-mandatory gap-5 md:gap-6 pb-8 md:pb-0 no-scrollbar -mx-6 px-6 md:mx-0 md:px-0 w-full">
+        <motion.div variants={containerVariants} initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.05 }} className="flex md:grid md:grid-cols-3 overflow-x-auto md:overflow-visible snap-x md:snap-none snap-mandatory gap-5 md:gap-6 pb-8 md:pb-0 no-scrollbar -mx-6 px-6 md:mx-0 md:px-0 w-full">
           {SERVICES.map((service) => {
             const Icon = service.icon;
             return (

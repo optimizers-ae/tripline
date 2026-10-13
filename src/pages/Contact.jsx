@@ -118,10 +118,10 @@ const ContactPage = () => {
             <div className="grid grid-cols-1 lg:grid-cols-5 gap-8 lg:gap-10">
               {/* ---------- Left: Contact Info ---------- */}
               <motion.div
-                initial={{ opacity: 0, x: -30 }}
+                initial={{ opacity: 0, x: -15 }}
                 whileInView={{ opacity: 1, x: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.6, delay: 0.1 }}
+                viewport={{ once: true, amount: 0.05 }}
+                transition={{ duration: 0.35 }}
                 className="lg:col-span-2 space-y-4"
               >
                 {CONTACT_INFO.map((info, idx) => {
@@ -167,10 +167,10 @@ const ContactPage = () => {
 
               {/* ---------- Right: Contact Form ---------- */}
               <motion.div
-                initial={{ opacity: 0, x: 30 }}
+                initial={{ opacity: 0, x: 15 }}
                 whileInView={{ opacity: 1, x: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.6, delay: 0.2 }}
+                viewport={{ once: true, amount: 0.05 }}
+                transition={{ duration: 0.35 }}
                 className="lg:col-span-3"
               >
                 <form
@@ -266,10 +266,10 @@ const ContactPage = () => {
 
             {/* ---------- Map / Location Card ---------- */}
             <motion.div
-              initial={{ opacity: 0, y: 20 }}
+              initial={{ opacity: 0, y: 15 }}
               whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6, delay: 0.3 }}
+              viewport={{ once: true, amount: 0.05 }}
+              transition={{ duration: 0.35 }}
               className="mt-10 md:mt-14"
             >
               <div className="relative rounded-3xl border border-neutral-200 bg-white overflow-hidden shadow-xl">

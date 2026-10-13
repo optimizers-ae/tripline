@@ -181,8 +181,7 @@ const headerContainerVariants = {
   visible: {
     opacity: 1,
     transition: {
-      staggerChildren: 0.12,
-      delayChildren: 0.1,
+      staggerChildren: 0.04,
     },
   },
 };
@@ -190,14 +189,14 @@ const headerContainerVariants = {
 const fadeUpVariants = {
   hidden: {
     opacity: 0,
-    y: 35,
+    y: 14,
   },
   visible: {
     opacity: 1,
     y: 0,
     transition: {
-      duration: 0.8,
-      ease: [0.22, 1, 0.36, 1],
+      duration: 0.35,
+      ease: [0.16, 1, 0.3, 1],
     },
   },
 };
@@ -207,8 +206,7 @@ const gridContainerVariants = {
   visible: {
     opacity: 1,
     transition: {
-      staggerChildren: 0.08,
-      delayChildren: 0.1,
+      staggerChildren: 0.04,
     },
   },
 };
@@ -216,14 +214,14 @@ const gridContainerVariants = {
 const cardFadeUpVariants = {
   hidden: {
     opacity: 0,
-    y: 35,
+    y: 16,
   },
   visible: {
     opacity: 1,
     y: 0,
     transition: {
-      duration: 0.8,
-      ease: [0.22, 1, 0.36, 1],
+      duration: 0.35,
+      ease: [0.16, 1, 0.3, 1],
     },
   },
 };
@@ -401,7 +399,7 @@ const TechStackGrid = () => {
           variants={headerContainerVariants}
           initial="hidden"
           whileInView="visible"
-          viewport={{ once: true, amount: 0.25 }}
+          viewport={{ once: true, amount: 0.05 }}
           className="mx-auto max-w-3xl text-center"
         >
           <motion.div
@@ -479,7 +477,7 @@ const TechStackGrid = () => {
           variants={gridContainerVariants}
           initial="hidden"
           whileInView="visible"
-          viewport={{ once: true, amount: 0.1 }}
+          viewport={{ once: true, amount: 0.05 }}
           className="mt-10 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3"
         >
           {filteredItems.map((partner) => (

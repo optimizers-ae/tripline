@@ -57,7 +57,7 @@ const Navbar = () => {
   const handleDropdownLeave = () => {
     leaveTimerRef.current = setTimeout(() => {
       setActiveDropdown(null);
-    }, 180);
+    }, 160);
   };
 
   // Main Corporate Services for Popup Window
@@ -395,7 +395,7 @@ const Navbar = () => {
                       <a
                         href={link.href}
                         onClick={(e) => handleNavClick(e, link.href)}
-                        className={`group relative px-2.5 py-1.5 text-[13px] lg:text-sm font-semibold whitespace-nowrap transition-colors duration-200 flex items-center gap-1 ${
+                        className={`group relative px-2.5 py-1.5 text-[13px] lg:text-sm font-semibold whitespace-nowrap transition-colors duration-150 flex items-center gap-1 ${
                           isActive || isDropdownOpen
                             ? "text-[#D32F2F]"
                             : "text-neutral-950 hover:text-[#D32F2F]"
@@ -405,7 +405,7 @@ const Navbar = () => {
                           <span className="relative pb-1">
                             {link.name}
                             <span
-                              className={`absolute bottom-0 left-0 right-0 h-[2px] rounded-full bg-[#D32F2F] transition-all duration-300 ease-out origin-center ${
+                              className={`absolute bottom-0 left-0 right-0 h-[2px] rounded-full bg-[#D32F2F] transition-transform duration-150 ease-out origin-center will-change-transform ${
                                 isActive || isDropdownOpen
                                   ? "scale-x-100 opacity-100"
                                   : "scale-x-0 opacity-0 group-hover:scale-x-100 group-hover:opacity-100"
@@ -413,7 +413,7 @@ const Navbar = () => {
                             />
                           </span>
                           <ChevronDown
-                            className={`h-3.5 w-3.5 transition-transform duration-300 ${
+                            className={`h-3.5 w-3.5 transition-transform duration-150 ${
                               isDropdownOpen ? "rotate-180 text-[#D32F2F]" : ""
                             }`}
                           />
@@ -424,24 +424,24 @@ const Navbar = () => {
                       <AnimatePresence>
                         {isDropdownOpen && (
                           <motion.div
-                            initial={{ opacity: 0, y: 10, scale: 0.96 }}
-                            animate={{ opacity: 1, y: 0, scale: 1 }}
-                            exit={{ opacity: 0, y: 8, scale: 0.96 }}
-                            transition={{ duration: 0.2, ease: "easeOut" }}
-                            className="absolute top-full left-1/2 -translate-x-1/2 pt-2.5 w-[380px] sm:w-[420px] z-[70]"
+                            initial={{ opacity: 0, y: 8 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            exit={{ opacity: 0, y: 4, transition: { duration: 0.1 } }}
+                            transition={{ duration: 0.16, ease: [0.16, 1, 0.3, 1] }}
+                            style={{ willChange: "transform, opacity" }}
+                            className="absolute top-full left-1/2 -translate-x-1/2 pt-2.5 w-[380px] sm:w-[420px] z-[70] before:absolute before:-top-3 before:inset-x-0 before:h-4 before:content-['']"
                             onMouseEnter={() => {
                               if (leaveTimerRef.current) clearTimeout(leaveTimerRef.current);
                             }}
                             onMouseLeave={handleDropdownLeave}
                           >
-                            <div className="relative rounded-2xl border border-white/70 bg-white/95 backdrop-blur-2xl shadow-[0_24px_60px_rgba(0,0,0,0.18),0_4px_16px_rgba(0,0,0,0.06),inset_0_1px_1px_rgba(255,255,255,0.9)] p-2.5 overflow-hidden text-neutral-900">
+                            <div className="relative rounded-2xl border border-neutral-200/90 bg-white shadow-[0_20px_50px_rgba(0,0,0,0.14)] p-2.5 overflow-hidden text-neutral-900">
                               <div className="pointer-events-none absolute inset-x-0 top-0 h-[2px] bg-gradient-to-r from-transparent via-[#D32F2F] to-transparent" />
-                              <div className="pointer-events-none absolute -top-8 left-10 h-16 w-32 rounded-full bg-[#D32F2F]/10 blur-xl" />
 
                               {/* Category Header */}
                               <div className="relative z-10 px-2.5 py-1.5 mb-1 flex items-center justify-between border-b border-neutral-100 text-[11px] font-bold uppercase tracking-wider text-neutral-400">
                                 <span className="flex items-center gap-1.5 text-[#D32F2F]">
-                                  <span className="h-1.5 w-1.5 rounded-full bg-[#D32F2F] animate-pulse" />
+                                  <span className="h-1.5 w-1.5 rounded-full bg-[#D32F2F]" />
                                   {link.headerTitle}
                                 </span>
                                 <span className="text-[10px] text-neutral-400 font-medium">
@@ -450,7 +450,7 @@ const Navbar = () => {
                               </div>
 
                               {/* Main Services List */}
-                              <div className="relative z-10 flex flex-col gap-1 max-h-[350px] overflow-y-auto no-scrollbar py-0.5">
+                              <div className="relative z-10 flex flex-col gap-1 py-0.5">
                                 {link.dropdownItems.map((item) => {
                                   const ItemIcon = item.icon;
                                   return (
@@ -458,14 +458,14 @@ const Navbar = () => {
                                       key={item.href}
                                       href={item.href}
                                       onClick={(e) => handleNavClick(e, item.href)}
-                                      className="group/item relative flex items-center gap-3 rounded-xl p-2 transition-all duration-200 hover:bg-neutral-100/90 active:scale-[0.99]"
+                                      className="group/item relative flex items-center gap-3 rounded-xl p-2 transition-all duration-150 ease-out hover:bg-neutral-100/90"
                                     >
-                                      <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-neutral-100 text-[#D32F2F] group-hover/item:bg-gradient-to-br group-hover/item:from-[#D32F2F] group-hover/item:to-[#F44336] group-hover/item:text-white group-hover/item:shadow-sm transition-all duration-200">
+                                      <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-neutral-100 text-[#D32F2F] group-hover/item:bg-[#D32F2F] group-hover/item:text-white transition-all duration-150 ease-out">
                                         <ItemIcon className="h-4 w-4" />
                                       </div>
 
                                       <div className="min-w-0 flex-1">
-                                        <p className="text-[13px] font-bold text-neutral-900 group-hover/item:text-[#D32F2F] transition-colors leading-snug line-clamp-1">
+                                        <p className="text-[13px] font-bold text-neutral-900 group-hover/item:text-[#D32F2F] transition-colors duration-150 leading-snug line-clamp-1">
                                           {item.title}
                                         </p>
                                         <p className="text-[11px] text-neutral-500 line-clamp-1 mt-0.5 leading-tight">
@@ -473,8 +473,8 @@ const Navbar = () => {
                                         </p>
                                       </div>
 
-                                      <div className="shrink-0 text-neutral-400 group-hover/item:text-[#D32F2F] transition-colors">
-                                        <ArrowRight className="h-3.5 w-3.5 opacity-0 -translate-x-1 group-hover/item:opacity-100 group-hover/item:translate-x-0 rtl:rotate-180 rtl:group-hover/item:-translate-x-0 transition-all duration-200" />
+                                      <div className="shrink-0 text-neutral-400 group-hover/item:text-[#D32F2F] transition-colors duration-150">
+                                        <ArrowRight className="h-3.5 w-3.5 opacity-0 -translate-x-1.5 group-hover/item:opacity-100 group-hover/item:translate-x-0 rtl:rotate-180 rtl:group-hover/item:-translate-x-0 transition-all duration-150 ease-out" />
                                       </div>
                                     </a>
                                   );
@@ -486,12 +486,12 @@ const Navbar = () => {
                                 <a
                                   href={link.moreHref}
                                   onClick={(e) => handleNavClick(e, link.moreHref)}
-                                  className="group/more flex items-center justify-between w-full px-3 py-2 rounded-xl bg-gradient-to-r from-neutral-50 to-neutral-100 hover:from-[#D32F2F]/10 hover:to-[#D32F2F]/5 border border-neutral-200/80 hover:border-[#D32F2F]/40 transition-all duration-200"
+                                  className="group/more flex items-center justify-between w-full px-3 py-2 rounded-xl bg-gradient-to-r from-neutral-50 to-neutral-100 hover:from-[#D32F2F]/10 hover:to-[#D32F2F]/5 border border-neutral-200/80 hover:border-[#D32F2F]/40 transition-colors duration-150"
                                 >
-                                  <span className="text-xs font-extrabold text-neutral-900 group-hover/more:text-[#D32F2F] transition-colors">
+                                  <span className="text-xs font-extrabold text-neutral-900 group-hover/more:text-[#D32F2F] transition-colors duration-150">
                                     {t("clickForMore")}
                                   </span>
-                                  <span className="flex items-center gap-1 text-xs font-bold text-[#D32F2F] group-hover/more:translate-x-1 rtl:group-hover/more:-translate-x-1 transition-transform duration-200">
+                                  <span className="flex items-center gap-1 text-xs font-bold text-[#D32F2F] group-hover/more:translate-x-1 rtl:group-hover/more:-translate-x-1 transition-transform duration-150">
                                     <ArrowRight className="h-3.5 w-3.5 rtl:rotate-180" />
                                   </span>
                                 </a>
@@ -510,7 +510,7 @@ const Navbar = () => {
                     key={link.name}
                     href={link.href}
                     onClick={(e) => handleNavClick(e, link.href)}
-                    className={`group relative px-2.5 py-1.5 text-[13px] lg:text-sm font-semibold whitespace-nowrap transition-colors duration-200 flex items-center ${
+                    className={`group relative px-2.5 py-1.5 text-[13px] lg:text-sm font-semibold whitespace-nowrap transition-colors duration-150 flex items-center ${
                       isActive
                         ? "text-[#D32F2F]"
                         : "text-neutral-950 hover:text-[#D32F2F]"
@@ -519,7 +519,7 @@ const Navbar = () => {
                     <span className="relative z-10 pb-1">
                       {link.name}
                       <span
-                        className={`absolute bottom-0 left-0 right-0 h-[2px] rounded-full bg-[#D32F2F] transition-all duration-300 ease-out origin-center ${
+                        className={`absolute bottom-0 left-0 right-0 h-[2px] rounded-full bg-[#D32F2F] transition-transform duration-150 ease-out origin-center will-change-transform ${
                           isActive
                             ? "scale-x-100 opacity-100"
                             : "scale-x-0 opacity-0 group-hover:scale-x-100 group-hover:opacity-100"

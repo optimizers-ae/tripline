@@ -20,33 +20,31 @@ const containerVariants = {
   visible: {
     opacity: 1,
     transition: {
-      staggerChildren: 0.12,
-      delayChildren: 0.1,
+      staggerChildren: 0.05,
     },
   },
 };
 
 const fadeUpVariants = {
-  hidden: { opacity: 0, y: 28 },
+  hidden: { opacity: 0, y: 14 },
   visible: {
     opacity: 1,
     y: 0,
     transition: {
-      duration: 0.7,
-      ease: [0.22, 1, 0.36, 1],
+      duration: 0.35,
+      ease: [0.16, 1, 0.3, 1],
     },
   },
 };
 
 const cardVariants = {
-  hidden: { opacity: 0, y: 35, scale: 0.97 },
+  hidden: { opacity: 0, y: 16 },
   visible: {
     opacity: 1,
     y: 0,
-    scale: 1,
     transition: {
-      duration: 0.75,
-      ease: [0.22, 1, 0.36, 1],
+      duration: 0.38,
+      ease: [0.16, 1, 0.3, 1],
     },
   },
 };
@@ -71,7 +69,7 @@ const WhyChooseUs = () => {
           variants={containerVariants}
           initial="hidden"
           whileInView="visible"
-          viewport={{ once: true, amount: 0.25 }}
+          viewport={{ once: true, amount: 0.05 }}
           className="mx-auto max-w-3xl text-center"
         >
           {/* Top Pill Badge */}
@@ -108,7 +106,7 @@ const WhyChooseUs = () => {
           variants={containerVariants}
           initial="hidden"
           whileInView="visible"
-          viewport={{ once: true, amount: 0.15 }}
+          viewport={{ once: true, amount: 0.05 }}
           className="mt-16 grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-4 lg:grid-rows-3"
         >
           {/* Card 1: We Learn Your Business First (Spans 2 cols, 2 rows) */}

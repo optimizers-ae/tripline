@@ -219,10 +219,10 @@ const CorporateServices = () => {
                   <motion.div
                     key={service.titleKey}
                     id={service.titleKey}
-                    initial={{ opacity: 0, y: 20 }}
+                    initial={{ opacity: 0, y: 12 }}
                     whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 0.5, delay: idx * 0.04 }}
+                    viewport={{ once: true, amount: 0.05 }}
+                    transition={{ duration: 0.28, delay: (idx % 3) * 0.04 }}
                     className="group relative flex items-start gap-4 rounded-2xl border border-neutral-200 bg-white p-5 transition-all duration-300 hover:border-[#D32F2F]/40 hover:shadow-xl hover:-translate-y-0.5 h-full scroll-mt-28 md:scroll-mt-36"
                   >
                     {/* Icon Box */}
@@ -246,10 +246,10 @@ const CorporateServices = () => {
 
             {/* ---- Bottom CTA ---- */}
             <motion.div
-              initial={{ opacity: 0, y: 20 }}
+              initial={{ opacity: 0, y: 14 }}
               whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6 }}
+              viewport={{ once: true, amount: 0.05 }}
+              transition={{ duration: 0.35 }}
               className="mt-16 text-center"
             >
               <a

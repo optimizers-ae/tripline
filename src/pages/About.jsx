@@ -53,10 +53,10 @@ const AboutPage = () => {
           <div className="relative z-10 max-w-7xl mx-auto px-6 md:px-10">
             {/* Section Header */}
             <motion.div
-              initial={{ opacity: 0, y: 30 }}
+              initial={{ opacity: 0, y: 15 }}
               whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6 }}
+              viewport={{ once: true, amount: 0.05 }}
+              transition={{ duration: 0.35 }}
               className="text-center mb-14 md:mb-20"
             >
               {/* Brand Logo Showcase */}
@@ -89,10 +89,10 @@ const AboutPage = () => {
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 items-center mb-16">
               {/* Left: Text Content */}
               <motion.div
-                initial={{ opacity: 0, x: isArabic ? 30 : -30 }}
+                initial={{ opacity: 0, x: isArabic ? 15 : -15 }}
                 whileInView={{ opacity: 1, x: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.6, delay: 0.1 }}
+                viewport={{ once: true, amount: 0.05 }}
+                transition={{ duration: 0.35 }}
                 className="space-y-5"
               >
                 <p className="text-base md:text-lg text-neutral-700 leading-relaxed">
@@ -124,10 +124,10 @@ const AboutPage = () => {
 
               {/* Right: Stats Card */}
               <motion.div
-                initial={{ opacity: 0, x: isArabic ? -30 : 30 }}
+                initial={{ opacity: 0, x: isArabic ? -15 : 15 }}
                 whileInView={{ opacity: 1, x: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.6, delay: 0.2 }}
+                viewport={{ once: true, amount: 0.05 }}
+                transition={{ duration: 0.35 }}
                 className="relative"
               >
                 <div className="relative rounded-3xl border border-neutral-200 bg-gradient-to-br from-white to-neutral-50 p-8 md:p-10 shadow-2xl overflow-hidden">
@@ -178,10 +178,10 @@ const AboutPage = () => {
                 return (
                   <motion.div
                     key={idx}
-                    initial={{ opacity: 0, y: 20 }}
+                    initial={{ opacity: 0, y: 12 }}
                     whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 0.5, delay: idx * 0.1 }}
+                    viewport={{ once: true, amount: 0.05 }}
+                    transition={{ duration: 0.3, delay: (idx % 4) * 0.04 }}
                     className="group relative rounded-2xl border border-neutral-200 bg-white p-6 transition-all duration-300 hover:border-[#D32F2F]/40 hover:shadow-xl hover:-translate-y-1"
                   >
                     <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-gradient-to-br from-[#D32F2F] to-[#F44336] text-white shadow-md mb-4 transition-transform duration-300 group-hover:scale-110 group-hover:rotate-3">

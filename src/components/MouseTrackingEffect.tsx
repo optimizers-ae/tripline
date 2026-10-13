@@ -178,9 +178,7 @@ export const MagneticCursor: FC<MagneticCursorProps> = ({
 
       const target = event.target as HTMLElement;
       const isTextContent =
-        target &&
-        (['P', 'SPAN', 'H1', 'H2', 'H3', 'H4', 'H5', 'H6'].includes(target.tagName) ||
-          window.getComputedStyle(target).cursor === 'text');
+        Boolean(target && ['P', 'SPAN', 'H1', 'H2', 'H3', 'H4', 'H5', 'H6'].includes(target.tagName));
 
       if (isTextContent && !state.hover.isHovered && !state.isDetaching) {
         gsap.to(cursorEl, { scaleX: 0.5, scaleY: 1.5, duration: 0.3, overwrite: 'auto' });
