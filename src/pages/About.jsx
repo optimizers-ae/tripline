@@ -5,7 +5,6 @@ import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import { useLanguage } from "../context/LanguageContext";
 import logoImg from "../assets/logo.png";
-import arabicLogoDark from "../assets/arabic_logo_dark.png";
 
 const AboutPage = () => {
   const { t, isArabic } = useLanguage();
@@ -63,8 +62,8 @@ const AboutPage = () => {
               <div className="flex justify-center mb-6">
                 <div className="inline-flex items-center justify-center px-6 py-3.5 rounded-2xl bg-white border border-neutral-200/90 shadow-md hover:shadow-xl hover:border-[#D32F2F]/40 hover:scale-105 transition-all duration-300">
                   <img
-                    src={isArabic ? arabicLogoDark : logoImg}
-                    alt={isArabic ? "شعار تريب لاين لخدمات رجال الأعمال" : "Trip Line Businessmen Services"}
+                    src={logoImg}
+                    alt="Trip Line Businessmen Services"
                     className="h-10 sm:h-12 md:h-14 w-auto max-w-[220px] sm:max-w-[280px] object-contain"
                   />
                 </div>

@@ -10,7 +10,7 @@ import { useLanguage } from '../context/LanguageContext';
 import dubaiDedImg from '../assets/dubai-ded-trimmed.png';
 import ifzaImg from '../assets/ifza-dark.png';
 import rakezImg from '../assets/rakez-trimmed.png';
-import ajmanDedImg from '../assets/ajman-ded-trimmed.png';
+import ajmanDedImg from '../assets/ajded-logo.svg';
 import ajmanFreezoneImg from '../assets/ajman-freezone-dark.png';
 import amerImg from '../assets/amer-trimmed.png';
 import tasheelImg from '../assets/tasheel-trimmed.png';
@@ -266,7 +266,7 @@ const PartnerCard = ({ partner, isArabic }) => {
       variants={cardFadeUpVariants}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
-      className="group relative flex flex-col justify-between overflow-hidden rounded-3xl border border-neutral-200/80 bg-white p-7 sm:p-8 shadow-sm transition-all duration-300 hover:-translate-y-1.5 hover:shadow-xl cursor-pointer"
+      className="group relative flex flex-col justify-between overflow-hidden rounded-3xl border border-neutral-200/80 bg-white p-6 sm:p-7 shadow-sm transition-all duration-300 hover:-translate-y-1.5 hover:shadow-xl cursor-pointer"
       style={{
         borderColor: isHovered ? partner.accentBorder : undefined,
         boxShadow: isHovered ? `0 20px 35px -10px ${partner.accentBg}` : undefined,
@@ -283,18 +283,18 @@ const PartnerCard = ({ partner, isArabic }) => {
 
       <div>
         {/* Top Row: Official Real Logo & Badge */}
-        <div className="flex items-center justify-between gap-4 pb-6 border-b border-neutral-100">
-          <div className="flex items-center min-h-[54px] max-w-[62%] transition-transform duration-300 group-hover:scale-105">
+        <div className="flex items-center justify-between gap-3 pb-5 border-b border-neutral-100 min-h-[56px]">
+          <div className="flex items-center min-h-[44px] max-w-[50%] shrink-0 transition-transform duration-300 group-hover:scale-105">
             <img
               src={partner.logoImg}
               alt={isArabic ? partner.nameAR : partner.name}
               draggable={false}
-              className="h-10 sm:h-12 w-auto max-w-[170px] sm:max-w-[195px] object-contain"
+              className="h-8 sm:h-9 md:h-10 w-auto max-w-[120px] sm:max-w-[135px] object-contain object-left rtl:object-right"
             />
           </div>
 
           <span
-            className="shrink-0 rounded-full px-3.5 py-1 text-[11px] font-bold uppercase tracking-wider transition-all duration-300 font-mono text-center"
+            className="shrink-0 rounded-full px-2.5 sm:px-3 py-1 text-[10px] sm:text-[11px] font-semibold tracking-wide transition-all duration-300 text-center whitespace-nowrap"
             style={{
               backgroundColor: isHovered ? partner.accentBg : '#F3F4F6',
               color: isHovered ? partner.accent : '#4B5563',

@@ -331,7 +331,7 @@ const WhyChooseUs = () => {
                   </span>
                 </div>
 
-                <p className="text-sm leading-relaxed text-neutral-300/80">
+                <p className="text-sm leading-relaxed text-neutral-300/80 whitespace-pre-line">
                   {t('whyCard4Desc')}
                 </p>
 

@@ -17,6 +17,11 @@ html[dir="rtl"] .font-comforta,
   letter-spacing: normal !important;
 }
 
+[dir="ltr"] {
+  direction: ltr !important;
+  unicode-bidi: isolate;
+}
+
 .no-scrollbar::-webkit-scrollbar {
   display: none;
 }

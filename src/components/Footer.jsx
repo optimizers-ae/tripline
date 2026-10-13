@@ -2,7 +2,6 @@ import { motion } from "framer-motion";
 import { MapPin, Phone, Mail, ArrowUpRight } from "lucide-react";
 import { useLanguage } from "../context/LanguageContext";
 import logoImg from "../assets/logo.png";
-import arabicLogoWhite from "../assets/arabic_logo_white.png";
 
 const containerVariants = {
   hidden: { opacity: 0 },
@@ -74,11 +73,9 @@ const Footer = () => {
                     className="inline-flex flex-col items-center md:items-start gap-3 group"
                   >
                     <img
-                      src={isArabic ? arabicLogoWhite : logoImg}
+                      src={logoImg}
                       alt="Trip Line"
-                      className={`h-8 sm:h-9 w-auto max-w-[170px] object-contain transition-transform duration-300 group-hover:scale-105 ${
-                        !isArabic ? "brightness-0 invert" : ""
-                      }`}
+                      className="h-8 sm:h-9 w-auto max-w-[170px] object-contain transition-transform duration-300 group-hover:scale-105 brightness-0 invert"
                     />
                     <span className="text-xl font-bold tracking-tight text-white transition-transform duration-300 group-hover:scale-105">
                       {isArabic ? "تريب لاين لخدمات رجال الأعمال" : "Tripline Businessmen Services"}
@@ -269,16 +266,18 @@ const Footer = () => {
                       <div className="flex flex-col sm:flex-row sm:items-center gap-1 sm:gap-2.5 text-xs sm:text-sm">
                         <a
                           href="tel:+97165734303"
-                          className="text-slate-300 transition-colors hover:text-white"
+                          className="inline-flex items-center gap-1.5 text-slate-300 transition-colors hover:text-white"
                         >
-                          <span className="text-slate-400 font-medium">{t("footerTelLabel")}</span> +971 6 573 4303
+                          <span className="text-slate-400 font-medium">{t("footerTelLabel")}</span>
+                          <span dir="ltr" className="inline-block select-all font-sans">+971 6 573 4303</span>
                         </a>
                         <span className="hidden sm:inline text-slate-500">•</span>
                         <a
                           href="tel:+971544442029"
-                          className="text-slate-300 transition-colors hover:text-white"
+                          className="inline-flex items-center gap-1.5 text-slate-300 transition-colors hover:text-white"
                         >
-                          <span className="text-slate-400 font-medium">{t("footerMobLabel")}</span> +971 54444 2029
+                          <span className="text-slate-400 font-medium">{t("footerMobLabel")}</span>
+                          <span dir="ltr" className="inline-block select-all font-sans">+971 54444 2029</span>
                         </a>
                       </div>
                     </div>

@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 import { useLocation } from "react-router-dom";
 import { motion } from "framer-motion";
 import {
@@ -22,6 +22,8 @@ import {
   GraduationCap,
   ArrowUpRight,
   Sparkles,
+  ChevronLeft,
+  ChevronRight,
 } from "lucide-react";
 
 import Navbar from "../components/Navbar";
@@ -43,17 +45,19 @@ const FEATURED_ICONS = [
    TOURIST VISAS — 11 Countries
    =========================================================== */
 const TOURIST_VISAS = [
-  { flag: "🇪🇺", nameEN: "Schengen", nameAR: "تشنغن" },
-  { flag: "🇨🇳", nameEN: "China", nameAR: "الصين" },
-  { flag: "🇹🇭", nameEN: "Thailand", nameAR: "تايلاند" },
-  { flag: "🇪🇹", nameEN: "Ethiopia", nameAR: "إثيوبيا" },
-  { flag: "🇲🇦", nameEN: "Morocco", nameAR: "المغرب" },
-  { flag: "🇦🇪", nameEN: "UAE", nameAR: "الإمارات" },
-  { flag: "🇴🇲", nameEN: "Oman", nameAR: "عمان" },
-  { flag: "🇸🇦", nameEN: "Saudi Arabia", nameAR: "السعودية" },
-  { flag: "🇶🇦", nameEN: "Qatar", nameAR: "قطر" },
-  { flag: "🇧🇭", nameEN: "Bahrain", nameAR: "البحرين" },
-  { flag: "🇰🇼", nameEN: "Kuwait", nameAR: "الكويت" },
+  { code: "eu", nameEN: "Schengen", nameAR: "شنغن" },
+  { code: "cn", nameEN: "China", nameAR: "الصين" },
+  { code: "th", nameEN: "Thailand", nameAR: "تايلاند" },
+  { code: "et", nameEN: "Ethiopia", nameAR: "إثيوبيا" },
+  { code: "ma", nameEN: "Morocco", nameAR: "المغرب" },
+  { code: "ae", nameEN: "UAE", nameAR: "الإمارات" },
+  { code: "om", nameEN: "Oman", nameAR: "عمان" },
+  { code: "sa", nameEN: "Saudi Arabia", nameAR: "السعودية" },
+  { code: "qa", nameEN: "Qatar", nameAR: "قطر" },
+  { code: "bh", nameEN: "Bahrain", nameAR: "البحرين" },
+  { code: "kw", nameEN: "Kuwait", nameAR: "الكويت" },
+  { code: "eg", nameEN: "Egypt", nameAR: "مصر" },
+  { code: "us", nameEN: "USA", nameAR: "الولايات المتحدة" },
 ];
 
 /* ===========================================================
@@ -88,6 +92,17 @@ const ServicesPage = () => {
   const { t, lang } = useLanguage();
   const location = useLocation();
   const isArabic = lang === "AR";
+  const sliderRef = useRef(null);
+
+  const scrollSlider = (direction) => {
+    if (!sliderRef.current) return;
+    const scrollAmount = 220;
+    const sign = direction === "next" ? 1 : -1;
+    sliderRef.current.scrollBy({
+      left: isArabic ? -sign * scrollAmount : sign * scrollAmount,
+      behavior: "smooth",
+    });
+  };
 
   useEffect(() => {
     if (location.hash) {
@@ -216,7 +231,8 @@ const ServicesPage = () => {
                 </p>
               </div>
 
-              <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 gap-4 md:gap-5">
+              {/* Desktop Grid (Hidden on Mobile) */}
+              <div className="hidden md:grid md:grid-cols-4 lg:grid-cols-4 xl:grid-cols-6 gap-4 md:gap-5">
                 {TOURIST_VISAS.map((visa, idx) => (
                   <motion.a
                     key={visa.nameEN}
@@ -228,12 +244,17 @@ const ServicesPage = () => {
                   >
                     <span className="absolute top-0 left-6 right-6 h-[2px] bg-gradient-to-r from-transparent via-[#D32F2F] to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
 
-                    <span
-                      className="text-5xl md:text-6xl leading-none transition-transform duration-300 group-hover:scale-110"
-                      aria-hidden="true"
-                    >
-                      {visa.flag}
-                    </span>
+                    <div className="relative flex items-center justify-center h-11 w-16 md:h-12 md:w-18 rounded-lg overflow-hidden shadow-sm border border-neutral-200/90 bg-neutral-100 transition-transform duration-300 group-hover:scale-110">
+                      <img
+                        src={`https://flagcdn.com/w160/${visa.code}.png`}
+                        srcSet={`https://flagcdn.com/w320/${visa.code}.png 2x`}
+                        alt={`${visa.nameEN} flag`}
+                        width="72"
+                        height="48"
+                        loading="lazy"
+                        className="h-full w-full object-cover"
+                      />
+                    </div>
 
                     <div className="text-center">
                       <p className="text-base font-bold text-neutral-900 group-hover:text-[#D32F2F] transition-colors">
@@ -250,6 +271,78 @@ const ServicesPage = () => {
                     <ArrowUpRight className="h-4 w-4 text-[#D32F2F] opacity-0 group-hover:opacity-100 transition-all duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 rtl:rotate-[-90deg]" />
                   </motion.a>
                 ))}
+              </div>
+
+              {/* Mobile Slider (Visible only on Mobile) */}
+              <div className="md:hidden">
+                <div
+                  ref={sliderRef}
+                  className="flex gap-3 overflow-x-auto snap-x snap-mandatory px-4 -mx-4 pb-4 pt-1 no-scrollbar scroll-smooth"
+                >
+                  {TOURIST_VISAS.map((visa) => (
+                    <a
+                      key={visa.nameEN}
+                      href="/contact"
+                      className="snap-start shrink-0 w-[148px] flex flex-col items-center justify-center gap-2.5 rounded-2xl border border-neutral-200 bg-white p-4 shadow-sm active:scale-95 transition-all"
+                    >
+                      <div className="relative flex items-center justify-center h-10 w-15 rounded-lg overflow-hidden shadow-sm border border-neutral-200/90 bg-neutral-100">
+                        <img
+                          src={`https://flagcdn.com/w160/${visa.code}.png`}
+                          srcSet={`https://flagcdn.com/w320/${visa.code}.png 2x`}
+                          alt={`${visa.nameEN} flag`}
+                          width="60"
+                          height="40"
+                          loading="lazy"
+                          className="h-full w-full object-cover"
+                        />
+                      </div>
+
+                      <div className="text-center w-full">
+                        <p className="text-sm font-bold text-neutral-900 truncate">
+                          {isArabic ? visa.nameAR : visa.nameEN}
+                        </p>
+                        <p
+                          className="text-[11px] text-neutral-500 mt-0.5 truncate"
+                          dir={isArabic ? "ltr" : "rtl"}
+                        >
+                          {isArabic ? visa.nameEN : visa.nameAR}
+                        </p>
+                      </div>
+
+                      <span className="inline-flex items-center gap-1 text-[11px] font-bold text-[#D32F2F] mt-0.5">
+                        <span>{isArabic ? "تقديم" : "Apply"}</span>
+                        <ArrowUpRight className="h-3 w-3 rtl:rotate-[-90deg]" />
+                      </span>
+                    </a>
+                  ))}
+                </div>
+
+                {/* Mobile Slider Controls */}
+                {/* <div className="mt-3 flex items-center justify-between px-1">
+                  <span className="text-[11px] font-medium text-neutral-400">
+                    {isArabic
+                      ? `١ من ${TOURIST_VISAS.length} وجهة متاحة`
+                      : `${TOURIST_VISAS.length} Destinations Available`}
+                  </span>
+                  <div className="flex items-center gap-2">
+                    <button
+                      type="button"
+                      onClick={() => scrollSlider("prev")}
+                      className="flex h-8 w-8 items-center justify-center rounded-full border border-neutral-200 bg-white text-neutral-700 shadow-sm active:bg-neutral-100 transition-colors"
+                      aria-label="Previous destination"
+                    >
+                      <ChevronLeft className="h-4 w-4 rtl:rotate-180" />
+                    </button>
+                    <button
+                      type="button"
+                      onClick={() => scrollSlider("next")}
+                      className="flex h-8 w-8 items-center justify-center rounded-full border border-neutral-200 bg-white text-neutral-700 shadow-sm active:bg-neutral-100 transition-colors"
+                      aria-label="Next destination"
+                    >
+                      <ChevronRight className="h-4 w-4 rtl:rotate-180" />
+                    </button>
+                  </div>
+                </div> */}
               </div>
 
               <div className="mt-10 text-center">

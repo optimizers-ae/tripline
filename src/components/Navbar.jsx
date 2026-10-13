@@ -1,5 +1,4 @@
 import logoImg from "../assets/logo.png";
-import arabicLogoDark from "../assets/arabic_logo_dark.png";
 import { useState, useEffect, useRef } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
@@ -277,7 +276,7 @@ const Navbar = () => {
             aria-label="Trip Line home"
           >
             <img
-              src={lang === "AR" ? arabicLogoDark : logoImg}
+              src={logoImg}
               alt="Trip Line"
               className="h-7 w-auto max-w-[80px] object-contain transition-transform duration-300 group-hover:scale-105"
               onError={(e) => (e.currentTarget.style.display = "none")}
@@ -288,7 +287,7 @@ const Navbar = () => {
           <button
             type="button"
             onClick={toggleLang}
-            className="relative z-10 flex h-9 px-2.5 items-center justify-center gap-1 shrink-0 rounded-full border border-neutral-900/20 bg-white/40 text-neutral-950 text-[0.7rem] font-bold hover:bg-white transition-colors"
+            className="relative z-10 flex h-9 px-2.5 items-center cursor-pointer justify-center gap-1 shrink-0 rounded-full border border-neutral-900/20 bg-white/40 text-neutral-950 text-[0.7rem] font-bold hover:bg-white transition-colors"
             aria-label="Toggle language"
           >
             <Globe className="w-3 h-3" />
@@ -361,7 +360,7 @@ const Navbar = () => {
               aria-label="Trip Line home"
             >
               <img
-                src={lang === "AR" ? arabicLogoDark : logoImg}
+                src={logoImg}
                 alt="Trip Line logo"
                 width="80"
                 height="32"
@@ -535,7 +534,7 @@ const Navbar = () => {
             <button
               type="button"
               onClick={toggleLang}
-              className="relative z-10 flex h-10 px-3 items-center justify-center gap-1.5 shrink-0 rounded-full border border-neutral-900/20 bg-white/40 text-neutral-950 text-xs font-bold hover:bg-white transition-all duration-300"
+              className="relative z-10 flex h-10 px-3 cursor-pointer items-center justify-center gap-1.5 shrink-0 rounded-full border border-neutral-900/20 bg-white/40 text-neutral-950 text-xs font-bold hover:bg-white transition-all duration-300"
               aria-label="Toggle language"
             >
               <Globe className="w-3.5 h-3.5" />
@@ -610,7 +609,7 @@ const Navbar = () => {
                   className="flex h-11 px-3 items-center justify-center rounded-2xl bg-white border border-neutral-200 backdrop-blur-md transition-all hover:bg-neutral-100 hover:scale-105"
                 >
                   <img
-                    src={lang === "AR" ? arabicLogoDark : logoImg}
+                    src={logoImg}
                     alt="Trip Line"
                     className="h-7 w-auto object-contain"
                     onError={(e) => (e.currentTarget.style.display = "none")}
@@ -625,7 +624,7 @@ const Navbar = () => {
                 <button
                   type="button"
                   onClick={toggleLang}
-                  className="flex h-10 px-3 items-center justify-center gap-1.5 rounded-full border border-neutral-200 bg-neutral-100 text-neutral-900 text-xs font-bold hover:bg-white transition-colors"
+                  className="flex h-10 px-3 items-center cursor-pointer justify-center gap-1.5 rounded-full border border-neutral-200 bg-neutral-100 text-neutral-900 text-xs font-bold hover:bg-white transition-colors"
                   aria-label="Toggle language"
                 >
                   <Globe className="w-3.5 h-3.5" />
@@ -698,8 +697,9 @@ const Navbar = () => {
                   className="flex items-center gap-1.5 hover:text-[#D32F2F] transition-colors"
                   aria-label="Call Landline +971 6 573 4303"
                 >
-                  <Phone className="h-3.5 w-3.5 text-[#D32F2F]" />
-                  <span>Tel: +971 6 573 4303</span>
+                  <Phone className="h-3.5 w-3.5 text-[#D32F2F] shrink-0" />
+                  <span>{t("footerTelLabel")}</span>
+                  <span dir="ltr" className="inline-block select-all font-sans">+971 6 573 4303</span>
                 </a>
                 <span className="hidden sm:inline text-neutral-300">•</span>
                 <a
@@ -707,8 +707,9 @@ const Navbar = () => {
                   className="flex items-center gap-1.5 hover:text-[#D32F2F] transition-colors"
                   aria-label="Call Mobile +971 54444 2029"
                 >
-                  <Phone className="h-3.5 w-3.5 text-[#D32F2F]" />
-                  <span>Mob: +971 54444 2029</span>
+                  <Phone className="h-3.5 w-3.5 text-[#D32F2F] shrink-0" />
+                  <span>{t("footerMobLabel")}</span>
+                  <span dir="ltr" className="inline-block select-all font-sans">+971 54444 2029</span>
                 </a>
                 <span className="hidden sm:inline text-neutral-300">•</span>
                 <a

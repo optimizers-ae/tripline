@@ -167,10 +167,13 @@ const ContactCTA = () => {
               whileHover={{ y: -2 }}
               className="group flex items-center gap-2.5 text-xs sm:text-sm font-semibold text-neutral-700 transition-colors hover:text-[#D32F2F]"
             >
-              <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-white shadow-sm border border-neutral-200 text-[#D32F2F] group-hover:scale-110 transition-transform">
+              <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-white shadow-sm border border-neutral-200 text-[#D32F2F] group-hover:scale-110 transition-transform shrink-0">
                 <Phone className="h-4 w-4" />
               </div>
-              <span dir="ltr">Tel: +971 6 573 4303</span>
+              <span className="inline-flex items-center gap-1.5">
+                <span>{t("footerTelLabel")}</span>
+                <span dir="ltr" className="inline-block select-all font-sans">+971 6 573 4303</span>
+              </span>
             </motion.a>
 
             <motion.a
@@ -178,10 +181,13 @@ const ContactCTA = () => {
               whileHover={{ y: -2 }}
               className="group flex items-center gap-2.5 text-xs sm:text-sm font-semibold text-neutral-700 transition-colors hover:text-[#D32F2F]"
             >
-              <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-white shadow-sm border border-neutral-200 text-[#D32F2F] group-hover:scale-110 transition-transform">
+              <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-white shadow-sm border border-neutral-200 text-[#D32F2F] group-hover:scale-110 transition-transform shrink-0">
                 <Phone className="h-4 w-4" />
               </div>
-              <span dir="ltr">Mob: +971 54444 2029</span>
+              <span className="inline-flex items-center gap-1.5">
+                <span>{t("footerMobLabel")}</span>
+                <span dir="ltr" className="inline-block select-all font-sans">+971 54444 2029</span>
+              </span>
             </motion.a>
           </motion.div>
 
