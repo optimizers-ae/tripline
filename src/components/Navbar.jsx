@@ -37,7 +37,7 @@ const Navbar = () => {
   const leaveTimerRef = useRef(null);
   const navContainerRef = useRef(null);
 
-  // Close dropdown on outside click
+  // Close dropdown
   useEffect(() => {
     const handleClickOutside = (e) => {
       if (navContainerRef.current && !navContainerRef.current.contains(e.target)) {
