@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { MapPin, Phone, Mail, ArrowUpRight } from "lucide-react";
+import { MapPin, Phone, Mail, ArrowUpRight, Clock } from "lucide-react";
 import { useLanguage } from "../context/LanguageContext";
 import logoImg from "../assets/logo.png";
 import WhatsAppIcon from "./WhatsAppIcon";
@@ -339,6 +339,29 @@ const Footer = () => {
                       >
                         inquiry@tripline.ae
                       </a>
+                    </div>
+
+                    <div className="flex items-start justify-center md:justify-start gap-3 group">
+                      <Clock className="mt-0.5 h-4 w-4 shrink-0 text-slate-400 transition-transform duration-200 group-hover:scale-110" />
+                      <div className="text-xs leading-relaxed text-slate-300 text-left rtl:text-right">
+                        <span className="text-slate-400 font-medium block mb-1">
+                          {t("contactLabelHours")}:
+                        </span>
+                        <div className="space-y-0.5 text-[11px] sm:text-xs">
+                          <div>
+                            <span className="text-slate-400">{t("contactHoursMonThuSatDays")}:</span>{" "}
+                            <span className="text-white font-medium" dir="ltr">{t("contactHoursMonThuSatTime")}</span>
+                          </div>
+                          <div>
+                            <span className="text-slate-400">{t("contactHoursFriDays")}:</span>{" "}
+                            <span className="text-white font-medium" dir="ltr">{t("contactHoursFriTime")}</span>
+                          </div>
+                          <div>
+                            <span className="text-slate-400">{t("contactHoursSunDays")}:</span>{" "}
+                            <span className="text-rose-400 font-semibold">{t("contactHoursSunTime")}</span>
+                          </div>
+                        </div>
+                      </div>
                     </div>
                   </div>
 

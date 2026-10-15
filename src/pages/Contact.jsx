@@ -76,7 +76,7 @@ const ContactPage = () => {
 
       value: t("contactHoursValue"),
 
-      href: "#",
+      isHours: true,
     },
   ];
 
@@ -226,10 +226,61 @@ const ContactPage = () => {
                 {CONTACT_INFO.map((info, idx) => {
                   const Icon = info.icon;
 
+                  if (info.isHours) {
+                    return (
+                      <div
+                        key={info.label}
+                        className="group flex items-start gap-4 rounded-2xl border border-neutral-200 bg-white p-5 transition-all duration-300 hover:border-[#D32F2F]/40 hover:shadow-lg"
+                        style={{ transitionDelay: `${idx * 40}ms` }}
+                      >
+                        <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-gradient-to-br from-[#D32F2F] to-[#F44336] text-white shadow-md transition-transform duration-300 group-hover:scale-110">
+                          <Icon className="h-5 w-5" />
+                        </div>
+
+                        <div className="flex-1 min-w-0">
+                          <p className="text-xs font-bold uppercase tracking-wider text-neutral-500 mb-2">
+                            {info.label}
+                          </p>
+
+                          <div className="space-y-1.5 text-xs sm:text-sm">
+                            <div className="flex items-center justify-between gap-3 pb-1 border-b border-neutral-100">
+                              <span className="font-medium text-neutral-700">
+                                {t("contactHoursMonThuSatDays")}
+                              </span>
+                              <span className="font-semibold text-neutral-900" dir="ltr">
+                                {t("contactHoursMonThuSatTime")}
+                              </span>
+                            </div>
+
+                            <div className="flex items-center justify-between gap-3 pb-1 border-b border-neutral-100">
+                              <span className="font-medium text-neutral-700">
+                                {t("contactHoursFriDays")}
+                              </span>
+                              <span className="font-semibold text-neutral-900" dir="ltr">
+                                {t("contactHoursFriTime")}
+                              </span>
+                            </div>
+
+                            <div className="flex items-center justify-between gap-3 pt-0.5">
+                              <span className="font-medium text-neutral-700">
+                                {t("contactHoursSunDays")}
+                              </span>
+                              <span className="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-semibold bg-rose-50 text-rose-600 border border-rose-200">
+                                {t("contactHoursSunTime")}
+                              </span>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    );
+                  }
+
                   return (
                     <a
                       key={info.label}
                       href={info.href}
+                      target={info.href?.startsWith("http") ? "_blank" : undefined}
+                      rel={info.href?.startsWith("http") ? "noopener noreferrer" : undefined}
                       className="group flex items-start gap-4 rounded-2xl border border-neutral-200 bg-white p-5 transition-all duration-300 hover:border-[#D32F2F]/40 hover:shadow-lg hover:-translate-y-0.5"
                       style={{ transitionDelay: `${idx * 40}ms` }}
                     >
@@ -237,12 +288,12 @@ const ContactPage = () => {
                         <Icon className="h-5 w-5" />
                       </div>
 
-                      <div>
+                      <div className="flex-1 min-w-0">
                         <p className="text-xs font-bold uppercase tracking-wider text-neutral-500 mb-1">
                           {info.label}
                         </p>
 
-                        <p className="text-base font-semibold text-neutral-900 group-hover:text-[#D32F2F] transition-colors">
+                        <p className="text-base font-semibold text-neutral-900 group-hover:text-[#D32F2F] transition-colors break-words">
                           {info.icon === Phone || info.icon === Smartphone ? (
                             <span
                               dir="ltr"
@@ -515,6 +566,25 @@ const ContactPage = () => {
                         <p>{t("contactOfficeStreet")}</p>
 
                         <p>{t("contactOfficeArea")}</p>
+                      </div>
+
+                      <div className="mt-5 pt-4 border-t border-white/20 text-xs text-white/95 space-y-1.5">
+                        <p className="font-bold uppercase tracking-wider text-white/80 text-[11px] flex items-center gap-1.5 mb-1">
+                          <Clock className="h-3.5 w-3.5" />
+                          {t("contactLabelHours")}
+                        </p>
+                        <div className="flex items-center justify-between gap-2">
+                          <span className="text-white/80">{t("contactHoursMonThuSatDays")}:</span>
+                          <span className="font-semibold" dir="ltr">{t("contactHoursMonThuSatTime")}</span>
+                        </div>
+                        <div className="flex items-center justify-between gap-2">
+                          <span className="text-white/80">{t("contactHoursFriDays")}:</span>
+                          <span className="font-semibold" dir="ltr">{t("contactHoursFriTime")}</span>
+                        </div>
+                        <div className="flex items-center justify-between gap-2">
+                          <span className="text-white/80">{t("contactHoursSunDays")}:</span>
+                          <span className="font-semibold text-rose-200">{t("contactHoursSunTime")}</span>
+                        </div>
                       </div>
                     </div>
 
