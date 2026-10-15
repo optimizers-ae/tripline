@@ -219,9 +219,9 @@ const CorporateServices = () => {
                         <span>{isArabic ? "انقر للتقديم" : "Click to Apply"}</span>
                         <ArrowUpRight className="h-3.5 w-3.5 rtl:rotate-[-90deg] transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
                       </span>
-                      <span className="text-[11px] font-semibold text-neutral-400 group-hover:text-neutral-600 transition-colors">
+                      {/* <span className="text-[11px] font-semibold text-neutral-400 group-hover:text-neutral-600 transition-colors">
                         {isArabic ? "طلب الخدمة" : "Apply Now"}
-                      </span>
+                      </span> */}
                     </div>
                   </motion.div>
                 );

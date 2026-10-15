@@ -3,7 +3,6 @@ import { useLocation } from "react-router-dom";
 import { motion } from "framer-motion";
 import { Toaster } from "react-hot-toast";
 import {
-  FileText,
   Users,
   Award,
   PlaneTakeoff,
@@ -22,9 +21,7 @@ import {
   Map,
   GraduationCap,
   ArrowUpRight,
-  Sparkles,
-  ChevronLeft,
-  ChevronRight,
+  Sparkles
 } from "lucide-react";
 
 import Navbar from "../components/Navbar";
@@ -171,16 +168,6 @@ const ServicesPage = () => {
     });
   };
 
-  const scrollSlider = (direction) => {
-    if (!sliderRef.current) return;
-    const scrollAmount = 220;
-    const sign = direction === "next" ? 1 : -1;
-    sliderRef.current.scrollBy({
-      left: isArabic ? -sign * scrollAmount : sign * scrollAmount,
-      behavior: "smooth",
-    });
-  };
-
   useEffect(() => {
     if (location.hash) {
       const id = location.hash.replace("#", "");
@@ -298,9 +285,9 @@ const ServicesPage = () => {
                         <span>{isArabic ? "انقر للتقديم" : "Click to Apply"}</span>
                         <ArrowUpRight className="h-3.5 w-3.5 rtl:rotate-[-90deg] transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
                       </span>
-                      <span className="text-[11px] font-semibold text-neutral-400 group-hover:text-neutral-600 transition-colors">
+                      {/* <span className="text-[11px] font-semibold text-neutral-400 group-hover:text-neutral-600 transition-colors">
                         {isArabic ? "طلب الخدمة" : "Apply Now"}
-                      </span>
+                      </span> */}
                     </div>
                   </motion.div>
                 );
