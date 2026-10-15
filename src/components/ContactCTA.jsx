@@ -4,10 +4,10 @@ import {
   Phone,
   MapPin,
   ArrowRight,
-  MessageSquare,
   ShieldCheck,
   Sparkles,
 } from "lucide-react";
+import WhatsAppIcon from "./WhatsAppIcon";
 import { useLanguage } from "../context/LanguageContext";
 
 const containerVariants = {
@@ -118,10 +118,13 @@ const ContactCTA = () => {
               rel="noopener noreferrer"
               whileHover={{ scale: 1.04 }}
               whileTap={{ scale: 0.96 }}
-              className="inline-flex items-center gap-2.5 rounded-full border border-neutral-300 bg-white/90 px-7 py-4 text-xs sm:text-sm font-bold text-neutral-800 shadow-md backdrop-blur-sm transition-all hover:bg-white hover:border-[#111111] hover:text-[#00A389]"
+              className="inline-flex items-center gap-2.5 rounded-full border border-neutral-300 bg-white/90 px-6 sm:px-7 py-3.5 sm:py-4 text-xs sm:text-sm font-bold text-neutral-800 shadow-md backdrop-blur-sm transition-all hover:bg-white hover:border-emerald-500 hover:text-emerald-700"
             >
-              <MessageSquare className="h-4 w-4 text-[#25D366]" />
+              <WhatsAppIcon className="h-4 w-4 text-[#25D366] fill-current" />
               <span>{t("contactCtaBtnWhatsApp")}</span>
+              <span dir="ltr" className="font-mono text-xs text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded-full font-semibold">
+                00971544442029
+              </span>
             </motion.a>
           </motion.div>
 
@@ -187,6 +190,22 @@ const ContactCTA = () => {
               <span className="inline-flex items-center gap-1.5">
                 <span>{t("footerMobLabel")}</span>
                 <span dir="ltr" className="inline-block select-all font-sans">+971 54444 2029</span>
+              </span>
+            </motion.a>
+
+            <motion.a
+              href="https://wa.me/971544442029"
+              target="_blank"
+              rel="noopener noreferrer"
+              whileHover={{ y: -2 }}
+              className="group flex items-center gap-2.5 text-xs sm:text-sm font-semibold text-neutral-700 transition-colors hover:text-emerald-700"
+            >
+              <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-emerald-50 shadow-sm border border-emerald-200 text-[#25D366] group-hover:scale-110 transition-transform shrink-0">
+                <WhatsAppIcon className="h-4 w-4 fill-current text-[#25D366]" />
+              </div>
+              <span className="inline-flex items-center gap-1.5">
+                <span>WhatsApp:</span>
+                <span dir="ltr" className="inline-block select-all font-sans font-bold text-emerald-700">00971544442029</span>
               </span>
             </motion.a>
           </motion.div>

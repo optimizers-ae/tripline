@@ -358,6 +358,10 @@ export const translations = {
     contactCtaTrust1: "Authorized Government Liaison",
     contactCtaTrust2: "Fast-Track Licenses & Visas",
     contactCtaTrust3: "100% Fee & Step Transparency",
+    whatsappFloatingTooltip: "Need help? Chat with us",
+    whatsappFloatingStatus: "Online • Instant Support",
+    whatsappAriaLabel: "Chat with Tripline on WhatsApp",
+    whatsappPreFill: "Hello Tripline Businessmen Services, I would like to inquire about your services.",
 
     /* ---------------- FOOTER ---------------- */
     footerDesc:
@@ -373,6 +377,8 @@ export const translations = {
     footerTerms: "Terms of Service",
     footerTelLabel: "Tel:",
     footerMobLabel: "Mob:",
+    footerWhatsAppLabel: "WhatsApp:",
+    contactLabelWhatsApp: "WhatsApp",
 
     /* ---------------- ABOUT PAGE ---------------- */
     aboutPageBadge: "About Trip Line",
@@ -810,6 +816,10 @@ export const translations = {
     contactCtaTrust1: "تنسيق واعتمادات حكومية مباشرة",
     contactCtaTrust2: "سرعة إصدار الرخص والتأشيرات",
     contactCtaTrust3: "شفافية تامة في الرسوم والخطوات",
+    whatsappFloatingTooltip: "تحتاج مساعدة؟ تحدث معنا",
+    whatsappFloatingStatus: "متاح الآن • دعم فوري",
+    whatsappAriaLabel: "محادثة مع تريب لاين عبر واتساب",
+    whatsappPreFill: "مرحباً تريب لاين لخدمات رجال الأعمال، أود الاستفسار عن خدماتكم.",
 
     /* ---------------- FOOTER ---------------- */
     footerDesc:
@@ -825,6 +835,8 @@ export const translations = {
     footerTerms: "شروط الخدمة",
     footerTelLabel: "هاتف:",
     footerMobLabel: "متحرك:",
+    footerWhatsAppLabel: "واتساب:",
+    contactLabelWhatsApp: "واتساب",
 
     /* ---------------- ABOUT PAGE ---------------- */
     aboutPageBadge: "عن ترايب لاين",

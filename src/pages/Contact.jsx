@@ -10,190 +10,17 @@ import {
   Mail,
   MapPin,
   Send,
-  MessageSquare,
   Clock,
   ArrowUpRight,
 } from "lucide-react";
 
+import WhatsAppIcon from "../components/WhatsAppIcon";
 import Navbar from "../components/Navbar";
 
 import Footer from "../components/Footer";
 
 import { useLanguage } from "../context/LanguageContext";
-
-const COUNTRY_CODES = [
-  { name: "United Arab Emirates", iso: "AE", dial: "+971" },
-  { name: "Pakistan", iso: "PK", dial: "+92" },
-  { name: "India", iso: "IN", dial: "+91" },
-  { name: "Saudi Arabia", iso: "SA", dial: "+966" },
-  { name: "Bangladesh", iso: "BD", dial: "+880" },
-  { name: "Philippines", iso: "PH", dial: "+63" },
-  { name: "United Kingdom", iso: "GB", dial: "+44" },
-  { name: "United States", iso: "US", dial: "+1" },
-  { name: "Canada", iso: "CA", dial: "+1" },
-  { name: "Egypt", iso: "EG", dial: "+20" },
-  { name: "Nepal", iso: "NP", dial: "+977" },
-  { name: "Sri Lanka", iso: "LK", dial: "+94" },
-  { name: "Oman", iso: "OM", dial: "+968" },
-  { name: "Qatar", iso: "QA", dial: "+974" },
-  { name: "Kuwait", iso: "KW", dial: "+965" },
-  { name: "Bahrain", iso: "BH", dial: "+973" },
-  { name: "China", iso: "CN", dial: "+86" },
-  { name: "France", iso: "FR", dial: "+33" },
-  { name: "Germany", iso: "DE", dial: "+49" },
-  { name: "Australia", iso: "AU", dial: "+61" },
-];
-
-const NATIONALITIES = [
-  "Afghan",
-  "Albanian",
-  "Algerian",
-  "American",
-  "Andorran",
-  "Angolan",
-  "Argentine",
-  "Armenian",
-  "Australian",
-  "Austrian",
-  "Azerbaijani",
-  "Bahraini",
-  "Bangladeshi",
-  "Belgian",
-  "Beninese",
-  "Bhutanese",
-  "Bolivian",
-  "Bosnian",
-  "Brazilian",
-  "British",
-  "Bruneian",
-  "Bulgarian",
-  "Burkinabé",
-  "Cambodian",
-  "Cameroonian",
-  "Canadian",
-  "Chadian",
-  "Chilean",
-  "Chinese",
-  "Colombian",
-  "Congolese",
-  "Costa Rican",
-  "Croatian",
-  "Cuban",
-  "Cypriot",
-  "Czech",
-  "Danish",
-  "Dominican",
-  "Dutch",
-  "Ecuadorian",
-  "Egyptian",
-  "Emirati",
-  "Eritrean",
-  "Estonian",
-  "Ethiopian",
-  "Fijian",
-  "Filipino",
-  "Finnish",
-  "French",
-  "Gabonese",
-  "Gambian",
-  "Georgian",
-  "German",
-  "Ghanaian",
-  "Greek",
-  "Guatemalan",
-  "Guinean",
-  "Haitian",
-  "Honduran",
-  "Hungarian",
-  "Icelandic",
-  "Indian",
-  "Indonesian",
-  "Iranian",
-  "Iraqi",
-  "Irish",
-  "Israeli",
-  "Italian",
-  "Jamaican",
-  "Japanese",
-  "Jordanian",
-  "Kazakh",
-  "Kenyan",
-  "Korean",
-  "Kuwaiti",
-  "Kyrgyz",
-  "Laotian",
-  "Latvian",
-  "Lebanese",
-  "Liberian",
-  "Libyan",
-  "Lithuanian",
-  "Luxembourgish",
-  "Malagasy",
-  "Malawian",
-  "Malaysian",
-  "Maldivian",
-  "Malian",
-  "Maltese",
-  "Mauritanian",
-  "Mauritian",
-  "Mexican",
-  "Moldovan",
-  "Mongolian",
-  "Montenegrin",
-  "Moroccan",
-  "Mozambican",
-  "Myanmar",
-  "Namibian",
-  "Nepalese",
-  "New Zealander",
-  "Nicaraguan",
-  "Nigerian",
-  "North Macedonian",
-  "Norwegian",
-  "Omani",
-  "Pakistani",
-  "Palestinian",
-  "Panamanian",
-  "Paraguayan",
-  "Peruvian",
-  "Polish",
-  "Portuguese",
-  "Qatari",
-  "Romanian",
-  "Russian",
-  "Rwandan",
-  "Saudi Arabian",
-  "Senegalese",
-  "Serbian",
-  "Singaporean",
-  "Slovak",
-  "Slovenian",
-  "Somali",
-  "South African",
-  "Spanish",
-  "Sri Lankan",
-  "Sudanese",
-  "Swedish",
-  "Swiss",
-  "Syrian",
-  "Taiwanese",
-  "Tajik",
-  "Tanzanian",
-  "Thai",
-  "Togolese",
-  "Tunisian",
-  "Turkish",
-  "Turkmen",
-  "Ugandan",
-  "Ukrainian",
-  "Uruguayan",
-  "Uzbek",
-  "Venezuelan",
-  "Vietnamese",
-  "Yemeni",
-  "Zambian",
-  "Zimbabwean",
-];
+import { COUNTRY_CODES, NATIONALITIES } from "../data/countriesAndNationalities";
 
 const fieldClass =
   "w-full rounded-xl border border-neutral-200 bg-neutral-50 px-4 py-3 text-sm text-neutral-900 placeholder-neutral-400 outline-none transition-all focus:border-[#D32F2F] focus:bg-white focus:ring-2 focus:ring-[#D32F2F]/20";
@@ -221,7 +48,6 @@ const ContactPage = () => {
 
       href: "tel:+971544442029",
     },
-
     {
       icon: Mail,
 
@@ -315,13 +141,10 @@ const ContactPage = () => {
       return;
     }
     // No API is connected yet: do not pretend the inquiry was sent.
-    toast(
-      "Our contact form is currently under development.",
-      {
-        icon: "⚠️",
-        duration: 6500,
-      },
-    );
+    toast("Our contact form is currently under development.", {
+      icon: "⚠️",
+      duration: 6500,
+    });
   };
 
   return (
@@ -421,7 +244,12 @@ const ContactPage = () => {
 
                         <p className="text-base font-semibold text-neutral-900 group-hover:text-[#D32F2F] transition-colors">
                           {info.icon === Phone || info.icon === Smartphone ? (
-                            <span dir="ltr" className="inline-block select-all font-sans">{info.value}</span>
+                            <span
+                              dir="ltr"
+                              className="inline-block select-all font-sans"
+                            >
+                              {info.value}
+                            </span>
                           ) : (
                             info.value
                           )}
@@ -440,7 +268,7 @@ const ContactPage = () => {
                   className="group flex items-center justify-between gap-3 rounded-2xl border border-[#111111]/20 bg-[#111111] p-5 text-white transition-all duration-300 hover:bg-[#000] hover:shadow-2xl"
                 >
                   <div className="flex items-center gap-3">
-                    <MessageSquare className="h-5 w-5" />
+                    <WhatsAppIcon className="h-5 w-5 fill-current text-[#25D366]" />
 
                     <span className="font-bold">
                       {t("contactChatWhatsApp")}

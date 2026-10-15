@@ -1,6 +1,7 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 import { motion } from "framer-motion";
+import { Toaster } from "react-hot-toast";
 import {
   FileText,
   Building2,
@@ -22,6 +23,7 @@ import {
 
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
+import ServiceInquiryModal from "../components/ServiceInquiryModal";
 import { useLanguage } from "../context/LanguageContext";
 
 /* ===========================================================
@@ -64,6 +66,42 @@ const CorporateServices = () => {
   const location = useLocation();
   const isArabic = lang === "AR";
 
+  // Modal State
+  const [modalState, setModalState] = useState({
+    isOpen: false,
+    modalType: "general", // "general" | "visa" | "trade-license"
+    serviceTitle: "",
+    category: "Corporate",
+    initialData: {},
+  });
+
+  const handleCloseModal = () => {
+    setModalState((prev) => ({ ...prev, isOpen: false }));
+  };
+
+  const handleServiceClick = (item) => {
+    const title = t(item.titleKey);
+    let type = "general";
+    let initialData = {};
+
+    if (item.titleKey === "corp1Title") {
+      type = "trade-license";
+    } else if (item.titleKey === "corp6Title" || item.titleKey === "corp15Title") {
+      type = "visa";
+      initialData = {
+        destinationCountry: isArabic ? "الإمارات العربية المتحدة" : "United Arab Emirates",
+      };
+    }
+
+    setModalState({
+      isOpen: true,
+      modalType: type,
+      serviceTitle: title,
+      category: "Corporate",
+      initialData,
+    });
+  };
+
   useEffect(() => {
     if (location.hash) {
       const id = location.hash.replace("#", "");
@@ -71,9 +109,19 @@ const CorporateServices = () => {
         const el = document.getElementById(id);
         if (el) {
           el.scrollIntoView({ behavior: "smooth", block: "center" });
-          el.classList.add("ring-4", "ring-[#D32F2F]/40", "shadow-2xl", "scale-[1.02]");
+          el.classList.add(
+            "ring-4",
+            "ring-[#D32F2F]/40",
+            "shadow-2xl",
+            "scale-[1.02]",
+          );
           setTimeout(() => {
-            el.classList.remove("ring-4", "ring-[#D32F2F]/40", "shadow-2xl", "scale-[1.02]");
+            el.classList.remove(
+              "ring-4",
+              "ring-[#D32F2F]/40",
+              "shadow-2xl",
+              "scale-[1.02]",
+            );
           }, 2400);
         }
       }, 200);
@@ -87,39 +135,20 @@ const CorporateServices = () => {
         isArabic ? "text-right" : "text-left"
       }`}
     >
+      <Toaster
+        position="top-center"
+        toastOptions={{
+          style: {
+            borderRadius: "12px",
+            padding: "14px 18px",
+            maxWidth: "480px",
+          },
+        }}
+      />
+
       <Navbar />
 
       <main>
-        {/* ============ HERO BANNER ============ */}
-        {/* <section className="relative w-full pt-32 md:pt-40 pb-12 md:pb-16 bg-gradient-to-b from-neutral-50 to-white overflow-hidden">
-          <div className="pointer-events-none absolute inset-0 overflow-hidden">
-            <div className="absolute top-0 left-1/4 h-[500px] w-[500px] rounded-full bg-gradient-to-br from-[#D32F2F]/10 via-[#F44336]/5 to-transparent blur-[120px]" />
-            <div className="absolute bottom-0 right-0 h-[400px] w-[400px] rounded-full bg-[#111111]/5 blur-[100px]" />
-          </div>
-
-          <div className="relative z-10 max-w-5xl mx-auto px-6 md:px-10 text-center">
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6 }}
-            >
-              <span className="inline-flex items-center gap-2 rounded-full border border-[#D32F2F]/30 bg-[#D32F2F]/5 px-4 py-1.5 text-xs font-bold uppercase tracking-wider text-[#D32F2F] mb-5">
-                <span className="h-1.5 w-1.5 rounded-full bg-[#D32F2F] animate-pulse" />
-                {t("corporateBadge")}
-              </span>
-              <h1 className="text-4xl md:text-6xl lg:text-7xl font-extrabold tracking-tight text-neutral-900 mb-5 leading-[1.05]">
-                {t("corporateTitleLine1")}{" "}
-                <span className="bg-gradient-to-r from-[#D32F2F] via-[#F44336] to-[#111111] bg-clip-text text-transparent">
-                  {t("corporateTitleHighlight")}
-                </span>
-              </h1>
-              <p className="max-w-3xl mx-auto text-base md:text-lg text-neutral-600 leading-relaxed">
-                {t("corporateSubtitle")}
-              </p>
-            </motion.div>
-          </div>
-        </section> */}
-
         {/* ============ MAIN CONTENT ============ */}
         <section className="relative w-full pt-32 py-14 bg-neutral-50 overflow-hidden">
           <div className="pointer-events-none absolute inset-0 overflow-hidden">
@@ -155,13 +184,16 @@ const CorporateServices = () => {
               {FEATURED_ICONS.map((item, idx) => {
                 const Icon = item.icon;
                 return (
-                  <motion.a
+                  <motion.div
                     key={idx}
-                    href="/contact"
+                    role="button"
+                    tabIndex={0}
+                    onClick={() => handleServiceClick(item)}
+                    onKeyDown={(e) => e.key === "Enter" && handleServiceClick(item)}
                     initial={{ opacity: 0, y: 25 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.5, delay: idx * 0.08 }}
-                    className="group relative flex flex-col rounded-2xl border border-neutral-200 bg-white p-6 transition-all duration-300 hover:border-[#D32F2F]/50 hover:shadow-2xl hover:-translate-y-1.5 overflow-hidden min-h-[280px]"
+                    className="group relative flex flex-col rounded-2xl border border-neutral-200 bg-white p-6 transition-all duration-300 hover:border-[#D32F2F]/50 hover:shadow-2xl hover:-translate-y-1.5 overflow-hidden min-h-[300px] cursor-pointer text-left rtl:text-right"
                   >
                     {/* Top accent line */}
                     <span className="absolute top-0 left-6 right-6 h-[2px] bg-gradient-to-r from-transparent via-[#D32F2F] to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
@@ -181,16 +213,17 @@ const CorporateServices = () => {
                       {t(item.descKey)}
                     </p>
 
-                    {/* Learn More */}
-                    <div
-                      className={`flex items-center gap-1.5 text-xs font-bold uppercase tracking-wider text-[#D32F2F] group-hover:gap-2.5 transition-all duration-300 mt-auto ${
-                        isArabic ? "flex-row-reverse" : ""
-                      }`}
-                    >
-                      <span>{t("learnMore")}</span>
-                      <ArrowUpRight className="h-3.5 w-3.5 rtl:rotate-[-90deg] transition-transform duration-300 group-hover:rotate-45" />
+                    {/* Click to Apply Button */}
+                    <div className="mt-auto pt-4 border-t border-neutral-100 flex items-center justify-between">
+                      <span className="inline-flex items-center gap-1.5 rounded-xl bg-[#D32F2F]/10 px-3.5 py-1.5 text-xs font-bold text-[#D32F2F] group-hover:bg-[#D32F2F] group-hover:text-white transition-all duration-300 shadow-sm">
+                        <span>{isArabic ? "انقر للتقديم" : "Click to Apply"}</span>
+                        <ArrowUpRight className="h-3.5 w-3.5 rtl:rotate-[-90deg] transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+                      </span>
+                      <span className="text-[11px] font-semibold text-neutral-400 group-hover:text-neutral-600 transition-colors">
+                        {isArabic ? "طلب الخدمة" : "Apply Now"}
+                      </span>
                     </div>
-                  </motion.a>
+                  </motion.div>
                 );
               })}
             </div>
@@ -219,25 +252,42 @@ const CorporateServices = () => {
                   <motion.div
                     key={service.titleKey}
                     id={service.titleKey}
+                    role="button"
+                    tabIndex={0}
+                    onClick={() => handleServiceClick(service)}
+                    onKeyDown={(e) => e.key === "Enter" && handleServiceClick(service)}
                     initial={{ opacity: 0, y: 12 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true, amount: 0.05 }}
                     transition={{ duration: 0.28, delay: (idx % 3) * 0.04 }}
-                    className="group relative flex items-start gap-4 rounded-2xl border border-neutral-200 bg-white p-5 transition-all duration-300 hover:border-[#D32F2F]/40 hover:shadow-xl hover:-translate-y-0.5 h-full scroll-mt-28 md:scroll-mt-36"
+                    className="group relative flex flex-col justify-between rounded-2xl border border-neutral-200 bg-white p-5 transition-all duration-300 hover:border-[#D32F2F]/40 hover:shadow-xl hover:-translate-y-1 h-full scroll-mt-28 md:scroll-mt-36 cursor-pointer text-left rtl:text-right"
                   >
-                    {/* Icon Box */}
-                    <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl border border-neutral-200 bg-neutral-50 text-[#D32F2F] transition-all duration-300 group-hover:bg-[#D32F2F] group-hover:text-white group-hover:border-[#D32F2F]">
-                      <Icon className="h-5 w-5" strokeWidth={1.75} />
+                    <div className="flex items-start gap-4">
+                      {/* Icon Box */}
+                      <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl border border-neutral-200 bg-neutral-50 text-[#D32F2F] transition-all duration-300 group-hover:bg-[#D32F2F] group-hover:text-white group-hover:border-[#D32F2F]">
+                        <Icon className="h-5 w-5" strokeWidth={1.75} />
+                      </div>
+
+                      {/* Text Content */}
+                      <div className="min-w-0 flex-1">
+                        <h4 className="text-[15px] font-bold text-neutral-900 mb-1.5 leading-snug group-hover:text-[#D32F2F] transition-colors">
+                          {t(service.titleKey)}
+                        </h4>
+                        <p className="text-[13px] text-neutral-600 leading-relaxed">
+                          {t(service.descKey)}
+                        </p>
+                      </div>
                     </div>
 
-                    {/* Text Content */}
-                    <div className="min-w-0 flex-1">
-                      <h4 className="text-[15px] font-bold text-neutral-900 mb-1.5 leading-snug group-hover:text-[#D32F2F] transition-colors">
-                        {t(service.titleKey)}
-                      </h4>
-                      <p className="text-[13px] text-neutral-600 leading-relaxed">
-                        {t(service.descKey)}
-                      </p>
+                    {/* Click to Apply Row */}
+                    <div className="mt-4 pt-3 border-t border-neutral-100 flex items-center justify-between">
+                      <span className="inline-flex items-center gap-1.5 text-xs font-bold text-[#D32F2F] group-hover:text-[#b71c1c] transition-colors">
+                        <span>{isArabic ? "انقر للتقديم" : "Click to Apply"}</span>
+                        <ArrowUpRight className="h-3.5 w-3.5 rtl:rotate-[-90deg] transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+                      </span>
+                      <span className="text-[11px] font-medium text-neutral-400 group-hover:text-neutral-600 transition-colors">
+                        {isArabic ? "طلب إلكتروني" : "Quick Request"}
+                      </span>
                     </div>
                   </motion.div>
                 );
@@ -252,17 +302,36 @@ const CorporateServices = () => {
               transition={{ duration: 0.35 }}
               className="mt-16 text-center"
             >
-              <a
-                href="/contact"
-                className="inline-flex items-center gap-3 rounded-full bg-gradient-to-r from-[#D32F2F] via-[#F44336] to-[#111111] px-8 py-4 text-sm font-extrabold uppercase tracking-wider text-white shadow-xl hover:brightness-110 active:scale-[0.98] transition-all"
+              <button
+                type="button"
+                onClick={() =>
+                  setModalState({
+                    isOpen: true,
+                    modalType: "general",
+                    serviceTitle: isArabic ? "استشارة عامة للشركات" : "General Corporate Consultation",
+                    category: "Corporate",
+                    initialData: {},
+                  })
+                }
+                className="inline-flex items-center gap-3 rounded-full bg-gradient-to-r from-[#D32F2F] via-[#F44336] to-[#111111] px-8 py-4 text-sm font-extrabold uppercase tracking-wider text-white shadow-xl hover:brightness-110 active:scale-[0.98] transition-all cursor-pointer"
               >
                 <span>{t("ctaConsultation")}</span>
                 <ArrowUpRight className="h-5 w-5 rtl:rotate-[-90deg]" />
-              </a>
+              </button>
             </motion.div>
           </div>
         </section>
       </main>
+
+      {/* Service Inquiry Modal */}
+      <ServiceInquiryModal
+        isOpen={modalState.isOpen}
+        onClose={handleCloseModal}
+        modalType={modalState.modalType}
+        serviceTitle={modalState.serviceTitle}
+        serviceCategory={modalState.category}
+        initialData={modalState.initialData}
+      />
 
       <Footer />
     </div>
@@ -270,3 +339,4 @@ const CorporateServices = () => {
 };
 
 export default CorporateServices;
+

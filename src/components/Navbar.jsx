@@ -23,6 +23,7 @@ import {
   Award,
 } from "lucide-react";
 import { useLanguage } from "../context/LanguageContext";
+import WhatsAppIcon from "./WhatsAppIcon";
 
 const Navbar = () => {
   const navigate = useNavigate();
@@ -40,7 +41,10 @@ const Navbar = () => {
   // Close dropdown
   useEffect(() => {
     const handleClickOutside = (e) => {
-      if (navContainerRef.current && !navContainerRef.current.contains(e.target)) {
+      if (
+        navContainerRef.current &&
+        !navContainerRef.current.contains(e.target)
+      ) {
         setActiveDropdown(null);
       }
     };
@@ -100,7 +104,7 @@ const Navbar = () => {
         href: "/services/corporate#corp14Title",
       },
     ],
-    [t]
+    [t],
   );
 
   // Main Individuals Services for Popup Window
@@ -143,14 +147,26 @@ const Navbar = () => {
         href: "/services/individuals#tourist-visas",
       },
     ],
-    [t]
+    [t],
   );
 
   // Build links using translations: Home, About Us, Corporate Services, Individuals Services, Contact
   const NAV_LINKS = useMemo(
     () => [
-      { num: "01", name: t("home"), href: "/", desc: t("homeDesc"), isRoute: true },
-      { num: "02", name: t("aboutUs"), href: "/about", desc: t("aboutDesc"), isRoute: true },
+      {
+        num: "01",
+        name: t("home"),
+        href: "/",
+        desc: t("homeDesc"),
+        isRoute: true,
+      },
+      {
+        num: "02",
+        name: t("aboutUs"),
+        href: "/about",
+        desc: t("aboutDesc"),
+        isRoute: true,
+      },
       {
         num: "03",
         key: "corporate",
@@ -175,9 +191,15 @@ const Navbar = () => {
         headerTitle: t("mainServicesIndividuals"),
         moreHref: "/services/individuals",
       },
-      { num: "05", name: t("contact"), href: "/contact", desc: t("contactDesc"), isRoute: true },
+      {
+        num: "05",
+        name: t("contact"),
+        href: "/contact",
+        desc: t("contactDesc"),
+        isRoute: true,
+      },
     ],
-    [t, CORPORATE_POPUP_SERVICES, INDIVIDUALS_POPUP_SERVICES]
+    [t, CORPORATE_POPUP_SERVICES, INDIVIDUALS_POPUP_SERVICES],
   );
 
   const MOBILE_CTAS = useMemo(() => [t("cta1"), t("cta2"), t("cta3")], [t]);
@@ -239,9 +261,19 @@ const Navbar = () => {
       const el = document.getElementById(hash);
       if (el) {
         el.scrollIntoView({ behavior: "smooth", block: "center" });
-        el.classList.add("ring-4", "ring-[#D32F2F]/40", "shadow-2xl", "scale-[1.02]");
+        el.classList.add(
+          "ring-4",
+          "ring-[#D32F2F]/40",
+          "shadow-2xl",
+          "scale-[1.02]",
+        );
         setTimeout(() => {
-          el.classList.remove("ring-4", "ring-[#D32F2F]/40", "shadow-2xl", "scale-[1.02]");
+          el.classList.remove(
+            "ring-4",
+            "ring-[#D32F2F]/40",
+            "shadow-2xl",
+            "scale-[1.02]",
+          );
         }, 2400);
       }
       return;
@@ -253,9 +285,19 @@ const Navbar = () => {
         const el = document.getElementById(hash);
         if (el) {
           el.scrollIntoView({ behavior: "smooth", block: "center" });
-          el.classList.add("ring-4", "ring-[#D32F2F]/40", "shadow-2xl", "scale-[1.02]");
+          el.classList.add(
+            "ring-4",
+            "ring-[#D32F2F]/40",
+            "shadow-2xl",
+            "scale-[1.02]",
+          );
           setTimeout(() => {
-            el.classList.remove("ring-4", "ring-[#D32F2F]/40", "shadow-2xl", "scale-[1.02]");
+            el.classList.remove(
+              "ring-4",
+              "ring-[#D32F2F]/40",
+              "shadow-2xl",
+              "scale-[1.02]",
+            );
           }, 2400);
         }
       }, 350);
@@ -388,7 +430,8 @@ const Navbar = () => {
                 const isActive =
                   link.href === "/"
                     ? location.pathname === "/"
-                    : location.pathname === link.href || location.pathname.startsWith(link.href + "/");
+                    : location.pathname === link.href ||
+                      location.pathname.startsWith(link.href + "/");
 
                 /* ---------- Link with Hover Pop-up Window ---------- */
                 if (link.hasDropdown) {
@@ -438,7 +481,8 @@ const Navbar = () => {
                         }`}
                         style={{ willChange: "transform, opacity" }}
                         onMouseEnter={() => {
-                          if (leaveTimerRef.current) clearTimeout(leaveTimerRef.current);
+                          if (leaveTimerRef.current)
+                            clearTimeout(leaveTimerRef.current);
                         }}
                         onMouseLeave={handleDropdownLeave}
                       >
@@ -452,7 +496,8 @@ const Navbar = () => {
                               {link.headerTitle}
                             </span>
                             <span className="text-[10px] text-neutral-400 font-medium">
-                              {link.dropdownItems.length} {lang === "AR" ? "خدمات رئيسية" : "Main Services"}
+                              {link.dropdownItems.length}{" "}
+                              {lang === "AR" ? "خدمات رئيسية" : "Main Services"}
                             </span>
                           </div>
 
@@ -602,7 +647,10 @@ const Navbar = () => {
             transition={{ duration: 0.25 }}
             className="fixed inset-0 z-[60] bg-white/95 backdrop-blur-2xl overflow-y-auto p-4 sm:p-6 md:p-10 text-neutral-900 font-comforta flex flex-col justify-between"
           >
-            <div className="pointer-events-none fixed inset-0 overflow-hidden" aria-hidden="true">
+            <div
+              className="pointer-events-none fixed inset-0 overflow-hidden"
+              aria-hidden="true"
+            >
               <div className="absolute top-1/4 right-1/4 h-[450px] w-[450px] rounded-full bg-gradient-to-tr from-[#D32F2F]/15 via-[#F44336]/10 to-[#111111]/10 blur-[120px]" />
               <div className="absolute -bottom-20 -left-20 h-[400px] w-[400px] rounded-full bg-[#111111]/10 blur-[100px]" />
             </div>
@@ -622,7 +670,9 @@ const Navbar = () => {
                   />
                 </a>
                 <span className="text-neutral-900 font-bold">
-                  {lang === "AR" ? "تريب لاين لخدمات رجال الأعمال" : "Trip Line Businessmen Services"}
+                  {lang === "AR"
+                    ? "تريب لاين لخدمات رجال الأعمال"
+                    : "Trip Line Businessmen Services"}
                 </span>
               </div>
 
@@ -705,7 +755,9 @@ const Navbar = () => {
                 >
                   <Phone className="h-3.5 w-3.5 text-[#D32F2F] shrink-0" />
                   <span>{t("footerTelLabel")}</span>
-                  <span dir="ltr" className="inline-block select-all font-sans">+971 6 573 4303</span>
+                  <span dir="ltr" className="inline-block select-all font-sans">
+                    +971 6 573 4303
+                  </span>
                 </a>
                 <span className="hidden sm:inline text-neutral-300">•</span>
                 <a
@@ -715,7 +767,23 @@ const Navbar = () => {
                 >
                   <Phone className="h-3.5 w-3.5 text-[#D32F2F] shrink-0" />
                   <span>{t("footerMobLabel")}</span>
-                  <span dir="ltr" className="inline-block select-all font-sans">+971 54444 2029</span>
+                  <span dir="ltr" className="inline-block select-all font-sans">
+                    +971 54444 2029
+                  </span>
+                </a>
+                <span className="hidden sm:inline text-neutral-300">•</span>
+                <a
+                  href="https://wa.me/971544442029"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center gap-1.5 hover:text-[#25D366] transition-colors"
+                  aria-label="WhatsApp 00971544442029"
+                >
+                  <WhatsAppIcon className="h-3.5 w-3.5 text-[#25D366] fill-current shrink-0" />
+                  <span>WhatsApp:</span>
+                  <span dir="ltr" className="inline-block select-all font-sans font-bold text-emerald-600">
+                    00971544442029
+                  </span>
                 </a>
                 <span className="hidden sm:inline text-neutral-300">•</span>
                 <a

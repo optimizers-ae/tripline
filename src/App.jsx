@@ -1,9 +1,13 @@
 import Router from './Routes/Router.jsx'
+import WhatsAppFloatingButton from './components/WhatsAppFloatingButton.jsx'
 
 const App = () => {
   return (
-    <Router />
+    <>
+      <Router />
+      <WhatsAppFloatingButton />
+    </>
   )
 }
 
-export default App
+export default App

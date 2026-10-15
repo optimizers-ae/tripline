@@ -364,7 +364,7 @@ const PartnerCard = ({ partner, isArabic }) => {
             color: isHovered ? partner.accent : '#6B7280',
             transform: isHovered ? 'translate(2px, -2px)' : 'translate(0, 0)',
           }}
-          title={isArabic ? 'تواصل معنا الآن' : 'Contact us'}
+          title={isArabic ? 'تواصل عبر واتساب: 00971544442029' : 'WhatsApp: 00971544442029'}
         >
           <ArrowUpRight className={`h-4 w-4 ${isArabic ? 'rotate-[-90deg]' : ''}`} />
         </a>

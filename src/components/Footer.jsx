@@ -2,6 +2,7 @@ import { motion } from "framer-motion";
 import { MapPin, Phone, Mail, ArrowUpRight } from "lucide-react";
 import { useLanguage } from "../context/LanguageContext";
 import logoImg from "../assets/logo.png";
+import WhatsAppIcon from "./WhatsAppIcon";
 
 const containerVariants = {
   hidden: { opacity: 0 },
@@ -31,8 +32,16 @@ const Footer = () => {
   const quickLinks = [
     { label: t("home"), href: "/", color: "#D32F2F" },
     { label: t("aboutUs"), href: "/about", color: "#D32F2F" },
-    { label: t("corporateServices"), href: "/services/corporate", color: "#D32F2F" },
-    { label: t("individualsServices"), href: "/services/individuals", color: "#D32F2F" },
+    {
+      label: t("corporateServices"),
+      href: "/services/corporate",
+      color: "#D32F2F",
+    },
+    {
+      label: t("individualsServices"),
+      href: "/services/individuals",
+      color: "#D32F2F",
+    },
     { label: t("contact"), href: "/contact", color: "#D32F2F" },
   ];
 
@@ -78,7 +87,9 @@ const Footer = () => {
                       className="h-8 sm:h-9 w-auto max-w-[170px] object-contain transition-transform duration-300 group-hover:scale-105 brightness-0 invert"
                     />
                     <span className="text-xl font-bold tracking-tight text-white transition-transform duration-300 group-hover:scale-105">
-                      {isArabic ? "تريب لاين لخدمات رجال الأعمال" : "Tripline Businessmen Services"}
+                      {isArabic
+                        ? "تريب لاين لخدمات رجال الأعمال"
+                        : "Tripline Businessmen Services"}
                     </span>
                   </a>
 
@@ -268,18 +279,55 @@ const Footer = () => {
                           href="tel:+97165734303"
                           className="inline-flex items-center gap-1.5 text-slate-300 transition-colors hover:text-white"
                         >
-                          <span className="text-slate-400 font-medium">{t("footerTelLabel")}</span>
-                          <span dir="ltr" className="inline-block select-all font-sans">+971 6 573 4303</span>
+                          <span className="text-slate-400 font-medium">
+                            {t("footerTelLabel")}
+                          </span>
+                          <span
+                            dir="ltr"
+                            className="inline-block select-all font-sans"
+                          >
+                            +971 6 573 4303
+                          </span>
                         </a>
-                        <span className="hidden sm:inline text-slate-500">•</span>
+                        <span className="hidden sm:inline text-slate-500">
+                          •
+                        </span>
                         <a
                           href="tel:+971544442029"
                           className="inline-flex items-center gap-1.5 text-slate-300 transition-colors hover:text-white"
                         >
-                          <span className="text-slate-400 font-medium">{t("footerMobLabel")}</span>
-                          <span dir="ltr" className="inline-block select-all font-sans">+971 54444 2029</span>
+                          <span className="text-slate-400 font-medium">
+                            {t("footerMobLabel")}
+                          </span>
+                          <span
+                            dir="ltr"
+                            className="inline-block select-all font-sans"
+                          >
+                            +971 54444 2029
+                          </span>
                         </a>
                       </div>
+                    </div>
+
+                    <div className="flex items-center justify-center md:justify-start gap-3 group">
+                      <WhatsAppIcon className="h-4 w-4 shrink-0 fill-current transition-transform duration-200 group-hover:scale-110" />
+                      <a
+                        href="https://wa.me/971544442029"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center gap-1.5 text-xs text-slate-300 transition-colors hover:text-[#25D366] sm:text-sm"
+                        title="Chat on WhatsApp 00971544442029"
+                      >
+                        <span className="text-slate-400 font-medium">
+                          {t("footerWhatsAppLabel") || "WhatsApp:"}
+                        </span>
+                        <span
+                          dir="ltr"
+                          className="inline-block select-all font-sans font-bold hover:underline"
+                        >
+                          00971544442029
+                        </span>
+                      </a>
                     </div>
 
                     <div className="flex items-center justify-center md:justify-start gap-3 group">

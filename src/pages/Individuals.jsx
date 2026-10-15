@@ -1,6 +1,7 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useLocation } from "react-router-dom";
 import { motion } from "framer-motion";
+import { Toaster } from "react-hot-toast";
 import {
   FileText,
   Users,
@@ -28,6 +29,7 @@ import {
 
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
+import ServiceInquiryModal from "../components/ServiceInquiryModal";
 import { useLanguage } from "../context/LanguageContext";
 
 /* ===========================================================
@@ -85,6 +87,20 @@ const INDIVIDUAL_SERVICES_MAP = [
   { icon: GraduationCap, titleKey: "service19Title", descKey: "service19Desc" },
 ];
 
+const VISA_SERVICE_KEYS = new Set([
+  "service5Title",
+  "service6Title",
+  "service7Title",
+  "service8Title",
+  "service9Title",
+  "service10Title",
+  "service13Title",
+  "service15Title",
+  "service16Title",
+  "service17Title",
+  "service18Title",
+]);
+
 /* ===========================================================
    PAGE COMPONENT
    =========================================================== */
@@ -93,6 +109,67 @@ const ServicesPage = () => {
   const location = useLocation();
   const isArabic = lang === "AR";
   const sliderRef = useRef(null);
+
+  // Modal State
+  const [modalState, setModalState] = useState({
+    isOpen: false,
+    modalType: "general", // "general" | "visa"
+    serviceTitle: "",
+    category: "Individuals",
+    initialData: {},
+  });
+
+  const handleCloseModal = () => {
+    setModalState((prev) => ({ ...prev, isOpen: false }));
+  };
+
+  const handleServiceClick = (item) => {
+    const title = t(item.titleKey);
+    const isVisa =
+      VISA_SERVICE_KEYS.has(item.titleKey) ||
+      title.toLowerCase().includes("visa") ||
+      title.toLowerCase().includes("visit");
+
+    let destinationCountry = "";
+    if (item.titleKey === "service15Title") {
+      destinationCountry = isArabic ? "المملكة العربية السعودية" : "Saudi Arabia";
+    } else if (item.titleKey === "service16Title") {
+      destinationCountry = isArabic ? "مصر" : "Egypt";
+    } else if (item.titleKey === "service17Title") {
+      destinationCountry = isArabic ? "الإمارات العربية المتحدة" : "UAE";
+    } else if (item.titleKey === "service18Title") {
+      destinationCountry = isArabic ? "سلطنة عمان" : "Oman";
+    }
+
+    setModalState({
+      isOpen: true,
+      modalType: isVisa ? "visa" : "general",
+      serviceTitle: title,
+      category: "Individuals",
+      initialData: {
+        destinationCountry,
+      },
+    });
+  };
+
+  const handleTouristVisaClick = (visa) => {
+    const dest = visa?.nameEN ? (isArabic ? visa.nameAR : visa.nameEN) : "";
+    setModalState({
+      isOpen: true,
+      modalType: "visa",
+      serviceTitle: dest
+        ? isArabic
+          ? `تأشيرة سياحية (${dest})`
+          : `Tourist Visa (${dest})`
+        : isArabic
+        ? "طلب تأشيرة سياحية"
+        : "Tourist Visa Application",
+      category: "Individuals",
+      initialData: {
+        destinationCountry: dest,
+      },
+    });
+  };
 
   const scrollSlider = (direction) => {
     if (!sliderRef.current) return;
@@ -111,9 +188,19 @@ const ServicesPage = () => {
         const el = document.getElementById(id);
         if (el) {
           el.scrollIntoView({ behavior: "smooth", block: "center" });
-          el.classList.add("ring-4", "ring-[#D32F2F]/40", "shadow-2xl", "scale-[1.02]");
+          el.classList.add(
+            "ring-4",
+            "ring-[#D32F2F]/40",
+            "shadow-2xl",
+            "scale-[1.02]",
+          );
           setTimeout(() => {
-            el.classList.remove("ring-4", "ring-[#D32F2F]/40", "shadow-2xl", "scale-[1.02]");
+            el.classList.remove(
+              "ring-4",
+              "ring-[#D32F2F]/40",
+              "shadow-2xl",
+              "scale-[1.02]",
+            );
           }, 2400);
         }
       }, 200);
@@ -127,10 +214,21 @@ const ServicesPage = () => {
         isArabic ? "text-right" : "text-left"
       }`}
     >
+      <Toaster
+        position="top-center"
+        toastOptions={{
+          style: {
+            borderRadius: "12px",
+            padding: "14px 18px",
+            maxWidth: "480px",
+          },
+        }}
+      />
+
       <Navbar />
 
       <main>
-        {/* ============ MAIN CONTENT (Identical layout to Corporate Services) ============ */}
+        {/* ============ MAIN CONTENT ============ */}
         <section className="relative w-full pt-32 py-14 bg-neutral-50 overflow-hidden">
           <div className="pointer-events-none absolute inset-0 overflow-hidden">
             <div className="absolute top-0 right-1/4 h-[500px] w-[500px] rounded-full bg-gradient-to-br from-[#D32F2F]/8 via-[#F44336]/5 to-transparent blur-[120px]" />
@@ -165,13 +263,16 @@ const ServicesPage = () => {
               {FEATURED_ICONS.map((item, idx) => {
                 const Icon = item.icon;
                 return (
-                  <motion.a
+                  <motion.div
                     key={idx}
-                    href="/contact"
+                    role="button"
+                    tabIndex={0}
+                    onClick={() => handleServiceClick(item)}
+                    onKeyDown={(e) => e.key === "Enter" && handleServiceClick(item)}
                     initial={{ opacity: 0, y: 25 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.5, delay: idx * 0.08 }}
-                    className="group relative flex flex-col rounded-2xl border border-neutral-200 bg-white p-6 transition-all duration-300 hover:border-[#D32F2F]/50 hover:shadow-2xl hover:-translate-y-1.5 overflow-hidden min-h-[280px]"
+                    className="group relative flex flex-col rounded-2xl border border-neutral-200 bg-white p-6 transition-all duration-300 hover:border-[#D32F2F]/50 hover:shadow-2xl hover:-translate-y-1.5 overflow-hidden min-h-[300px] cursor-pointer text-left rtl:text-right"
                   >
                     {/* Top accent line */}
                     <span className="absolute top-0 left-6 right-6 h-[2px] bg-gradient-to-r from-transparent via-[#D32F2F] to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
@@ -191,16 +292,17 @@ const ServicesPage = () => {
                       {t(item.descKey)}
                     </p>
 
-                    {/* Learn More */}
-                    <div
-                      className={`flex items-center gap-1.5 text-xs font-bold uppercase tracking-wider text-[#D32F2F] group-hover:gap-2.5 transition-all duration-300 mt-auto ${
-                        isArabic ? "flex-row-reverse" : ""
-                      }`}
-                    >
-                      <span>{t("learnMore")}</span>
-                      <ArrowUpRight className="h-3.5 w-3.5 rtl:rotate-[-90deg] transition-transform duration-300 group-hover:rotate-45" />
+                    {/* Click to Apply Button */}
+                    <div className="mt-auto pt-4 border-t border-neutral-100 flex items-center justify-between">
+                      <span className="inline-flex items-center gap-1.5 rounded-xl bg-[#D32F2F]/10 px-3.5 py-1.5 text-xs font-bold text-[#D32F2F] group-hover:bg-[#D32F2F] group-hover:text-white transition-all duration-300 shadow-sm">
+                        <span>{isArabic ? "انقر للتقديم" : "Click to Apply"}</span>
+                        <ArrowUpRight className="h-3.5 w-3.5 rtl:rotate-[-90deg] transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+                      </span>
+                      <span className="text-[11px] font-semibold text-neutral-400 group-hover:text-neutral-600 transition-colors">
+                        {isArabic ? "طلب الخدمة" : "Apply Now"}
+                      </span>
                     </div>
-                  </motion.a>
+                  </motion.div>
                 );
               })}
             </div>
@@ -234,25 +336,36 @@ const ServicesPage = () => {
               {/* Desktop Grid (Hidden on Mobile) */}
               <div className="hidden md:grid md:grid-cols-4 lg:grid-cols-4 xl:grid-cols-6 gap-4 md:gap-5">
                 {TOURIST_VISAS.map((visa, idx) => (
-                  <motion.a
+                  <motion.button
                     key={visa.nameEN}
-                    href="/contact"
+                    type="button"
+                    onClick={() => handleTouristVisaClick(visa)}
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.4, delay: idx * 0.04 }}
-                    className="group relative flex flex-col items-center justify-center gap-3 rounded-2xl border border-neutral-200 bg-white p-5 md:p-6 transition-all duration-300 hover:border-[#D32F2F]/50 hover:shadow-2xl hover:-translate-y-1.5 overflow-hidden"
+                    className="group relative flex flex-col items-center justify-center gap-2.5 rounded-2xl border border-neutral-200 bg-white p-5 md:p-6 transition-all duration-300 hover:border-[#D32F2F]/50 hover:shadow-2xl hover:-translate-y-1.5 overflow-hidden cursor-pointer w-full text-center"
                   >
                     <span className="absolute top-0 left-6 right-6 h-[2px] bg-gradient-to-r from-transparent via-[#D32F2F] to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
 
                     <div className="relative flex items-center justify-center h-11 w-16 md:h-12 md:w-18 rounded-lg overflow-hidden shadow-sm border border-neutral-200/90 bg-neutral-100 transition-transform duration-300 group-hover:scale-110">
                       <img
-                        src={`https://flagcdn.com/w160/${visa.code}.png`}
-                        srcSet={`https://flagcdn.com/w320/${visa.code}.png 2x`}
+                        src={`https://flagcdn.com/w160/${visa.code.toLowerCase()}.png`}
                         alt={`${visa.nameEN} flag`}
                         width="72"
                         height="48"
                         loading="lazy"
-                        className="h-full w-full object-cover"
+                        decoding="async"
+                        referrerPolicy="no-referrer"
+                        className="h-full w-full object-contain"
+                        onError={(e) => {
+                          const img = e.currentTarget;
+                          const code = visa.code.toLowerCase();
+
+                          if (img.dataset.fallback !== "used") {
+                            img.dataset.fallback = "used";
+                            img.src = `https://flagsapi.com/${code.toUpperCase()}/flat/64.png`;
+                          }
+                        }}
                       />
                     </div>
 
@@ -268,8 +381,14 @@ const ServicesPage = () => {
                       </p>
                     </div>
 
-                    <ArrowUpRight className="h-4 w-4 text-[#D32F2F] opacity-0 group-hover:opacity-100 transition-all duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 rtl:rotate-[-90deg]" />
-                  </motion.a>
+                    {/* Click to Apply */}
+                    <div className="mt-1 w-full pt-2 border-t border-neutral-100 flex items-center justify-center">
+                      <span className="inline-flex items-center gap-1 text-xs font-bold text-[#D32F2F] group-hover:underline">
+                        <span>{isArabic ? "انقر للتقديم" : "Click to Apply"}</span>
+                        <ArrowUpRight className="h-3.5 w-3.5 rtl:rotate-[-90deg]" />
+                      </span>
+                    </div>
+                  </motion.button>
                 ))}
               </div>
 
@@ -280,10 +399,11 @@ const ServicesPage = () => {
                   className="flex gap-3 overflow-x-auto snap-x snap-mandatory px-4 -mx-4 pb-4 pt-1 no-scrollbar scroll-smooth"
                 >
                   {TOURIST_VISAS.map((visa) => (
-                    <a
+                    <button
                       key={visa.nameEN}
-                      href="/contact"
-                      className="snap-start shrink-0 w-[148px] flex flex-col items-center justify-center gap-2.5 rounded-2xl border border-neutral-200 bg-white p-4 shadow-sm active:scale-95 transition-all"
+                      type="button"
+                      onClick={() => handleTouristVisaClick(visa)}
+                      className="snap-start shrink-0 w-[150px] flex flex-col items-center justify-center gap-2.5 rounded-2xl border border-neutral-200 bg-white p-4 shadow-sm active:scale-95 transition-all text-center cursor-pointer"
                     >
                       <div className="relative flex items-center justify-center h-10 w-15 rounded-lg overflow-hidden shadow-sm border border-neutral-200/90 bg-neutral-100">
                         <img
@@ -310,49 +430,24 @@ const ServicesPage = () => {
                       </div>
 
                       <span className="inline-flex items-center gap-1 text-[11px] font-bold text-[#D32F2F] mt-0.5">
-                        <span>{isArabic ? "تقديم" : "Apply"}</span>
+                        <span>{isArabic ? "انقر للتقديم" : "Click to Apply"}</span>
                         <ArrowUpRight className="h-3 w-3 rtl:rotate-[-90deg]" />
                       </span>
-                    </a>
+                    </button>
                   ))}
                 </div>
-
-                {/* Mobile Slider Controls */}
-                {/* <div className="mt-3 flex items-center justify-between px-1">
-                  <span className="text-[11px] font-medium text-neutral-400">
-                    {isArabic
-                      ? `١ من ${TOURIST_VISAS.length} وجهة متاحة`
-                      : `${TOURIST_VISAS.length} Destinations Available`}
-                  </span>
-                  <div className="flex items-center gap-2">
-                    <button
-                      type="button"
-                      onClick={() => scrollSlider("prev")}
-                      className="flex h-8 w-8 items-center justify-center rounded-full border border-neutral-200 bg-white text-neutral-700 shadow-sm active:bg-neutral-100 transition-colors"
-                      aria-label="Previous destination"
-                    >
-                      <ChevronLeft className="h-4 w-4 rtl:rotate-180" />
-                    </button>
-                    <button
-                      type="button"
-                      onClick={() => scrollSlider("next")}
-                      className="flex h-8 w-8 items-center justify-center rounded-full border border-neutral-200 bg-white text-neutral-700 shadow-sm active:bg-neutral-100 transition-colors"
-                      aria-label="Next destination"
-                    >
-                      <ChevronRight className="h-4 w-4 rtl:rotate-180" />
-                    </button>
-                  </div>
-                </div> */}
               </div>
 
+              {/* Apply for a Visa CTA Button */}
               <div className="mt-10 text-center">
-                <a
-                  href="/contact"
-                  className="inline-flex items-center gap-2 rounded-full border-2 border-[#D32F2F] bg-white px-6 py-3 text-sm font-bold text-[#D32F2F] hover:bg-[#D32F2F] hover:text-white transition-all duration-300"
+                <button
+                  type="button"
+                  onClick={() => handleTouristVisaClick(null)}
+                  className="inline-flex items-center gap-2 rounded-full border-2 border-[#D32F2F] bg-white px-7 py-3.5 text-sm font-bold text-[#D32F2F] hover:bg-[#D32F2F] hover:text-white transition-all duration-300 shadow-md cursor-pointer hover:shadow-lg hover:scale-105"
                 >
                   <span>{t("applyVisaBtn")}</span>
                   <ArrowUpRight className="h-4 w-4 rtl:rotate-[-90deg]" />
-                </a>
+                </button>
               </div>
             </motion.div>
 
@@ -380,25 +475,42 @@ const ServicesPage = () => {
                   <motion.div
                     key={service.titleKey}
                     id={service.titleKey}
+                    role="button"
+                    tabIndex={0}
+                    onClick={() => handleServiceClick(service)}
+                    onKeyDown={(e) => e.key === "Enter" && handleServiceClick(service)}
                     initial={{ opacity: 0, y: 12 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true, amount: 0.05 }}
                     transition={{ duration: 0.28, delay: (idx % 3) * 0.04 }}
-                    className="group relative flex items-start gap-4 rounded-2xl border border-neutral-200 bg-white p-5 transition-all duration-300 hover:border-[#D32F2F]/40 hover:shadow-xl hover:-translate-y-0.5 h-full scroll-mt-28 md:scroll-mt-36"
+                    className="group relative flex flex-col justify-between rounded-2xl border border-neutral-200 bg-white p-5 transition-all duration-300 hover:border-[#D32F2F]/40 hover:shadow-xl hover:-translate-y-1 h-full scroll-mt-28 md:scroll-mt-36 cursor-pointer text-left rtl:text-right"
                   >
-                    {/* Icon Box */}
-                    <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl border border-neutral-200 bg-neutral-50 text-[#D32F2F] transition-all duration-300 group-hover:bg-[#D32F2F] group-hover:text-white group-hover:border-[#D32F2F]">
-                      <Icon className="h-5 w-5" strokeWidth={1.75} />
+                    <div className="flex items-start gap-4">
+                      {/* Icon Box */}
+                      <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl border border-neutral-200 bg-neutral-50 text-[#D32F2F] transition-all duration-300 group-hover:bg-[#D32F2F] group-hover:text-white group-hover:border-[#D32F2F]">
+                        <Icon className="h-5 w-5" strokeWidth={1.75} />
+                      </div>
+
+                      {/* Text Content */}
+                      <div className="min-w-0 flex-1">
+                        <h4 className="text-[15px] font-bold text-neutral-900 mb-1.5 leading-snug group-hover:text-[#D32F2F] transition-colors">
+                          {t(service.titleKey)}
+                        </h4>
+                        <p className="text-[13px] text-neutral-600 leading-relaxed">
+                          {t(service.descKey)}
+                        </p>
+                      </div>
                     </div>
 
-                    {/* Text Content */}
-                    <div className="min-w-0 flex-1">
-                      <h4 className="text-[15px] font-bold text-neutral-900 mb-1.5 leading-snug group-hover:text-[#D32F2F] transition-colors">
-                        {t(service.titleKey)}
-                      </h4>
-                      <p className="text-[13px] text-neutral-600 leading-relaxed">
-                        {t(service.descKey)}
-                      </p>
+                    {/* Click to Apply Row */}
+                    <div className="mt-4 pt-3 border-t border-neutral-100 flex items-center justify-between">
+                      <span className="inline-flex items-center gap-1.5 text-xs font-bold text-[#D32F2F] group-hover:text-[#b71c1c] transition-colors">
+                        <span>{isArabic ? "انقر للتقديم" : "Click to Apply"}</span>
+                        <ArrowUpRight className="h-3.5 w-3.5 rtl:rotate-[-90deg] transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+                      </span>
+                      <span className="text-[11px] font-medium text-neutral-400 group-hover:text-neutral-600 transition-colors">
+                        {isArabic ? "طلب إلكتروني" : "Quick Request"}
+                      </span>
                     </div>
                   </motion.div>
                 );
@@ -413,17 +525,36 @@ const ServicesPage = () => {
               transition={{ duration: 0.35 }}
               className="mt-16 text-center"
             >
-              <a
-                href="/contact"
-                className="inline-flex items-center gap-3 rounded-full bg-gradient-to-r from-[#D32F2F] via-[#F44336] to-[#111111] px-8 py-4 text-sm font-extrabold uppercase tracking-wider text-white shadow-xl hover:brightness-110 active:scale-[0.98] transition-all"
+              <button
+                type="button"
+                onClick={() =>
+                  setModalState({
+                    isOpen: true,
+                    modalType: "general",
+                    serviceTitle: isArabic ? "استشارة عامة للأفراد" : "General Individual Consultation",
+                    category: "Individuals",
+                    initialData: {},
+                  })
+                }
+                className="inline-flex items-center gap-3 rounded-full bg-gradient-to-r from-[#D32F2F] via-[#F44336] to-[#111111] px-8 py-4 text-sm font-extrabold uppercase tracking-wider text-white shadow-xl hover:brightness-110 active:scale-[0.98] transition-all cursor-pointer"
               >
                 <span>{t("ctaConsultation")}</span>
                 <ArrowUpRight className="h-5 w-5 rtl:rotate-[-90deg]" />
-              </a>
+              </button>
             </motion.div>
           </div>
         </section>
       </main>
+
+      {/* Service Inquiry Modal */}
+      <ServiceInquiryModal
+        isOpen={modalState.isOpen}
+        onClose={handleCloseModal}
+        modalType={modalState.modalType}
+        serviceTitle={modalState.serviceTitle}
+        serviceCategory={modalState.category}
+        initialData={modalState.initialData}
+      />
 
       <Footer />
     </div>
