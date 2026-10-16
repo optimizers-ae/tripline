@@ -1,6 +1,7 @@
 import { motion } from 'framer-motion';
 import { useLanguage } from '../context/LanguageContext';
 import HeroCursorGlow from '../components/HeroCursorGlow';
+import { Link } from 'react-router-dom';
 
 const Hero = () => {
   const { t, isArabic } = useLanguage();
@@ -43,7 +44,7 @@ const Hero = () => {
         <source media="(max-width: 768px)" srcSet="/banner-mobile.webp" type="image/webp" />
         <source media="(min-width: 769px)" srcSet="/banner.webp" type="image/webp" />
         <img
-          src="/banner.jpg"
+          src="/banner.webp"
           alt="Tripline Businessmen Services - UAE Business Setup & Corporate Advisory"
           fetchPriority="high"
           loading="eager"
@@ -122,10 +123,10 @@ const Hero = () => {
           variants={fadeUpVariants}
           className="relative z-20 flex flex-wrap items-center justify-center gap-4 pt-4"
         >
-          <motion.a
-            href="/services/corporate"
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
+          <Link
+            to="/services/corporate"
+            // whileHover={{ scale: 1.05 }}
+            // whileTap={{ scale: 0.95 }}
             className="group/btn relative inline-flex cursor-pointer items-center gap-2 overflow-hidden rounded-full bg-white px-7 py-3 text-sm font-bold text-neutral-900 shadow-[0_10px_30px_rgba(0,0,0,0.25)] transition-all duration-300 hover:bg-neutral-50 hover:shadow-[0_12px_35px_rgba(0,0,0,0.35)]"
           >
             <span className="relative z-10 font-comforta">
@@ -137,18 +138,18 @@ const Hero = () => {
             </span>
 
             <div className="absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-black/10 to-transparent transition-transform duration-700 group-hover/btn:translate-x-full" />
-          </motion.a>
+          </Link>
 
-          <motion.a
-            href="/contact"
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
+          <Link
+            to="/contact"
+            // whileHover={{ scale: 1.05 }}
+            // whileTap={{ scale: 0.95 }}
             className="group/btn2 relative inline-flex cursor-pointer items-center gap-2 rounded-full border border-white/50 bg-black/25 px-7 py-3 text-sm font-semibold text-white shadow-[0_10px_30px_rgba(0,0,0,0.2)] backdrop-blur-xl transition-all duration-300 hover:border-white hover:bg-white hover:text-neutral-950 hover:shadow-[0_12px_35px_rgba(255,255,255,0.25)]"
           >
             <span className="relative z-10">
               {t('heroBtnContact')}
             </span>
-          </motion.a>
+          </Link>
         </motion.div>
       </motion.div>
 

@@ -3,6 +3,7 @@ import { MapPin, Phone, Mail, ArrowUpRight, Clock } from "lucide-react";
 import { useLanguage } from "../context/LanguageContext";
 import logoImg from "../assets/logo.png";
 import WhatsAppIcon from "./WhatsAppIcon";
+import {Link} from "react-router-dom"
 
 const containerVariants = {
   hidden: { opacity: 0 },
@@ -113,7 +114,7 @@ const Footer = () => {
                     {[
                       {
                         name: "Facebook",
-                        href: "https://www.facebook.com",
+                        href: "https://www.facebook.com/share/14rK1yzMxzF/?mibextid=wwXIfr",
                         icon: (
                           <svg
                             className="h-4 w-4"
@@ -366,15 +367,15 @@ const Footer = () => {
                   </div>
 
                   <div className="pt-2">
-                    <motion.a
-                      href="/contact"
-                      whileHover={{ scale: 1.05 }}
-                      whileTap={{ scale: 0.95 }}
+                    <Link
+                      to="/contact"
+                      // whileHover={{ scale: 1.05 }}
+                      // whileTap={{ scale: 0.95 }}
                       className="inline-flex items-center md:items-start gap-2 rounded-xl bg-[#D32F2F] px-6 py-2.5 text-xs font-bold uppercase tracking-wider text-white shadow-md transition-all duration-200 hover:bg-[#B71C1C] hover:shadow-lg cursor-pointer group"
                     >
                       <span>{t("footerBookConsultation")}</span>
                       <ArrowUpRight className="h-4 w-4 transition-transform duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 rtl:rotate-90" />
-                    </motion.a>
+                    </Link>
                   </div>
                 </motion.div>
               </div>

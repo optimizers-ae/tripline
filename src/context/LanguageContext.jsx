@@ -837,7 +837,7 @@ export const translations = {
     footerContactUs: "اتصل بنا",
     footerConsultancyTag: "استشارات أعمال وترخيص بالدولة",
     footerBookConsultation: "احجز استشارة مجانية",
-    footerCopyright: "© 2026 ترايب لاين لخدمات رجال الأعمال. جميع الحقوق محفوظة.",
+    footerCopyright: "© 2026 تريب لاين لخدمات رجال الأعمال. جميع الحقوق محفوظة.",
     footerPrivacy: "سياسة الخصوصية",
     footerTerms: "شروط الخدمة",
     footerTelLabel: "هاتف:",

@@ -9,9 +9,25 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800;900&family=Comfortaa:wght@300..700&display=swap" rel="stylesheet">
-  <!-- Preload LCP hero image for immediate visual paint -->
-  <link rel="preload" as="image" href="/banner-mobile.webp" media="(max-width: 768px)" type="image/webp" fetchpriority="high">
-  <link rel="preload" as="image" href="/banner.webp" media="(min-width: 769px)" type="image/webp" fetchpriority="high">
+  <!-- Preload LCP hero image only on the homepage to avoid unused preload warnings on other routes -->
+  <script>
+    (function () {
+      var path = window.location.pathname;
+      if (path === '/' || path === '' || path === '/index.html') {
+        var isMobile = window.matchMedia('(max-width: 768px)').matches;
+        var file = isMobile ? '/banner-mobile.webp' : '/banner.webp';
+        var link = document.createElement('link');
+        link.rel = 'preload';
+        link.as = 'image';
+        link.href = file;
+        link.imageSrcset = file;
+        link.setAttribute('imagesrcset', file);
+        link.type = 'image/webp';
+        link.setAttribute('fetchpriority', 'high');
+        document.head.appendChild(link);
+      }
+    })();
+  </script>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Tripline Businessmen Services | UAE Business Setup & Government Solutions</title>
 </head>
