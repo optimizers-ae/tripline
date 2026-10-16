@@ -326,7 +326,7 @@ const ContactPage = () => {
                     </span>
                   </div>
 
-                  <span className="text-xs font-semibold uppercase tracking-wider opacity-80 group-hover:opacity-100 rtl:rotate-180 inline-block">
+                  <span className="text-xs font-semibold uppercase tracking-wider opacity-80 group-hover:opacity-100 inline-block">
                     {t("contactInstantReply")}
                   </span>
                 </a>
@@ -528,7 +528,7 @@ const ContactPage = () => {
                     <>
                       <span>{t("contactFormBtnSend")}</span>
 
-                      <Send className="h-4 w-4 rtl:rotate-180 transition-transform group-hover:translate-x-0.5 rtl:group-hover:-translate-x-0.5" />
+                      <Send className="h-4 w-4 rtl:-scale-x-100 transition-transform group-hover:translate-x-0.5 rtl:group-hover:-translate-x-0.5" />
                     </>
                   </button>
                 </form>
