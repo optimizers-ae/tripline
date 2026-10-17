@@ -12,6 +12,9 @@ import {
   Send,
   Clock,
   ArrowUpRight,
+  Upload,
+  Check,
+  X,
 } from "lucide-react";
 
 import WhatsAppIcon from "../components/WhatsAppIcon";
@@ -90,6 +93,8 @@ const ContactPage = () => {
     email: "",
 
     phone: "",
+
+    visaDocument: null,
   });
 
   const [countryIso, setCountryIso] = useState("AE");
@@ -124,6 +129,16 @@ const ContactPage = () => {
       return;
     }
     setForm((prev) => ({ ...prev, [name]: value }));
+  };
+
+  const handleFileChange = (file) => {
+    if (file && file.size > 5 * 1024 * 1024) {
+      toast.error(
+        t("contactFormVisaDocHint") || "File size exceeds the 5MB limit."
+      );
+      return;
+    }
+    setForm((prev) => ({ ...prev, visaDocument: file }));
   };
 
   const handleSubmit = (e) => {
@@ -518,6 +533,53 @@ const ContactPage = () => {
                           Enter a valid phone number for {country.name}.
                         </p>
                       )}
+                    </div>
+
+                    {/* 6. Visa / Supporting Document Upload */}
+                    <div className="sm:col-span-2">
+                      <label className="block text-xs font-bold uppercase tracking-wider text-neutral-700 mb-2">
+                        {t("contactFormVisaDoc")}
+                      </label>
+                      <div className="rounded-xl border border-dashed border-neutral-300 bg-neutral-50 p-3.5 hover:bg-neutral-100/70 transition-all flex flex-col sm:flex-row items-center justify-between gap-3">
+                        <div className="flex items-center gap-3 text-center sm:text-left rtl:sm:text-right">
+                          <div className="h-9 w-9 rounded-lg bg-red-50 text-[#D32F2F] flex items-center justify-center shrink-0">
+                            <Upload className="h-4 w-4" />
+                          </div>
+                          <div>
+                            <p className="text-xs font-bold text-neutral-800">
+                              {t("contactFormVisaDoc")}
+                            </p>
+                            <p className="text-[11px] text-neutral-500">
+                              {t("contactFormVisaDocHint")}
+                            </p>
+                          </div>
+                        </div>
+
+                        {form.visaDocument ? (
+                          <div className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-emerald-50 text-emerald-700 text-xs font-semibold">
+                            <Check className="h-3.5 w-3.5 shrink-0" />
+                            <span className="truncate max-w-[140px]">{form.visaDocument.name}</span>
+                            <button
+                              type="button"
+                              onClick={() => handleFileChange(null)}
+                              className="text-neutral-400 hover:text-red-500 ml-1 text-sm font-bold"
+                              aria-label="Remove attached visa document"
+                            >
+                              <X className="h-3.5 w-3.5" />
+                            </button>
+                          </div>
+                        ) : (
+                          <label className="cursor-pointer inline-flex items-center justify-center rounded-lg bg-white border border-neutral-300 px-3.5 py-1.5 text-xs font-bold text-neutral-700 hover:bg-neutral-50 shadow-sm transition-all shrink-0">
+                            <span>{t("contactFormChooseFile")}</span>
+                            <input
+                              type="file"
+                              accept=".pdf,image/*,.doc,.docx"
+                              className="hidden"
+                              onChange={(e) => handleFileChange(e.target.files?.[0] || null)}
+                            />
+                          </label>
+                        )}
+                      </div>
                     </div>
                   </div>
 

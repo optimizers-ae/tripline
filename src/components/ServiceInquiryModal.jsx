@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useMemo, useRef } from "react";
+import { useState, useEffect, useMemo, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { parsePhoneNumberFromString } from "libphonenumber-js";
 import toast from "react-hot-toast";
@@ -6,21 +6,13 @@ import {
   X,
   CheckCircle2,
   Upload,
-  Calendar,
-  Users,
-  Globe2,
   FileText,
   Phone,
-  Mail,
   User,
-  MapPin,
-  Briefcase,
   Plane,
   Sparkles,
   AlertCircle,
-  Clock,
   ArrowRight,
-  ShieldCheck,
   Building2,
   Check,
 } from "lucide-react";
@@ -35,8 +27,7 @@ import { useLanguage } from "../context/LanguageContext";
  *  - "visa": Travel Visa Application form
  *  - "trade-license": Trade License Application form
  */
-const ServiceInquiryModal = ({
-  isOpen,
+const ServiceInquiryModalContent = ({
   onClose,
   modalType = "general", // "general" | "visa" | "trade-license"
   serviceTitle = "",
@@ -65,6 +56,7 @@ const ServiceInquiryModal = ({
     email: "",
     serviceRequired: serviceTitle || "",
     additionalDetails: "",
+    visaDocument: null,
   });
 
   // Visa Form state
@@ -81,6 +73,7 @@ const ServiceInquiryModal = ({
     entryType: "Single Entry",
     additionalDetails: "",
     passportCopy: null,
+    visaCopy: null,
     residenceVisaCopy: null,
     agreeTerms: false,
   });
@@ -104,75 +97,20 @@ const ServiceInquiryModal = ({
     agreeTerms: false,
   });
 
-  // Reset or initialize when modal opens/changes
+  // Prevent body scroll and handle escape key while mounted
   useEffect(() => {
-    if (isOpen) {
-      setSubmitted(false);
-      setLoading(false);
-      setErrors({});
-      setCountryDropdownOpen(false);
-      setNationalityDropdownOpen(false);
-      setGeneralForm({
-        firstName: "",
-        lastName: "",
-        phone: "",
-        email: "",
-        serviceRequired: serviceTitle || "",
-        additionalDetails: "",
-      });
-      setVisaForm({
-        fullName: "",
-        phone: "",
-        email: "",
-        destinationCountry: initialData.destinationCountry || "",
-        nationality: initialData.nationality || "",
-        residenceCountry: "United Arab Emirates",
-        purposeOfTravel: "Tourism",
-        expectedTravelDate: "",
-        numberOfApplicants: "1",
-        entryType: "Single Entry",
-        additionalDetails: "",
-        passportCopy: null,
-        residenceVisaCopy: null,
-        agreeTerms: false,
-      });
-      setTradeForm({
-        fullName: "",
-        phone: "",
-        email: "",
-        companyName: "",
-        jurisdiction: "Dubai",
-        nationality: "",
-        residenceCountry: "United Arab Emirates",
-        purpose: "New License",
-        expectedDate: "",
-        numberOfApplicants: "1",
-        licenseType: "Commercial",
-        additionalDetails: "",
-        passportCopy: null,
-        existingLicenseCopy: null,
-        agreeTerms: false,
-      });
-      // Prevent body scroll
-      document.body.style.overflow = "hidden";
-    } else {
-      document.body.style.overflow = "unset";
-    }
-    return () => {
-      document.body.style.overflow = "unset";
-    };
-  }, [isOpen, serviceTitle, initialData]);
-
-  // Handle escape key
-  useEffect(() => {
+    document.body.style.overflow = "hidden";
     const handleKeyDown = (e) => {
-      if (e.key === "Escape" && isOpen) {
+      if (e.key === "Escape") {
         onClose();
       }
     };
     window.addEventListener("keydown", handleKeyDown);
-    return () => window.removeEventListener("keydown", handleKeyDown);
-  }, [isOpen, onClose]);
+    return () => {
+      document.body.style.overflow = "unset";
+      window.removeEventListener("keydown", handleKeyDown);
+    };
+  }, [onClose]);
 
   // Active country for dial code
   const currentCountry =
@@ -356,18 +294,25 @@ const ServiceInquiryModal = ({
 
   // File upload input helper
   const handleFileChange = (field, file, formType) => {
+    if (file && file.size > 5 * 1024 * 1024) {
+      toast.error(
+        isArabic
+          ? "حجم الملف يتجاوز الحد المسموح به (5 ميجابايت)"
+          : "File size exceeds the 5MB limit."
+      );
+      return;
+    }
     if (formType === "visa") {
       setVisaForm((prev) => ({ ...prev, [field]: file }));
     } else if (formType === "trade") {
       setTradeForm((prev) => ({ ...prev, [field]: file }));
+    } else if (formType === "general") {
+      setGeneralForm((prev) => ({ ...prev, [field]: file }));
     }
   };
 
-  if (!isOpen) return null;
-
   return (
-    <AnimatePresence>
-      <div className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-4 md:p-6 overflow-y-auto">
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-4 md:p-6 overflow-y-auto">
         {/* Backdrop */}
         <motion.div
           initial={{ opacity: 0 }}
@@ -914,22 +859,25 @@ const ServiceInquiryModal = ({
                     </span>
                   </div>
 
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
                     {/* Passport Copy */}
-                    <div className="rounded-xl border border-dashed border-neutral-300 bg-neutral-50 p-4 text-center hover:bg-neutral-100/70 transition-all">
-                      <Upload className="h-5 w-5 text-neutral-400 mx-auto mb-1.5" />
-                      <p className="text-xs font-bold text-neutral-800">
-                        {isArabic ? "نسخة جواز السفر" : "Passport Copy"}
-                      </p>
-                      <p className="text-[11px] text-neutral-500 mb-2">PDF, JPG, PNG (Max 5MB)</p>
+                    <div className="rounded-xl border border-dashed border-neutral-300 bg-neutral-50 p-4 text-center hover:bg-neutral-100/70 transition-all flex flex-col justify-between">
+                      <div>
+                        <Upload className="h-5 w-5 text-neutral-400 mx-auto mb-1.5" />
+                        <p className="text-xs font-bold text-neutral-800">
+                          {isArabic ? "نسخة جواز السفر" : "Passport Copy"}
+                        </p>
+                        <p className="text-[11px] text-neutral-500 mb-2">PDF, JPG, PNG (Max 5MB)</p>
+                      </div>
                       {visaForm.passportCopy ? (
-                        <div className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-emerald-50 text-emerald-700 text-xs font-semibold">
-                          <Check className="h-3.5 w-3.5" />
-                          <span className="truncate max-w-[130px]">{visaForm.passportCopy.name}</span>
+                        <div className="inline-flex items-center justify-center gap-1.5 px-2.5 py-1 rounded-lg bg-emerald-50 text-emerald-700 text-xs font-semibold">
+                          <Check className="h-3.5 w-3.5 shrink-0" />
+                          <span className="truncate max-w-[120px]">{visaForm.passportCopy.name}</span>
                           <button
                             type="button"
                             onClick={() => handleFileChange("passportCopy", null, "visa")}
-                            className="text-neutral-400 hover:text-red-500 ml-1"
+                            className="text-neutral-400 hover:text-red-500 ml-1 font-bold text-sm"
+                            aria-label="Remove passport copy"
                           >
                             ×
                           </button>
@@ -939,7 +887,7 @@ const ServiceInquiryModal = ({
                           <span>{isArabic ? "اختر ملف" : "Choose File"}</span>
                           <input
                             type="file"
-                            accept=".pdf,image/*"
+                            accept=".pdf,image/*,.doc,.docx"
                             className="hidden"
                             onChange={(e) =>
                               handleFileChange("passportCopy", e.target.files?.[0] || null, "visa")
@@ -949,21 +897,61 @@ const ServiceInquiryModal = ({
                       )}
                     </div>
 
+                    {/* Visa PDF / Visa Copy */}
+                    <div className="rounded-xl border border-dashed border-red-200 bg-red-50/20 p-4 text-center hover:bg-red-50/40 transition-all flex flex-col justify-between">
+                      <div>
+                        <Upload className="h-5 w-5 text-[#D32F2F] mx-auto mb-1.5" />
+                        <p className="text-xs font-bold text-neutral-800">
+                          {isArabic ? "تأشيرة الدخول / نسخة التأشيرة" : "Visa PDF / Visa Copy"}
+                        </p>
+                        <p className="text-[11px] text-neutral-500 mb-2">PDF, JPG, PNG (Max 5MB)</p>
+                      </div>
+                      {visaForm.visaCopy ? (
+                        <div className="inline-flex items-center justify-center gap-1.5 px-2.5 py-1 rounded-lg bg-emerald-50 text-emerald-700 text-xs font-semibold">
+                          <Check className="h-3.5 w-3.5 shrink-0" />
+                          <span className="truncate max-w-[120px]">{visaForm.visaCopy.name}</span>
+                          <button
+                            type="button"
+                            onClick={() => handleFileChange("visaCopy", null, "visa")}
+                            className="text-neutral-400 hover:text-red-500 ml-1 font-bold text-sm"
+                            aria-label="Remove visa copy"
+                          >
+                            ×
+                          </button>
+                        </div>
+                      ) : (
+                        <label className="cursor-pointer inline-flex items-center justify-center rounded-lg bg-white border border-[#D32F2F]/40 px-3 py-1.5 text-xs font-bold text-[#D32F2F] hover:bg-[#D32F2F]/5 shadow-sm transition-all">
+                          <span>{isArabic ? "اختر التأشيرة (PDF)" : "Upload Visa (PDF)"}</span>
+                          <input
+                            type="file"
+                            accept=".pdf,image/*,.doc,.docx"
+                            className="hidden"
+                            onChange={(e) =>
+                              handleFileChange("visaCopy", e.target.files?.[0] || null, "visa")
+                            }
+                          />
+                        </label>
+                      )}
+                    </div>
+
                     {/* Residence Visa Copy */}
-                    <div className="rounded-xl border border-dashed border-neutral-300 bg-neutral-50 p-4 text-center hover:bg-neutral-100/70 transition-all">
-                      <Upload className="h-5 w-5 text-neutral-400 mx-auto mb-1.5" />
-                      <p className="text-xs font-bold text-neutral-800">
-                        {isArabic ? "نسخة تأشيرة الإقامة" : "Residence Visa Copy"}
-                      </p>
-                      <p className="text-[11px] text-neutral-500 mb-2">PDF, JPG, PNG (Max 5MB)</p>
+                    <div className="rounded-xl border border-dashed border-neutral-300 bg-neutral-50 p-4 text-center hover:bg-neutral-100/70 transition-all flex flex-col justify-between">
+                      <div>
+                        <Upload className="h-5 w-5 text-neutral-400 mx-auto mb-1.5" />
+                        <p className="text-xs font-bold text-neutral-800">
+                          {isArabic ? "نسخة تأشيرة الإقامة" : "Residence Visa Copy"}
+                        </p>
+                        <p className="text-[11px] text-neutral-500 mb-2">PDF, JPG, PNG (Max 5MB)</p>
+                      </div>
                       {visaForm.residenceVisaCopy ? (
-                        <div className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-emerald-50 text-emerald-700 text-xs font-semibold">
-                          <Check className="h-3.5 w-3.5" />
-                          <span className="truncate max-w-[130px]">{visaForm.residenceVisaCopy.name}</span>
+                        <div className="inline-flex items-center justify-center gap-1.5 px-2.5 py-1 rounded-lg bg-emerald-50 text-emerald-700 text-xs font-semibold">
+                          <Check className="h-3.5 w-3.5 shrink-0" />
+                          <span className="truncate max-w-[120px]">{visaForm.residenceVisaCopy.name}</span>
                           <button
                             type="button"
                             onClick={() => handleFileChange("residenceVisaCopy", null, "visa")}
-                            className="text-neutral-400 hover:text-red-500 ml-1"
+                            className="text-neutral-400 hover:text-red-500 ml-1 font-bold text-sm"
+                            aria-label="Remove residence visa copy"
                           >
                             ×
                           </button>
@@ -973,7 +961,7 @@ const ServiceInquiryModal = ({
                           <span>{isArabic ? "اختر ملف" : "Choose File"}</span>
                           <input
                             type="file"
-                            accept=".pdf,image/*"
+                            accept=".pdf,image/*,.doc,.docx"
                             className="hidden"
                             onChange={(e) =>
                               handleFileChange("residenceVisaCopy", e.target.files?.[0] || null, "visa")
@@ -1579,6 +1567,58 @@ const ServiceInquiryModal = ({
                       className="w-full rounded-xl border border-neutral-200 bg-neutral-50 px-4 py-2.5 text-sm text-neutral-900 placeholder-neutral-400 outline-none focus:border-[#D32F2F] focus:bg-white focus:ring-2 focus:ring-[#D32F2F]/20 transition-all resize-none"
                     />
                   </div>
+
+                  {/* Optional Visa / Supporting Document Upload */}
+                  <div className="sm:col-span-2 pt-1">
+                    <label className="block text-xs font-bold text-neutral-700 mb-1.5">
+                      {isArabic ? "إرفاق تأشيرة أو مستند ذي صلة" : "Attach Visa or Supporting Document"}{" "}
+                      <span className="text-neutral-400 font-normal">({isArabic ? "اختياري" : "optional"})</span>
+                    </label>
+                    <div className="rounded-xl border border-dashed border-neutral-300 bg-neutral-50 p-4 hover:bg-neutral-100/70 transition-all flex flex-col sm:flex-row items-center justify-between gap-3">
+                      <div className="flex items-center gap-3 text-center sm:text-left rtl:sm:text-right">
+                        <div className="h-10 w-10 rounded-lg bg-red-50 text-[#D32F2F] flex items-center justify-center shrink-0">
+                          <Upload className="h-5 w-5" />
+                        </div>
+                        <div>
+                          <p className="text-xs font-bold text-neutral-800">
+                            {isArabic ? "نسخة التأشيرة أو المستند (PDF أو صورة)" : "Visa PDF or Supporting Document"}
+                          </p>
+                          <p className="text-[11px] text-neutral-500">
+                            {isArabic
+                              ? "صيغ PDF أو صور (بحد أقصى 5 ميجابايت) لتسريع إجراءات المعاملة"
+                              : "PDF, JPG, PNG (Max 5MB) to speed up service processing"}
+                          </p>
+                        </div>
+                      </div>
+
+                      {generalForm.visaDocument ? (
+                        <div className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-emerald-50 text-emerald-700 text-xs font-semibold">
+                          <Check className="h-3.5 w-3.5 shrink-0" />
+                          <span className="truncate max-w-[150px]">{generalForm.visaDocument.name}</span>
+                          <button
+                            type="button"
+                            onClick={() => handleFileChange("visaDocument", null, "general")}
+                            className="text-neutral-400 hover:text-red-500 ml-1 text-sm font-bold"
+                            aria-label="Remove attached document"
+                          >
+                            ×
+                          </button>
+                        </div>
+                      ) : (
+                        <label className="cursor-pointer inline-flex items-center justify-center rounded-lg bg-white border border-neutral-300 px-4 py-2 text-xs font-bold text-neutral-700 hover:bg-neutral-50 shadow-sm transition-all shrink-0">
+                          <span>{isArabic ? "اختر تأشيرة / ملف" : "Upload Visa / File"}</span>
+                          <input
+                            type="file"
+                            accept=".pdf,image/*,.doc,.docx"
+                            className="hidden"
+                            onChange={(e) =>
+                              handleFileChange("visaDocument", e.target.files?.[0] || null, "general")
+                            }
+                          />
+                        </label>
+                      )}
+                    </div>
+                  </div>
                 </div>
 
                 {/* Submit Action */}
@@ -1610,6 +1650,29 @@ const ServiceInquiryModal = ({
           </div>
         </motion.div>
       </div>
+  );
+};
+
+const ServiceInquiryModal = ({
+  isOpen,
+  onClose,
+  modalType = "general",
+  serviceTitle = "",
+  serviceCategory = "Individuals",
+  initialData = {},
+}) => {
+  return (
+    <AnimatePresence>
+      {isOpen && (
+        <ServiceInquiryModalContent
+          key={`${modalType}-${serviceTitle}`}
+          onClose={onClose}
+          modalType={modalType}
+          serviceTitle={serviceTitle}
+          serviceCategory={serviceCategory}
+          initialData={initialData}
+        />
+      )}
     </AnimatePresence>
   );
 };

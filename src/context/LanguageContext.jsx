@@ -1,3 +1,4 @@
+/* eslint-disable react-refresh/only-export-components */
 import { createContext, useContext, useState, useEffect } from "react";
 
 const LanguageContext = createContext();
@@ -14,7 +15,6 @@ export const translations = {
     homeDesc: "Welcome & Overview",
     aboutDesc: "Our Mission & Advisory Team",
     servicesDesc: "Government, Visa & Business Services",
-    corporateDesc: "Business & Company Services",
     corporateNavDesc: "Trade Licenses, MOHRE & PRO Services",
     individualsNavDesc: "Residency, Family & Tourist Visas",
     contactDesc: "Speak to Senior Advisors",
@@ -443,6 +443,9 @@ export const translations = {
     contactFormEmailPh: "you@example.com",
     contactFormPhone: "Mobile Number",
     contactFormPhonePh: "+971 54444 2029",
+    contactFormVisaDoc: "Attach Visa / Document (Optional)",
+    contactFormVisaDocHint: "Upload your visa PDF or document (PDF, JPG, PNG up to 5MB)",
+    contactFormChooseFile: "Choose File",
     contactFormBtnSend: "Send Message",
     contactFormBtnSent: "✓ Message Sent!",
     contactVisitOfficeTitle: "Visit Our Office",
@@ -456,17 +459,6 @@ export const translations = {
     notFoundHeading: "404",
     notFoundDesc: "Page not found",
     backToHome: "Back to Home",
-
-    /* ---------------- TECH STACK / PARTNERS ---------------- */
-    trustedPartnersBadge: "TRUSTED PARTNERS",
-    trustedPartnersTitlePre: "Building Success Through ",
-    trustedPartnersTitleHighlight: "Trusted Partnerships.",
-    trustedPartnersSubtitle:
-      "We collaborate with reliable institutions and government authorities to deliver complete business solutions for entrepreneurs and companies in the UAE.",
-    tabAllPartners: "All Partners",
-    tabFreezones: "Free Zones",
-    tabMainland: "Mainland Authorities",
-    tabGovt: "Government Centers",
   },
 
   AR: {
@@ -480,7 +472,6 @@ export const translations = {
     homeDesc: "مرحباً ونظرة عامة",
     aboutDesc: "مهمتنا وفريق المستشارين",
     servicesDesc: "الخدمات الحكومية والتأشيرات والأعمال",
-    corporateDesc: "خدمات الأعمال والشركات",
     corporateNavDesc: "الرخص التجارية ومعاملات العمل وتخليص المعاملات",
     individualsNavDesc: "الإقامات وتأشيرات الأسرة وتعديل الوضع",
     contactDesc: "تحدث مع كبار المستشارين",
@@ -908,6 +899,9 @@ export const translations = {
     contactFormEmailPh: "you@example.com",
     contactFormPhone: "رقم الهاتف المتحرك",
     contactFormPhonePh: "+971 54444 2029",
+    contactFormVisaDoc: "إرفاق التأشيرة أو المستند (اختياري)",
+    contactFormVisaDocHint: "نسخة التأشيرة أو المستند (PDF أو صورة بحد أقصى 5 ميجابايت)",
+    contactFormChooseFile: "اختر ملف",
     contactFormBtnSend: "إرسال الرسالة",
     contactFormBtnSent: "✓ تم إرسال الرسالة بنجاح!",
     contactVisitOfficeTitle: "تفضل بزيارة مكتبنا",
@@ -921,17 +915,6 @@ export const translations = {
     notFoundHeading: "404",
     notFoundDesc: "الصفحة غير موجودة",
     backToHome: "العودة إلى الرئيسية",
-
-    /* ---------------- TECH STACK / PARTNERS ---------------- */
-    trustedPartnersBadge: "شركاؤنا المعتمدون",
-    trustedPartnersTitlePre: "نبني النجاح من خلال ",
-    trustedPartnersTitleHighlight: "شراكات موثوقة.",
-    trustedPartnersSubtitle:
-      "نتعاون مع أرقى المؤسسات والجهات الحكومية لتقديم حلول أعمال ومعاملات متكاملة للمستثمرين والشركات في دولة الإمارات.",
-    tabAllPartners: "جميع الشركاء",
-    tabFreezones: "المناطق الحرة",
-    tabMainland: "الدوائر الاقتصادية المحلية",
-    tabGovt: "المراكز الحكومية",
   },
 };
 
